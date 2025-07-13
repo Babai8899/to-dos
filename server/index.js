@@ -4,6 +4,9 @@ import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
+import authRoutes from './routes/AuthRoute.js';
+import userRoutes from './routes/UserRoute.js';
+
 dotenv.config();
 
 const app = express();
@@ -28,3 +31,5 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
+app.use('/api/auth', authRoutes);
+app.use('/api/users', userRoutes);
