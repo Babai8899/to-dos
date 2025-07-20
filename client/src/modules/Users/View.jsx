@@ -14,21 +14,6 @@ function View() {
         dob: "",
     })
 
-    const loadUser = async () => {
-        try{
-
-            const response = await axiosInstance.get(`/users/${user.emailId}`);
-            setUserData(response.data);
-        }
-        catch (error) {
-            console.error("Error fetching user data:", error);
-        }
-    }
-
-    useEffect(() => {
-        loadUser();
-    }, []);
-
     return (
         <div className="container flex justify-center mx-auto my-1">
             <div className="card w-1/2 bg-base-100 shadow-sm border-2 border-base-300 mx-auto my-10 h-96 flex flex-col justify-center items-center gap-4 py-1">
@@ -39,7 +24,7 @@ function View() {
                         <tbody>
                             <tr>
                                 <th>First Name</th>
-                                <td>{userData.firstName}</td>
+                                <td>{user.firstName}</td>
                             </tr>
                             <tr>
                                 <th>Last Name</th>
