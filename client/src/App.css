@@ -1,2 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 @plugin "daisyui";
+
+
+@plugin "daisyui/theme" {
+  name: "myDarkTheme";
+  default: false;
+  prefersdark: false;
+  color-scheme: "dark";
+  --color-base-100: oklch(0.3492 0.058 182.83);
+  --color-base-200: oklch(0.4 0.058 182.83);
+  --color-base-300: oklch(0.5 0.058 182.83);
+  --color-base-content: oklch(0.8128 0.025 85.79);
+  --color-primary: oklch(80% 0.105 251.813);
+  --color-primary-content: oklch(0.3492 0.058 182.83);
+  --color-secondary: oklch(82% 0.12 346.018);
+  --color-secondary-content: oklch(0.3492 0.058 182.83);
+  --color-accent: oklch(71% 0.143 215.221);
+  --color-accent-content: oklch(0.3492 0.058 182.83);
+  --color-neutral: oklch(0.8128 0.025 85.79);
+  --color-neutral-content: oklch(0.3492 0.058 182.83);
+  --color-info: oklch(82% 0.111 230.318);
+  --color-info-content: oklch(0.3492 0.058 182.83);
+  --color-success: oklch(84% 0.238 128.85);
+  --color-success-content: oklch(0.3492 0.058 182.83);
+  --color-warning: oklch(94% 0.129 101.54);
+  --color-warning-content: oklch(0.3492 0.058 182.83);
+  --color-error: oklch(64% 0.246 16.439);
+  --color-error-content: oklch(0.3492 0.058 182.83);
+}
+
+:root {
+    --color-custom-green: #09443D;
+    --color-custom-beige: #C9C1B0;
+}
+
+body {
+    margin: 0;
+    font-family: 'Saira', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@layer utilities {
+    .bg-custom-green {
+        background-color: var(--color-custom-green);
+    }
+
+    .bg-custom-beige {
+        background-color: var(--color-custom-beige);
+    }
+
+    .text-custom-green {
+        color: var(--color-custom-green);
+    }
+
+    .text-custom-beige {
+        color: var(--color-custom-beige);
+    }
+
+}
+
+.noscrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.noscrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}

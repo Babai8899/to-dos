@@ -6,6 +6,7 @@ import Welcome from './pages/Welcome'
 import Login from './modules/Users/Login'
 import Home from './pages/Home'
 import AuthProvider from './hooks/AuthProvider'
+import ToastProvider from './hooks/ToastProvider'
 import PrivateRoute from './routes/PrivateRoute'
 import View from './modules/Users/View'
 import Unauthorized from './pages/errors/Unauthorized'
@@ -15,61 +16,65 @@ import CreateTask from './modules/todos/task/CreateTask'
 import CreateEvent from './modules/todos/event/CreateEvent'
 import CreateNote from './modules/todos/note/CreateNote'
 import CreateList from './modules/todos/list/CreateList'
+import Register from './modules/Users/Register'
 function App() {
 
   return (
     <>
       <AnimatePresence mode='wait'>
         <Router>
+            <ToastProvider>
           <AuthProvider>
-            <Navbar />
-            <SidebarItems />
-            <Routes>
-              <Route exact path='/' element={<Welcome />} />
-              <Route exact path='/unathorized' element={<Unauthorized />} />
-              <Route path='/login' element={<Login />} />
-              <Route
-                path="/home"
-                element={
+              <Navbar />
+              <SidebarItems />
+              <Routes>
+                <Route exact path='/' element={<Welcome />} />
+                <Route exact path='/unathorized' element={<Unauthorized />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/register' element={<Register />} />
+                <Route
+                  path="/home"
+                  element={
+                    <PrivateRoute>
+                      <Home />
+                    </PrivateRoute>
+                  }
+                />
+                <Route path='/user/view' element={
                   <PrivateRoute>
-                    <Home />
+                    <View />
                   </PrivateRoute>
-                }
-              />
-              <Route path='/user/view' element={
-                <PrivateRoute>
-                  <View />
-                </PrivateRoute>
-              } />
-              <Route
-                path="/task"
-                element={
+                } />
+                <Route
+                  path="/task"
+                  element={
+                    <PrivateRoute>
+                      <CreateTask />
+                    </PrivateRoute>
+                  }
+                />
+                <Route path='/event' element={
                   <PrivateRoute>
-                    <CreateTask />
+                    <CreateEvent />
                   </PrivateRoute>
-                }
-              />
-              <Route path='/event' element={
-                <PrivateRoute>
-                  <CreateEvent />
-                </PrivateRoute>
-              } />
-              <Route
-                path="/note"
-                element={
+                } />
+                <Route
+                  path="/note"
+                  element={
+                    <PrivateRoute>
+                      <CreateNote />
+                    </PrivateRoute>
+                  }
+                />
+                <Route path='/list' element={
                   <PrivateRoute>
-                    <CreateNote />
+                    <CreateList />
                   </PrivateRoute>
-                }
-              />
-              <Route path='/list' element={
-                <PrivateRoute>
-                  <CreateList />
-                </PrivateRoute>
-              } />
-            </Routes>
-            <Footer />
+                } />
+              </Routes>
+              <Footer />
           </AuthProvider>
+            </ToastProvider>
         </Router>
       </AnimatePresence>
     </>

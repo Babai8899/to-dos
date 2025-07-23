@@ -2,8 +2,8 @@ import UserModel from "../models/UserModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import expressAsyncHandler from "express-async-handler";
-import dotenv from "dotenv";
-dotenv.config();
+// import dotenv from "dotenv";
+// dotenv.config();
 
 const register = async (req, res) => {
     const { emailId, password, firstName, lastName, phone, dob } = req.body;
@@ -83,7 +83,7 @@ const login = async (req, res) => {
         // Compare the provided password with the hashed password in the database
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
-            return res.status(401).json({ message: "Invalid email ID or password" });
+            return res.status(401).json({ message: "Wrong password" });
         }
 
         // generate JWT token

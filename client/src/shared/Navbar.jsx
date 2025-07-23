@@ -1,12 +1,23 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import AuthContext from '../hooks/AuthContext'
+import { useNavigate } from 'react-router-dom';
 
 function Navbar() {
+
+    const { logout } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        logout();
+        navigate('/');
+    }
+
     return (
         <div>
             <div className="navbar bg-base-100 shadow-sm">
                 <div className="flex-1">
-                    <a className="btn btn-ghost text-2xl">ToDos</a>
-                    <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
+                    <a className="btn btn-ghost text-custom-beige text-4xl">ToDos</a>
+                    <input type="text" placeholder="Search" className="input input-neutral input-bordered w-24 md:w-auto lg:visible invisible" />
                 </div>
                 <div className="flex gap-2 mr-4">
                     <button className="btn btn-ghost btn-circle">
@@ -33,7 +44,7 @@ function Navbar() {
                                 </a>
                             </li>
                             <li><a>Settings</a></li>
-                            <li><a>Logout</a></li>
+                            <li><a onClick={handleClick}>Logout</a></li>
                         </ul>
                     </div>
                 </div>

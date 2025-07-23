@@ -1,18 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import AuthContext from './AuthContext';
 import axiosInstance from '../api/axiosInstance';
+import ToastContext from './ToastContext';
 
 const AuthProvider = ({ children }) => {
+    const { showToast } = useContext(ToastContext);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
     const login = async (credentials) => {
         try {
-            await axiosInstance.post('/auth', credentials); // cookie set via backend
+            const data = await axiosInstance.post('/auth', credentials); // cookie set via backend
+            if (data.status === 200) {
+                showToast("Login successful", "success");
+            }
             await fetchUser();
         }
         catch (error) {
-            console.error("Login failed:", error);
+            console.error("Login failed:", error.response.data.message);
+            showToast(error.response.data.message, "error");
             throw error; // propagate error to the component
         }
     };
