@@ -36,9 +36,9 @@ const createEvent = async (req, res) => {
             eventId,
             title,
             description,
-            date: eventDate,
+            date,
             location,
-            user: user._id // Assuming req.user is set by an authentication middleware
+            user: user // Assuming req.user is set by an authentication middleware
         });
 
         // Save the event to the database
@@ -48,4 +48,81 @@ const createEvent = async (req, res) => {
         console.error("Error creating event:", error);
         res.status(500).json({ message: "Internal server error" });
     }
+}
+
+const getEvents = async (req, res) => {
+    try {
+        const events = await EventModel.find();
+        res.status(200).json(events);
+    } catch (error) {
+        console.error("Error fetching events:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+}
+
+const getEventById = async (req, res) => {
+    const { eventId } = req.params;
+
+    try {
+        const event = await EventModel.findOne({ eventId });
+        if (!event) {
+            return res.status(404).json({ message: "Event not found" });
+        }
+        res.status(200).json(event);
+    } catch (error) {
+        console.error("Error fetching event:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+}
+
+const updateEventById = async (req, res) => {
+    const { eventId } = req.params;
+    const { title, description, date, location } = req.body;
+
+    try {
+        const event = await EventModel.findOneAndUpdate({ eventId }, { title, description, date, location }, { new: true });
+        if (!event) {
+            return res.status(404).json({ message: "Event not found" });
+        }
+        res.status(200).json(event);
+    } catch (error) {
+        console.error("Error updating event:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+}
+
+const deleteEventById = async (req, res) => {
+    const { eventId } = req.params;
+
+    try {
+        const event = await EventModel.findOneAndDelete({ eventId });
+        if (!event) {
+            return res.status(404).json({ message: "Event not found" });
+        }
+        res.status(200).json({ message: "Event deleted successfully" });
+    } catch (error) {
+        console.error("Error deleting event:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+}
+
+const getEventsByEmailId = async (req, res) => {
+    const { emailId } = req.params;
+
+    try {
+        const events = await EventModel.find({ user: emailId });
+        res.status(200).json(events);
+    } catch (error) {
+        console.error("Error fetching events:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+}
+
+export {
+    createEvent,
+    getEvents,
+    getEventById,
+    updateEventById,
+    deleteEventById,
+    getEventsByEmailId
 }

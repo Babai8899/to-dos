@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import AuthContext from '../hooks/AuthContext'
 import { useNavigate } from 'react-router-dom';
 
@@ -7,6 +7,23 @@ function Navbar() {
     const { logout } = useContext(AuthContext);
     const navigate = useNavigate();
 
+    const [theme, setTheme] = useState(localStorage.getItem('theme') ? localStorage.getItem('theme') : 'mylighttheme')
+
+    const toggleTheme = (e) => {
+        console.log(e.target.checked);
+        if (e.target.checked) {
+            setTheme('mydarktheme');
+        }
+        else {
+            setTheme('mylighttheme');
+        }
+    }
+    useEffect(() => {
+        localStorage.setItem('theme', theme);
+        const localTheme = localStorage.getItem('theme');
+        document.querySelector("html").setAttribute("data-theme", localTheme);
+    });
+
     const handleClick = () => {
         logout();
         navigate('/');
@@ -14,29 +31,48 @@ function Navbar() {
 
     return (
         <div>
-            <div className="navbar bg-base-100 shadow-sm">
-                <div className="flex-1">
-                    <a className="btn btn-ghost text-custom-beige text-4xl">ToDos</a>
-                    <input type="text" placeholder="Search" className="input input-neutral input-bordered w-24 md:w-auto lg:visible invisible" />
+            <div className="navbar bg-gradient-to-tr from-cyan-500 shadow-sm">
+                <div className="flex my-auto text-4xl navbar-start gap-1">
+                    <a className="rounded-box grid h-10 w-32 place-items-center cursor-pointer hover:bg-base-100 ease-in-out transition-colors duration-300" href="/home">ToDos</a>
+                    <input type="text" placeholder="Search" className="input input-neutral w-24 md:w-auto lg:visible invisible" />
                 </div>
-                <div className="flex gap-2 mr-4">
-                    <button className="btn btn-ghost btn-circle">
+                <div className="flex gap-2 mr-4 navbar-end">
+                    <label className="swap swap-rotate p-2 rounded-full cursor-pointer hover:bg-base-100 ease-in-out transition-colors duration-300">
+                        {/* this hidden checkbox controls the state */}
+
+                        <input type="checkbox" className="theme-controller " value="synthwave" onChange={toggleTheme} />
+
+                        {/* sun icon */}
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-8 swap-on">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+                        </svg>
+
+
+                        {/* moon icon */}
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-8 swap-off">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+                        </svg>
+
+                    </label>
+                    <div className="pt-2 px-2 rounded-full cursor-pointer hover:bg-base-100 ease-in-out transition-colors duration-300">
                         <div className="indicator">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /> </svg>
-                            <span className="badge badge-xs badge-primary indicator-item"></span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-8">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+                            </svg>
+
+                            <span className="badge badge-xs badge-error indicator-item"></span>
                         </div>
-                    </button>
+                    </div>
                     <div className="dropdown dropdown-end">
-                        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                            <div className="w-10 rounded-full">
-                                <img
-                                    alt="Tailwind CSS Navbar component"
-                                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-                            </div>
+                        <div tabIndex={0} role="button" className="py-2 px-2 rounded-full cursor-pointer hover:bg-base-100 ease-in-out transition-colors duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-8">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            </svg>
+
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                            className="menu menu-sm dropdown-content bg-accent/50 rounded-box z-1 mt-3 w-52 p-2 shadow">
                             <li>
                                 <a className="justify-between">
                                     Profile

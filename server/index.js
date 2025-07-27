@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 
 import authRoutes from './routes/AuthRoute.js';
 import userRoutes from './routes/UserRoute.js';
+import eventRoutes from './routes/EventRoute.js';
 
 dotenv.config();
 
@@ -33,3 +34,4 @@ app.get('/', (req, res) => {
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/events', eventRoutes);

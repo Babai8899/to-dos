@@ -5,7 +5,7 @@ import { Navigate } from 'react-router-dom';
 function PrivateRoute({ children }) {
     const { user } = useContext(AuthContext);
     console.log("PrivateRoute user:", user);
-    return user ? children : <Navigate to="/unathorized" replace/>
+    return user ? children : <Navigate to="/login" replace />
 }
 
 export default PrivateRoute

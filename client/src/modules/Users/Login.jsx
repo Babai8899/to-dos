@@ -74,22 +74,22 @@ function Login() {
     return (
         <Transitions pageVariants={pageVariants}>
             <div className="container flex justify-center w-1/2 mx-auto my-0.5">
-                <div className="card w-96 bg-base-100 shadow-sm border-2 border-base-300 mx-auto my-10 h-96 flex flex-col justify-center items-center gap-4 py-1 px-5">
-                    <h1 className='text-2xl'>Login Page</h1>
+                <div className="card w-96 bg-base-200 shadow-sm border-2 border-base-300 mx-auto my-10 h-96 flex flex-col justify-center items-center gap-4 py-1 px-5">
+                    <h1 className='text-2xl text-accent font-bold'>Login Page</h1>
                     <div className='gap-2 w-full max-w-xs'>
                         <label >Email ID</label>
-                        <input type="text" placeholder="Email ID" className="input input-neutral" name='emailId' value={emailId} onChange={handleChange} />
+                        <input type="text" placeholder="Email ID" className="input input-accent" name='emailId' value={emailId} onChange={handleChange} />
                     </div>
                     <div className='gap-2 w-full max-w-xs'>
                         <label>Password</label>
-                        <input type="password" placeholder="Password" className="input input-neutral" name='password' value={password} onChange={handleChange} />
+                        <input type="password" placeholder="Password" className="input input-accent" name='password' value={password} onChange={handleChange} />
                     </div>
                     <div className='text-sm flex flex-row gap-12'>
                         <span>
-                            <Link to={'/register'} className='text-accent cursor-pointer hover:text-info ease-in-out transition-colors duration-300'>Forgot Password?</Link>
+                            <Link to={'/register'} className='text-accent cursor-pointer hover:text-accent/50 ease-in-out transition-colors duration-300'>Forgot Password?</Link>
                         </span>
                         <span>
-                            New user? <Link to={'/register'} className='text-accent cursor-pointer hover:text-info ease-in-out transition-colors duration-300'>Register now</Link>
+                            New user? <Link to={'/register'} className='text-accent cursor-pointer hover:text-accent/50 ease-in-out transition-colors duration-300'>Register now</Link>
                         </span>
                     </div>
                     <div className='flex gap-2 w-full max-w-xs'>
@@ -97,8 +97,8 @@ function Login() {
                         <label >Remember me</label>
                     </div>
                     <div className="flex justify-center w-full mx-auto my-2 gap-5">
-                        <a className="bg-base-300 rounded-box grid h-10 w-32 place-items-center cursor-pointer hover:bg-accent hover:text-base-100 ease-in-out transition-colors duration-300" onClick={(e) => handleSubmit(e)}>Login</a>
-                        <a className="bg-base-300 rounded-box grid h-10 w-32 place-items-center cursor-pointer hover:bg-accent hover:text-base-100 ease-in-out transition-colors duration-300">Reset</a>
+                        <a className="bg-accent text-base-200 rounded-box grid h-10 w-32 place-items-center cursor-pointer hover:bg-accent/50 hover:text-accent ease-in-out transition-colors duration-300" onClick={(e) => handleSubmit(e)}>Login</a>
+                        <a className="bg-accent text-base-200 rounded-box grid h-10 w-32 place-items-center cursor-pointer hover:bg-accent/50 hover:text-accent ease-in-out transition-colors duration-300">Reset</a>
                     </div>
                     
                 </div>

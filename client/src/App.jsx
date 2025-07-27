@@ -17,14 +17,16 @@ import CreateEvent from './modules/todos/event/CreateEvent'
 import CreateNote from './modules/todos/note/CreateNote'
 import CreateList from './modules/todos/list/CreateList'
 import Register from './modules/Users/Register'
+import UpdatePassword from './modules/Users/UpdatePassword'
+import FullCalendar from './components/FullCalendar'
 function App() {
 
   return (
     <>
       <AnimatePresence mode='wait'>
         <Router>
-            <ToastProvider>
-          <AuthProvider>
+          <ToastProvider>
+            <AuthProvider>
               <Navbar />
               <SidebarItems />
               <Routes>
@@ -32,6 +34,7 @@ function App() {
                 <Route exact path='/unathorized' element={<Unauthorized />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />
+                <Route path='/calendar' element={<FullCalendar />} />
                 <Route
                   path="/home"
                   element={
@@ -43,6 +46,11 @@ function App() {
                 <Route path='/user/view' element={
                   <PrivateRoute>
                     <View />
+                  </PrivateRoute>
+                } />
+                <Route path='/user/update' element={
+                  <PrivateRoute>
+                    <UpdatePassword />
                   </PrivateRoute>
                 } />
                 <Route
@@ -73,8 +81,8 @@ function App() {
                 } />
               </Routes>
               <Footer />
-          </AuthProvider>
-            </ToastProvider>
+            </AuthProvider>
+          </ToastProvider>
         </Router>
       </AnimatePresence>
     </>
