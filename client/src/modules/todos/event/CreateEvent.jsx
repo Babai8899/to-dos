@@ -1,6 +1,9 @@
-import React, { useState } from 'react'
+import React, {useContext, useState} from 'react'
 import dayjs from 'dayjs';
 import Transitions from '../../../components/Transitions'
+import axiosInstance from "../../../api/axiosInstance.js";
+import AuthContext from "../../../hooks/AuthContext.jsx";
+import ToastContext from "../../../hooks/ToastContext.jsx";
 const months = [
   'January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December'
@@ -9,6 +12,8 @@ const months = [
 const years = Array.from({ length: 20 }, (_, i) => dayjs().year() + i);
 
 function CreateEvent() {
+  const {user} = useContext(AuthContext);
+  const {showToast} = useContext(ToastContext);
   const today = dayjs().startOf('day');
   const [currentDate, setCurrentDate] = useState(dayjs());
   const [selectedDate, setSelectedDate] = useState(null);
@@ -53,9 +58,9 @@ function CreateEvent() {
         days.push(
           <div
             key={thisDay.format('YYYY-MM-DD')}
-            className={`p-2 text-center rounded-xl
-              ${isSelected ? 'bg-primary text-primary-content font-bold' : 'bg-base-100'}
-              ${!isTodayOrFuture ? 'text-base-content/30 cursor-not-allowed' : 'hover:bg-primary hover:text-primary-content'}`}
+            className={`cursor-pointer p-2 text-center rounded-xl
+              ${isSelected ? 'bg-accent text-accent-content font-bold' : 'bg-base-100'}
+              ${!isTodayOrFuture ? 'text-base-content/30 cursor-not-allowed' : 'hover:bg-accent hover:text-accent-content'}`}
             disabled={!isTodayOrFuture}
             onClick={() => { handleCreateEventWindow(thisDay); isTodayOrFuture && setSelectedDate(thisDay); }}
           >
@@ -79,15 +84,19 @@ function CreateEvent() {
   };
 
   const [eventData, setEventData] = useState({
-    eventTitle: "",
+    title: "",
     description: "",
-    deadline: ""
+    location: "",
+    date: "",
+    time: ""
   });
 
   const {
-    eventTitle,
+    title,
     description,
-    deadline
+      location,
+    date,
+      time
   } = eventData;
 
   const handleChange = (e) => {
@@ -99,9 +108,11 @@ function CreateEvent() {
 
   const onReset = () => {
     setEventData({
-      eventTitle: "",
+      title: "",
       description: "",
-      deadline: ""
+      location: "",
+      date: "",
+      time: ""
     });
   }
 
@@ -109,21 +120,29 @@ function CreateEvent() {
     setCreateEventWindow(!createEventWindow);
     setEventData({
       ...eventData,
-      deadline: thisDay.format('YYYY-MM-DD')
+      date: thisDay.format('YYYY-MM-DD')
     });
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    //add user.email to eventData
+    eventData.user = user.emailId;
     try {
-      await axiosInstance.post('/event', eventData);
+      await axiosInstance.post('/events', eventData);
+      showToast("Event created successfully", "success");
     } catch (error) {
       console.error("Registration failed:", error.response.data.message);
       showToast(error.response.data.message, "error");
       throw error;
     }
     // Reset form after submission
-    onReset();
+    setTimeout(() => {
+      onReset();
+      handleCreateEventWindow();
+    }, 1000);
+
   }
 
 
@@ -145,7 +164,7 @@ function CreateEvent() {
               {showSelector && (
                 <div className="absolute top-12 left-1/2 transform -translate-x-1/2 z-20 bg-base-100 border rounded-xl shadow-lg p-4 flex gap-4">
                   <select
-                    className="select select-bordered"
+                    className="select noscrollbar"
                     value={currentDate.month()}
                     onChange={(e) =>
                       handleSelectMonthYear(Number(e.target.value), currentDate.year())
@@ -159,7 +178,7 @@ function CreateEvent() {
                   </select>
 
                   <select
-                    className="select select-bordered"
+                    className="select noscrollbar"
                     value={currentDate.year()}
                     onChange={(e) =>
                       handleSelectMonthYear(currentDate.month(), Number(e.target.value))
@@ -188,26 +207,32 @@ function CreateEvent() {
           </div>
         </div> :
         <div className="container flex justify-center w-1/2 mx-auto my-0.5 h-max">
-          <div className="card w-96 bg-base-100 shadow-sm border-2 border-base-300 h-96 mx-auto my-5 flex flex-col justify-center items-center gap-4 py-1 px-5">
+          <div className="card w-96 bg-base-100 shadow-sm border-2 border-base-300 mx-auto my-5 flex flex-col justify-center items-center gap-4 py-1 px-5">
             <h1 className='text-2xl'>Create Event</h1>
-            <div className='grid grid-cols-1 gap-1'>
+            <div className='grid grid-cols-1 gap-0.5'>
               <div className='w-full max-w-xs'>
-                <label>Ttle</label>
-                <input type="text" placeholder="Enter your first name" className="input input-warning" name='eventTitle' value={eventTitle} onChange={handleChange} />
+                <label>Title</label>
+                <input type="text" placeholder="Event title" className="input input-accent" name='title' value={title} onChange={handleChange} />
               </div>
               <div className='w-full max-w-xs'>
                 <label >Description</label>
-                <textarea className="textarea textarea-warning" placeholder="Description" name='description' value={description} onChange={handleChange}></textarea>
-                {/* <input type="text" placeholder="Enter your last name" className="input input-warning" name='lastName' value={lastName}  /> */}
+                <textarea className="textarea textarea-accent" placeholder="Description" name='description' value={description} onChange={handleChange}></textarea>
               </div>
               <div className='w-full max-w-xs'>
-                <label>Deadline</label>
-                <input type="date" className="input input-warning" name='deadline' value={deadline} onChange={handleChange} />
+                <label>Location</label>
+                <input type="text" placeholder="Event location" className="input input-accent" name='location' value={location} onChange={handleChange} />
+              </div>
+              <div className='w-full max-w-xs'>
+                <label>Date & Time</label>
+                <div className='flex gap-2'>
+                <input type="date" className="input input-accent w-1/2" name='date' value={date} onChange={handleChange} />
+                <input type="time" className="input input-accent w-1/2" name='time' value={time} onChange={handleChange} />
+                </div>
               </div>
             </div>
             <div className="flex justify-center w-full mx-auto my-2 gap-5">
-              <a className="bg-base-300 rounded-box grid h-10 w-32 place-items-center cursor-pointer hover:bg-amber-100 ease-in-out transition-colors duration-300" onClick={(e) => handleSubmit(e)}>Create Event</a>
-              <a className="bg-base-300 rounded-box grid h-10 w-32 place-items-center cursor-pointer hover:bg-amber-100 ease-in-out transition-colors duration-300" onClick={() => {onReset; handleCreateEventWindow()}}>Cancel</a>
+              <a className="bg-accent text-base-200 rounded-box grid h-10 w-32 place-items-center cursor-pointer hover:bg-accent/50 hover:text-accent ease-in-out transition-colors duration-300" onClick={(e) => handleSubmit(e)}>Create Event</a>
+              <a className="bg-accent text-base-200 rounded-box grid h-10 w-32 place-items-center cursor-pointer hover:bg-accent/50 hover:text-accent ease-in-out transition-colors duration-300" onClick={() => {onReset; handleCreateEventWindow()}}>Cancel</a>
             </div>
           </div>
         </div>

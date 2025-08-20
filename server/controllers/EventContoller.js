@@ -2,10 +2,11 @@ import EventModel from "../models/EventModel.js";
 import EventCounterModel from "../models/EventCounter.js";
 
 const createEvent = async (req, res) => {
-    const { title, description, date, location, user } = req.body;
+    console.log(req.body);
+    const { title, description, date, time, location, user } = req.body;
 
     // Validate required fields
-    if (!title || !description || !date || !location || !user) {
+    if (!title || !description || !date || !time || !location || !user) {
         return res.status(400).json({ message: "All fields are required" });
     }
     //autogenerate _id as EVENT001 using EventCounter
@@ -29,6 +30,12 @@ const createEvent = async (req, res) => {
         return res.status(400).json({ message: "Event date must be a valid date and not in the past" });
     }
 
+    // Validate time is a valid time
+    const eventTime = new Date(`${date} ${time}`);
+    if (isNaN(eventTime.getTime())) {
+        return res.status(400).json({ message: "Event time must be a valid time" });
+    }
+
     try {
         // Create a new event instance
         
@@ -37,6 +44,7 @@ const createEvent = async (req, res) => {
             title,
             description,
             date,
+            time,
             location,
             user: user // Assuming req.user is set by an authentication middleware
         });

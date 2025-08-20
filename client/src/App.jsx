@@ -11,14 +11,14 @@ import PrivateRoute from './routes/PrivateRoute'
 import View from './modules/Users/View'
 import Unauthorized from './pages/errors/Unauthorized'
 import { AnimatePresence } from 'framer-motion'
-import SidebarItems from './shared/SidebarItems'
+import Sidebar from './shared/Sidebar'
 import CreateTask from './modules/todos/task/CreateTask'
 import CreateEvent from './modules/todos/event/CreateEvent'
 import CreateNote from './modules/todos/note/CreateNote'
 import CreateList from './modules/todos/list/CreateList'
 import Register from './modules/Users/Register'
 import UpdatePassword from './modules/Users/UpdatePassword'
-import FullCalendar from './components/FullCalendar'
+import ChatBot from './shared/ChatBot'
 function App() {
 
   return (
@@ -27,14 +27,14 @@ function App() {
         <Router>
           <ToastProvider>
             <AuthProvider>
+              <ChatBot/>
               <Navbar />
-              <SidebarItems />
+              <Sidebar />
               <Routes>
                 <Route exact path='/' element={<Welcome />} />
                 <Route exact path='/unathorized' element={<Unauthorized />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />
-                <Route path='/calendar' element={<FullCalendar />} />
                 <Route
                   path="/home"
                   element={

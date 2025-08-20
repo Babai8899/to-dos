@@ -1,27 +1,36 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom';
-import Transitions from '../components/Transitions';
+import React, { useState } from 'react'
+import HomeNavProvider from '../hooks/HomeNavProvider';
 
 function Home() {
-  const navigate = useNavigate();
+  const options = ['task', 'event', 'list', 'note'];
+  const [activeNav, setActiveNav] = useState('task');
 
-  const handleGetStarted = () => {
-    navigate('/user/view');
-  };
-
-  const pageVariants = {
-    initial: { opacity: 0 },
-    animate: { opacity: 2 },
-    exit: { opacity: 0 },
-  };
   return (
-    <Transitions pageVariants={pageVariants}>
-      <div className="flex justify-center w-1/2 mx-auto my-10">
-        <a className="bg-base-300 rounded-box grid h-10 w-32 place-items-center cursor-pointer hover:bg-amber-100 ease-in-out transition-colors duration-300" onClick={handleGetStarted}>view</a>
-        <div className="divider divider-horizontal"></div>
-        <a className="bg-base-300 rounded-box grid h-10 w-32 place-items-center cursor-pointer hover:bg-amber-100 ease-in-out transition-colors duration-300">Watch Demo</a>
+    <div className="w-screen lg:w-[calc(100vw-5rem)] grid gap-y-4 fixed -right-0 h-[calc(100vh-4rem-4rem)] noscrollbar my-3 -z-10 overflow-y-scroll">
+      <div className="card rounded-box h-96 w-11/12 mx-auto place-items-center shadow-lg">
+        <HomeNavProvider>
+          {options.map((option, index) => (
+            <li
+              key={index}
+              className={`text-lg text-center font-semibold cursor-pointer w-20 transition-colors duration-300
+                ${activeNav === option
+                  ? 'border-b-2 border-blue-500 text-blue-500'
+                  : 'hover:border-b-2 hover:text-blue-200 hover:border-blue-200'}
+              `}
+              onClick={() => setActiveNav(option)}
+            >
+              {option.charAt(0).toUpperCase() + option.slice(1)}
+            </li>
+          ))}
+        </HomeNavProvider>
       </div>
-    </Transitions>
+      <div className="card rounded-box h-96 w-11/12 mx-auto place-items-center border-2">
+
+      </div>
+      <div className="card rounded-box h-96 w-11/12 mx-auto place-items-center border-2">
+
+      </div>
+    </div>
   )
 }
 

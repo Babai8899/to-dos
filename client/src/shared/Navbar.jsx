@@ -7,15 +7,15 @@ function Navbar() {
     const { logout } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const [theme, setTheme] = useState(localStorage.getItem('theme') ? localStorage.getItem('theme') : 'mylighttheme')
+    const [theme, setTheme] = useState(localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light')
 
     const toggleTheme = (e) => {
         console.log(e.target.checked);
         if (e.target.checked) {
-            setTheme('mydarktheme');
+            setTheme('dark');
         }
         else {
-            setTheme('mylighttheme');
+            setTheme('light');
         }
     }
     useEffect(() => {
@@ -31,9 +31,9 @@ function Navbar() {
 
     return (
         <div>
-            <div className="navbar bg-gradient-to-tr from-cyan-500 shadow-sm">
+            <div className="navbar bg-cyan-300 dark:bg-cyan-600 shadow-sm">
                 <div className="flex my-auto text-4xl navbar-start gap-1">
-                    <a className="rounded-box grid h-10 w-32 place-items-center cursor-pointer hover:bg-base-100 ease-in-out transition-colors duration-300" href="/home">ToDos</a>
+                    <a className="rounded-box grid h-10 w-32 place-items-center cursor-pointer hover:bg-base-100 font-bold ease-in-out transition-colors duration-300 text-shadow-xs text-shadow-cyan-50" href="/home">ToDos</a>
                     <input type="text" placeholder="Search" className="input input-neutral w-24 md:w-auto lg:visible invisible" />
                 </div>
                 <div className="flex gap-2 mr-4 navbar-end">

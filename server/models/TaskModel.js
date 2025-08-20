@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
-const eventSchema = new mongoose.Schema({
-    eventId: {
+const taskSchema = new mongoose.Schema({
+    taskId: {
         type: String,
         required: true,
         unique: true,
@@ -24,17 +24,12 @@ const eventSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    location: {
-        type: String,
-        required: true,
-        trim: true,
-    },
     user: {
         type: String,
         required: true,
     }
 });
 
-const EventModel = mongoose.model("Event", eventSchema);
+const TaskModel = mongoose.model("Task", taskSchema);
 
-export default EventModel;
+export default TaskModel;
