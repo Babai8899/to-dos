@@ -57,16 +57,16 @@ function CreateNote() {
   }
   return (
     <Transitions pageVariants={pageVariants}>
-      <div className="container flex justify-center w-1/3 mx-auto my-0.5 h-max">
-        <div className="card w-full h-96 bg-base-100 shadow-sm border-2 border-base-300 mx-auto my-5 flex flex-col justify-center items-center gap-4 py-1 px-5">
+      <div className="container flex justify-center md:w-2/5 w-4/5 mx-auto my-0.5 h-max">
+        <div className="card w-full bg-base-100 shadow-sm border-2 border-base-300 mx-auto my-5 flex flex-col justify-center items-center gap-4 py-1 px-2">
           <h1 className='text-2xl'>Create Task</h1>
           <div className='grid grid-cols-1 gap-0.5'>
-            <div className='w-96 max-w-xs'>
-              <input type="text" placeholder="Task title" className="input input-ghost" name='title' value={title} onChange={handleChange} />
+            <div className='w-96 md:max-w-xs'>
+              <input type="text" placeholder="Task title" className="md:max-w-xs input input-ghost w-96" name='title' value={title} onChange={handleChange} />
             </div>
             <div className='divider m-0 p-0'></div>
-            <div className='w-full max-w-xs'>
-              <textarea className="textarea textarea-ghost h-44" placeholder="Description" name='description' value={description} onChange={handleChange}></textarea>
+            <div className='w-96 md:max-w-xs'>
+              <textarea className="w-96 md:max-w-xs textarea textarea-ghost h-96 md:h-44" placeholder="Description" name='description' value={description} onChange={handleChange}></textarea>
             </div>
           </div>
           <div className="flex justify-center w-full mx-auto my-2 gap-5">
