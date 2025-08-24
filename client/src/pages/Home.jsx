@@ -12,7 +12,7 @@ function Home() {
           {options.map((option, index) => (
             <li
               key={index}
-              className={`text-lg text-center font-semibold cursor-pointer w-20 transition-colors duration-300
+              className={`md:text-lg text-sm text-center font-semibold cursor-pointer md:w-20 w-15 transition-colors duration-300
                 ${activeNav === option
                   ? 'border-b-2 border-blue-500 text-blue-500'
                   : 'hover:border-b-2 hover:text-blue-200 hover:border-blue-200'}
