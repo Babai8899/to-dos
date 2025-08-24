@@ -61,12 +61,12 @@ function CreateNote() {
         <div className="card w-96 h-96 bg-base-100 shadow-sm border-2 border-base-300 mx-auto my-5 flex flex-col justify-center items-center gap-4 py-1 px-5">
           <h1 className='text-2xl'>Create Task</h1>
           <div className='grid grid-cols-1 gap-0.5'>
-            <div className='md:w-96 w-80 max-w-xs'>
+            <div className='md:w-96 w-64 max-w-xs'>
               <input type="text" placeholder="Task title" className="input input-ghost" name='title' value={title} onChange={handleChange} />
             </div>
             <div className='divider m-0 p-0'></div>
-            <div className='md:w-96 w-80 max-w-xs'>
-              <textarea className="textarea textarea-ghost h-44" placeholder="Description" name='description' value={description} onChange={handleChange}></textarea>
+            <div className='md:w-96 w-64 max-w-xs'>
+              <textarea className="textarea textarea-ghost md:h-44 h-48" placeholder="Description" name='description' value={description} onChange={handleChange}></textarea>
             </div>
           </div>
           <div className="flex justify-center w-full mx-auto my-2 gap-5">
