@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 5000;
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/todos';
 
-app.use(cors({origin: '*', credentials: true}));
+app.use(cors({origin: 'https://to-dos-client.vercel.app', credentials: true}));
 app.use(cookieParser());
 app.use(express.json());
 
