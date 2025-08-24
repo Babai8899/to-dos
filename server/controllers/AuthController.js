@@ -97,13 +97,15 @@ const login = async (req, res) => {
         cookie('accessToken', accessToken, {
             httpOnly: true,
             secure: true, // Use secure cookies in production
-            sameSite: 'Strict', // Adjust as necessary for your application
+            domain: 'vercel.app',
+            sameSite: 'None', // Adjust as necessary for your application
             maxAge: 1 * 60 * 1000 // 1 minutes
         }).
         cookie('refreshToken', refreshToken, {
             httpOnly: true,
             secure: true, // Use secure cookies in production
-            sameSite: 'Strict', // Adjust as necessary for your application
+            domain: 'vercel.app',
+            sameSite: 'None', // Adjust as necessary for your application
             maxAge: 1 * 60 * 60 * 1000 // 1 hour
         });
 
@@ -137,7 +139,8 @@ const refresh = async (req, res) => {
             res.cookie('accessToken', accessToken, {
                 httpOnly: true,
                 secure: true, // Use secure cookies in production
-                sameSite: 'Strict', // Adjust as necessary for your application
+                domain: 'vercel.app',
+                sameSite: 'None', // Adjust as necessary for your application
                 maxAge: 1 * 60 * 1000 // 1 minute
             });
             
