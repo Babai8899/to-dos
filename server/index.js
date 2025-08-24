@@ -33,6 +33,8 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
+app.set('trust proxy', 1); // trust first proxy
+
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/events', eventRoutes);
