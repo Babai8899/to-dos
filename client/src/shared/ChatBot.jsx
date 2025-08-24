@@ -18,7 +18,7 @@ function ChatBot() {
     return (
         <div>
             <div className="container flex">
-                <div className="md:w-1/3 w-full h-full fixed md:top-20 md:right-5 md:px-2 px-10 py-20 z-10">
+                <div className="md:w-1/3 w-full fixed md:top-20 top-20 md:right-5 md:px-2 px-10 z-2">
                     {visible &&
                         <Transitions pageVariants={pageVariants}>
                             <div className='card gap-2 grid bg-blue-50 shadow-2xl p-2'>
