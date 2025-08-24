@@ -22,7 +22,7 @@ function ChatBot() {
                     {visible &&
                         <Transitions pageVariants={pageVariants}>
                             <div className='card gap-2 grid bg-blue-50 shadow-2xl p-2'>
-                                <div className="card bg-amber-50 md:h-80 h-[calc(100vh-10rem-10rem)] shadow-lg p-2 text-sm">
+                                <div className="card bg-amber-50 md:h-80 h-[calc(100vh-12rem-12rem)] shadow-lg p-2 text-sm">
                                     <div className="chat chat-start">
                                         <div className="chat-image avatar">
                                             <div className="w-10 rounded-full">
