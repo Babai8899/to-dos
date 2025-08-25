@@ -73,15 +73,15 @@ function Login() {
 
     return (
         <Transitions pageVariants={pageVariants}>
-            <div className="container flex justify-center w-1/2 mx-auto my-0.5">
-                <div className="card w-96 bg-base-200 shadow-sm border-2 border-base-300 mx-auto my-10 h-96 flex flex-col justify-center items-center gap-4 py-1 px-5">
-                    <h1 className='text-2xl text-accent font-bold'>Login Page</h1>
+            <div className="container flex justify-center md:w-1/2 w-screen mx-auto my-0.5">
+                <div className="card md:w-96 w-full md:bg-base-300 md:shadow-sm md:border-2 border-base-300 mx-auto md:my-10 h-[calc(100vh-10rem-10rem)] md:h-96 flex flex-col justify-center items-center gap-4 md:py-1 px-5">
+                    <h1 className='text-4xl text-orange-600 dark:text-orange-300 font-bold'>Login</h1>
                     <div className='gap-2 w-full max-w-xs'>
-                        <label >Email ID</label>
-                        <input type="text" placeholder="Email ID" className="input input-accent" name='emailId' value={emailId} onChange={handleChange} />
+                        <label className='text-gray-900 dark:text-gray-200'>Email ID</label>
+                        <input type="text" placeholder="Email ID" className="input" name='emailId' value={emailId} onChange={handleChange} />
                     </div>
                     <div className='gap-2 w-full max-w-xs'>
-                        <label>Password</label>
+                        <label className='text-gray-900 dark:text-gray-200'>Password</label>
                         <input type="password" placeholder="Password" className="input input-accent" name='password' value={password} onChange={handleChange} />
                     </div>
                     <div className='text-sm flex flex-row gap-12'>

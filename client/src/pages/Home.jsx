@@ -6,9 +6,9 @@ function Home() {
   const [activeNav, setActiveNav] = useState('task');
 
   return (
-    <div className="w-screen lg:w-[calc(100vw-5rem)] grid gap-y-4 fixed -right-0 h-[calc(100vh-4rem-4rem)] noscrollbar my-3 -z-10 overflow-y-scroll">
+    <div className="w-screen lg:w-[calc(100vw-5rem)] grid gap-y-4 fixed -right-0 h-[calc(100vh-4rem-4rem)] noscrollbar my-3 overflow-y-scroll">
       <div className="card rounded-box h-96 w-11/12 mx-auto place-items-center shadow-lg">
-        <HomeNavProvider>
+        <HomeNavProvider value={{ activeNav, setActiveNav }}>
           {options.map((option, index) => (
             <li
               key={index}
