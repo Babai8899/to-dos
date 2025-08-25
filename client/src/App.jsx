@@ -22,7 +22,7 @@ import ChatBot from './shared/ChatBot'
 function App() {
 
   return (
-    <>
+    <div className="bg-gray-50 dark:bg-gray-800 min-h-screen transition-colors duration-100">
       <AnimatePresence mode='wait'>
         <Router>
           <ToastProvider>
@@ -85,7 +85,7 @@ function App() {
           </ToastProvider>
         </Router>
       </AnimatePresence>
-    </>
+    </div>
   )
 }
 
