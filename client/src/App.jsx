@@ -19,7 +19,7 @@ import CreateList from './modules/todos/list/CreateList'
 import Register from './modules/Users/Register'
 import UpdatePassword from './modules/Users/UpdatePassword'
 import ChatBot from './shared/ChatBot'
-import PushNotification from './shared/PushNotification'
+import PushProvider from './hooks/PushProvider'
 function App() {
 
   return (
@@ -27,6 +27,9 @@ function App() {
       <AnimatePresence mode='wait'>
         <Router>
           <ToastProvider>
+            <PushProvider>
+
+            
             <AuthProvider>
               <ChatBot/>
               <Navbar />
@@ -41,14 +44,6 @@ function App() {
                   element={
                     <PrivateRoute>
                       <Home />
-                    </PrivateRoute>
-                  }
-                />
-                <Route
-                  path="/pushNotification"
-                  element={
-                    <PrivateRoute>
-                      <PushNotification />
                     </PrivateRoute>
                   }
                 />
@@ -91,6 +86,7 @@ function App() {
               </Routes>
               <Footer />
             </AuthProvider>
+          </PushProvider>
           </ToastProvider>
         </Router>
       </AnimatePresence>

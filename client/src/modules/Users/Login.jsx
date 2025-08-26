@@ -74,7 +74,7 @@ function Login() {
     return (
         <Transitions pageVariants={pageVariants}>
             <div className="container flex justify-center md:w-1/2 w-screen mx-auto my-0.5">
-                <div className="card md:w-96 w-full md:bg-base-300 md:shadow-sm md:border-2 border-base-300 mx-auto md:my-10 h-[calc(100vh-10rem-10rem)] md:h-96 flex flex-col justify-center items-center gap-4 md:py-1 px-5">
+                <div className="card md:w-96 w-full md:bg-base-300 md:shadow-sm md:border-2 md:border-cyan-300 mx-auto md:my-10 h-[calc(100vh-10rem-10rem)] md:h-96 flex flex-col justify-center items-center gap-4 md:py-1 px-5">
                     <h1 className='text-4xl text-orange-600 dark:text-orange-300 font-bold'>Login</h1>
                     <div className='gap-2 w-full max-w-xs'>
                         <label className='text-gray-900 dark:text-gray-200'>Email ID</label>

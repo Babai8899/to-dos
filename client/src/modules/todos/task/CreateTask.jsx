@@ -3,8 +3,10 @@ import Transitions from '../../../components/Transitions'
 import axiosInstance from '../../../api/axiosInstance';
 import AuthContext from '../../../hooks/AuthContext';
 import ToastContext from '../../../hooks/ToastContext';
+import PushContext from '../../../hooks/PushContext';
 
 function CreateTask() {
+  const { sendNotification } = useContext(PushContext);
   const {user} = useContext(AuthContext);
   const {showToast} = useContext(ToastContext);
   const pageVariants = {
@@ -50,6 +52,10 @@ function CreateTask() {
     try {
       await axiosInstance.post('/tasks', taskData);
       showToast("Task created successfully", "success");
+      sendNotification({
+        title: 'Task Created',
+        body: `Task "${title}" has been created successfully!`
+      });
     } catch (error) {
       console.error("Registration failed:", error.response.data.message);
       showToast(error.response.data.message, "error");

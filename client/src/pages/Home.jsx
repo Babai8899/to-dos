@@ -1,9 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react';
 import HomeNavProvider from '../hooks/HomeNavProvider';
+import PushContext from '../hooks/PushContext';
+
 
 function Home() {
   const options = ['task', 'event', 'list', 'note'];
   const [activeNav, setActiveNav] = useState('task');
+  const { subscribe } = useContext(PushContext);
+
+  useEffect(() => {
+    const notificationConfirmed = localStorage.getItem('notificationConfirmed');
+    if (!notificationConfirmed) {
+      const result = window.confirm('Do you want to allow notifications?');
+      if (result) {
+        subscribe();
+        localStorage.setItem('notificationConfirmed', 'true');
+      } else {
+        localStorage.setItem('notificationConfirmed', 'false');
+      }
+    }
+  }, [subscribe]);
 
   return (
     <div className="w-screen lg:w-[calc(100vw-5rem)] grid gap-y-4 fixed -right-0 h-[calc(100vh-4rem-4rem)] noscrollbar my-3 overflow-y-scroll">
@@ -25,13 +41,13 @@ function Home() {
         </HomeNavProvider>
       </div>
       <div className="card rounded-box h-96 w-11/12 mx-auto place-items-center border-2">
-
+        {/* ...existing code... */}
       </div>
       <div className="card rounded-box h-96 w-11/12 mx-auto place-items-center border-2">
-
+        {/* ...existing code... */}
       </div>
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;

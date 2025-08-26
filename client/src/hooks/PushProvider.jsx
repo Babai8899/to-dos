@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import axiosInstance from '../api/axiosInstance';
+import PushContext from './PushContext';
 
 const PUBLIC_VAPID_KEY = "BIGMDHupR8z8IgOdtcbYsUoAznXT6N3tGUxA0jg0lbwbTZ67hw0LG_svNCCiNnkSyrn_gjQXTN4LYDXroH9HpqY"; // replace later
 
@@ -10,7 +11,8 @@ function urlBase64ToUint8Array(base64String) {
     return Uint8Array.from([...rawData].map((c) => c.charCodeAt(0)));
 }
 
-function PushNotification() {
+function PushProvider({children}) {
+
     useEffect(() => {
         if ("serviceWorker" in navigator) {
             navigator.serviceWorker.register("/sw.js");
@@ -32,21 +34,15 @@ function PushNotification() {
         alert("Subscribed to push!");
     };
 
-    const payload = {
-        title: "🚀 Hello!",
-        body: "This is a push notification",
-    };
-
-    const sendNotification = async () => {
+    const sendNotification = async (payload) => {
         await axiosInstance.post("/send", payload);
     };
 
-    return (
-        <div className='z-10'>
-            <button className='btn' onClick={subscribe}>Subscribe to Push</button>
-            <button className='btn' onClick={sendNotification}>Send Notification</button>
-        </div>
-    )
+  return (
+    <PushContext.Provider value={{subscribe, sendNotification}}>
+        {children}
+    </PushContext.Provider>
+  )
 }
 
-export default PushNotification
+export default PushProvider
