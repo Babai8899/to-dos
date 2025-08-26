@@ -19,6 +19,7 @@ import CreateList from './modules/todos/list/CreateList'
 import Register from './modules/Users/Register'
 import UpdatePassword from './modules/Users/UpdatePassword'
 import ChatBot from './shared/ChatBot'
+import PushNotification from './shared/PushNotification'
 function App() {
 
   return (
@@ -40,6 +41,14 @@ function App() {
                   element={
                     <PrivateRoute>
                       <Home />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/pushNotification"
+                  element={
+                    <PrivateRoute>
+                      <PushNotification />
                     </PrivateRoute>
                   }
                 />
