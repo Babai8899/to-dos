@@ -19,9 +19,9 @@ function Welcome() {
     return (
         <Transitions pageVariants={pageVariants}>
             <div className="flex justify-center w-full mx-auto my-10">
-                <a className="bg-gray-200 dark:bg-gray-900 text-gray-900 dark:text-gray-200 rounded-box grid h-10 md:w-32 w-40 place-items-center cursor-pointer hover:bg-amber-100 ease-in-out transition-colors duration-300" onClick={handleGetStarted}>Get Started</a>
+                <a className="bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-box grid h-10 md:w-32 w-40 place-items-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 ease-in-out transition-colors duration-300" onClick={handleGetStarted}>Get Started</a>
                 <div className="divider divider-horizontal"></div>
-                <a className="bg-gray-200 dark:bg-gray-900 text-gray-900 dark:text-gray-200 rounded-box grid h-10 md:w-32 w-40 place-items-center cursor-pointer hover:bg-amber-100 ease-in-out transition-colors duration-300">Watch Demo</a>
+                <a className="bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-box grid h-10 md:w-32 w-40 place-items-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 ease-in-out transition-colors duration-300">Watch Demo</a>
             </div>
         </Transitions>
     )

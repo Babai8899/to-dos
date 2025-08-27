@@ -53,7 +53,7 @@ export function SidebarItem({ icon, text, alert, active }) {
                 -translate-x-3 transition-all lg:group-hover:visible lg:group-hover:opacity-100 lg:group-hover:translate-x-0`
                 }>{text}</div>}
             </li>
-            <div className='text-center lg:invisible mb-1 lg:mb-0'>{text}</div>
+            <div className='text-center text-gray-800 dark:text-gray-200 lg:invisible mb-1 lg:mb-0'>{text}</div>
         </div>
     )
 }
