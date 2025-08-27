@@ -62,11 +62,11 @@ function CreateNote() {
           <h1 className='text-3xl'>Create Note</h1>
           <div className='grid grid-cols-1 gap-0.5 w-full'>
             <div className='w-full'>
-              <input type="text" placeholder="Task title" className="focus:bg-transparent focus:outline-none input w-full input-ghost" name='title' value={title} onChange={handleChange} />
+              <input type="text" placeholder="Task title" className="placeholder:text-gray-800 dark:placeholder:text-gray-200 focus:bg-transparent focus:outline-none input w-full input-ghost" name='title' value={title} onChange={handleChange} />
             </div>
-            <div className='divider m-0 p-0'></div>
+            <div className='divider divider-warning dark:divider-neutral m-0 p-0 '></div>
             <div className='w-full'>
-              <textarea className="focus:bg-transparent focus:outline-none textarea textarea-ghost md:h-44 h-48 w-full" placeholder="Description" name='description' value={description} onChange={handleChange}></textarea>
+              <textarea className="placeholder:text-gray-800 dark:placeholder:text-gray-200 focus:bg-transparent focus:outline-none textarea textarea-ghost md:h-44 h-48 w-full" placeholder="Description" name='description' value={description} onChange={handleChange}></textarea>
             </div>
           </div>
           <div className="flex justify-center w-full mx-auto my-2 gap-5">

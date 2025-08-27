@@ -108,27 +108,27 @@ function Register() {
                     <div className='grid w-full grid-cols-1 lg:grid-cols-2 gap-3 h-[calc(100vh-9rem-9rem)] overflow-y-auto noscrollbar px-1'>
                         <div className='w-full max-w-xs mx-auto'>
                             <label className='text-gray-900 dark:text-gray-200'>Email ID</label>
-                            <input type="text" placeholder="Enter your email id" className="input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600"
+                            <input type="text" placeholder="Enter your email id" className="text-gray-800 dark:text-gray-200 input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600"
                                 name='emailId' value={emailId} onChange={handleChange} />
                         </div>
                         <div className='w-full max-w-xs mx-auto'>
                             <label className='text-gray-900 dark:text-gray-200'>First Name</label>
-                            <input type="text" placeholder="Enter your first name" className="input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600"
+                            <input type="text" placeholder="Enter your first name" className="text-gray-800 dark:text-gray-200 input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600"
                                 name='firstName' value={firstName} onChange={handleChange} />
                         </div>
                         <div className='w-full max-w-xs mx-auto'>
                             <label className='text-gray-900 dark:text-gray-200'>Last Name</label>
-                            <input type="text" placeholder="Enter your last name" className="input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600"
+                            <input type="text" placeholder="Enter your last name" className="text-gray-800 dark:text-gray-200 input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600"
                                 name='lastName' value={lastName} onChange={handleChange} />
                         </div>
                         <div className='w-full max-w-xs mx-auto'>
                             <label className='text-gray-900 dark:text-gray-200'>Date of Birth</label>
-                            <input type="date" className="input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600" name='dob' value={dob}
+                            <input type="date" className="text-gray-800 dark:text-gray-200 input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600" name='dob' value={dob}
                                 onChange={handleChange} />
                         </div>
                         <div className='w-full max-w-xs mx-auto'>
                             <label className='text-gray-900 dark:text-gray-200'>Phone</label>
-                            <input type="text" placeholder="Enter your phone" className="input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600"
+                            <input type="text" placeholder="Enter your phone" className="text-gray-800 dark:text-gray-200 input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600"
                                 name='phone' value={phone} onChange={handleChange} />
                         </div>
                         <div className='w-full max-w-xs mx-auto'>
@@ -136,7 +136,7 @@ function Register() {
                                 <label className='text-gray-900 dark:text-gray-200'>Password</label> <span className="text-sm font-medium"
                                     style={{ color: strength.color }}>{strength.label}</span>
                             </div>
-                            <input type="password" placeholder="Password" className="input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600" name='password'
+                            <input type="password" placeholder="Password" className="text-gray-800 dark:text-gray-200 input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600" name='password'
                                 value={password} onChange={handleChange} />
                         </div>
                         <div className='w-full max-w-xs mx-auto'>
@@ -144,12 +144,12 @@ function Register() {
                                 <label className='text-gray-900 dark:text-gray-200'>Confirm Password</label> <span className="text-sm font-medium"
                                     style={{ color: matching.color }}>{matching.label}</span>
                             </div>
-                            <input type="password" placeholder="Confirm Password" className="input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600"
+                            <input type="password" placeholder="Confirm Password" className="text-gray-800 dark:text-gray-200 input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600"
                                 value={confirmPassword} onChange={handleChange} name='confirmPassword' />
                         </div>
                         <div className='w-full max-w-xs mx-auto'>
                             <label className='text-gray-900 dark:text-gray-200'>Anniversary (Optional)</label>
-                            <input type="date" className="input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600" name='anniversary' value={anniversary}
+                            <input type="date" className="text-gray-800 dark:text-gray-200 input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600" name='anniversary' value={anniversary}
                                 onChange={handleChange} />
                         </div>
                     </div>
