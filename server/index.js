@@ -146,7 +146,7 @@ async function sendTodayEventNotifications() {
 // Run every day at 8:00 AM server time
 function scheduleDailyNotifications() {
     const now = new Date();
-    const next8am = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 7, 27, 0, 0);
+    const next8am = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 14, 9, 0, 0);
     if (now > next8am) {
         next8am.setDate(next8am.getDate() + 1);
     }

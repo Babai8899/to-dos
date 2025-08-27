@@ -211,19 +211,19 @@ function CreateEvent() {
             <h1 className='text-2xl'>Create Event</h1>
             <div className='grid grid-cols-1 gap-0.5'>
               <div className='w-full max-w-xs'>
-                <label>Title</label>
+                <label className='text-gray-900 dark:text-gray-200'>Title</label>
                 <input type="text" placeholder="Event title" className="input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600" name='title' value={title} onChange={handleChange} />
               </div>
               <div className='w-full max-w-xs'>
-                <label >Description</label>
+                <label className='text-gray-900 dark:text-gray-200'>Description</label>
                 <textarea className="textarea border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600" placeholder="Description" name='description' value={description} onChange={handleChange}></textarea>
               </div>
               <div className='w-full max-w-xs'>
-                <label>Location</label>
+                <label className='text-gray-900 dark:text-gray-200'>Location</label>
                 <input type="text" placeholder="Event location" className="input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600" name='location' value={location} onChange={handleChange} />
               </div>
               <div className='w-full max-w-xs'>
-                <label>Date & Time</label>
+                <label className='text-gray-900 dark:text-gray-200'>Date & Time</label>
                 <div className='flex gap-2'>
                 <input type="date" className="input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600" name='date' value={date} onChange={handleChange} />
                 <input type="time" className="input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600" name='time' value={time} onChange={handleChange} />
