@@ -55,9 +55,13 @@ webpush.setVapidDetails(
 
 let subscriptions = [];
 
+// Expect { subscription: <push subscription>, emailId: <user email> }
 app.post("/api/subscribe", (req, res) => {
-    const subscription = req.body;
-    subscriptions.push(subscription);
+    const { subscription, emailId } = req.body;
+    if (!subscription || !emailId) {
+        return res.status(400).json({ message: "Subscription and emailId required" });
+    }
+    subscriptions.push({ subscription, emailId });
     res.status(201).json({});
 });
 
@@ -95,22 +99,24 @@ async function sendTodayEventNotifications() {
         console.log("Today's events:", events);
         if (events.length === 0) {
             console.log("No events today.");
-        }
-        else {
-        for (const event of events) {
-            const payload = JSON.stringify({
-                title: 'Event Today!',
-                body: `Event: ${event.title} at ${event.time} - ${event.location}`,
-                eventId: event.eventId
-            });
-            for (let sub of subscriptions) {
-                try {
-                    await webpush.sendNotification(sub, payload);
-                } catch (err) {
-                    console.error("Push error:", err);
+        } else {
+            for (const event of events) {
+                const payload = JSON.stringify({
+                    title: 'Event Today!',
+                    body: `Event: ${event.title} at ${event.time} - ${event.location}`,
+                    eventId: event.eventId
+                });
+                for (let sub of subscriptions) {
+                    if (sub.emailId === event.user) {
+                        try {
+                            await webpush.sendNotification(sub.subscription, payload);
+                        } catch (err) {
+                            console.error("Push error:", err);
+                        }
+                    }
                 }
             }
-        }}
+        }
         console.log("Sent event notifications");
         // Also send notifications for today's tasks
         const tasks = await TaskModel.find({ date: todayStr });
@@ -120,16 +126,15 @@ async function sendTodayEventNotifications() {
             const payload = JSON.stringify({
                 title: 'Task Today!',
                 body: `Task: ${task.title} at ${task.time}`,
-                // taskId: task.taskId
+                taskId: task.taskId
             });
-            console.log("Task payload:", payload);
-            console.log("Subscriptions:", subscriptions);
             for (let sub of subscriptions) {
-                console.log("Sending task notification to subscription:", sub);
-                try {
-                    await webpush.sendNotification(sub, payload);
-                } catch (err) {
-                    console.error("Push error:", err);
+                if (sub.emailId === task.user) {
+                    try {
+                        await webpush.sendNotification(sub.subscription, payload);
+                    } catch (err) {
+                        console.error("Push error:", err);
+                    }
                 }
             }
         }
@@ -141,7 +146,7 @@ async function sendTodayEventNotifications() {
 // Run every day at 8:00 AM server time
 function scheduleDailyNotifications() {
     const now = new Date();
-    const next8am = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 8, 0, 0, 0);
+    const next8am = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 7, 27, 0, 0);
     if (now > next8am) {
         next8am.setDate(next8am.getDate() + 1);
     }

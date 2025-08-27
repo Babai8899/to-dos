@@ -23,7 +23,7 @@ import PushProvider from './hooks/PushProvider'
 function App() {
 
   return (
-    <div className="bg-gray-50 dark:bg-gray-800 min-h-screen transition-colors duration-100">
+    <div className="bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors duration-100">
       <AnimatePresence mode='wait'>
         <Router>
           <ToastProvider>

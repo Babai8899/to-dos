@@ -11,13 +11,13 @@ function SidebarProvider({ children }) {
 
     return (
         <aside className='lg:h-screen lg:w-auto fixed sm:w-screen lg:bottom-auto bottom-0'>
-            <nav className="lg:h-full sm:h-auto flex lg:flex-col sm:flex-row bg-base-300 border-r-2 border-r-base-100 shadow-xl">
+            <nav className="lg:h-full sm:h-auto flex lg:flex-col sm:flex-row dark:bg-gray-800 bg-gray-200">
                 <div className="hidden lg:flex p-4 pb-2 justify-between items-center my-3" >
                     <div className={`text-2xl overflow-hidden transition-all ${open ? 'w-40' : 'w-0'
                         }`}>
                         CreateMenu
                     </div>
-                    <button className="p-1 rounded-lg bg-base-300 hover:bg-base-100 cursor-pointer" onClick={() => handleSidebar()}>
+                    <button className="p-1 rounded-lg bg-gray-300 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-900 cursor-pointer ease-in-out transition-colors duration-300" onClick={() => handleSidebar()}>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-9">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                         </svg>
@@ -40,16 +40,16 @@ export function SidebarItem({ icon, text, alert, active }) {
     const { open } = useContext(SidebarContext)
     return (
         <div>
-            <li className={`relative flex items-center my-2 lg:my-0 py-2 px-2 font-medium rounded-md cursor-pointer ${active ? 'bg-cyan-200 dark:bg-cyan-700 text-base-100' : 'hover:bg-cyan-100  hover:text-base-100 dark:hover:bg-cyan-700 dark:hover:text-base-100'}
+            <li className={`relative flex items-center my-2 lg:my-0 py-2 px-2 font-medium rounded-md cursor-pointer ${active ? 'bg-gray-300 dark:bg-gray-700 text-gray-800 dark:text-gray-200' : 'hover:bg-gray-300 dark:hover:bg-gray-700 hover:text-gray-800 text-gray-800 dark:text-gray-200 dark:hover:text-gray-200'}
         transition-colors group`}>
                 <div className='mx-auto'>
                     {icon}
                 </div>
                 <span className={`overflow-hidden text-2xl transition-all ${open ? 'w-40 ml-3' : 'w-0'
                     }`}>{text}</span>
-                {alert && (<div className={`absolute right-2 w-2 h-2 rounded bg-primary ${open ? "" : "top-1"}`} />)}
+                {alert && (<div className={`absolute right-2 w-2 h-2 rounded bg-white ${open ? "" : "top-1"}`} />)}
                 {!open && <div className={
-                    `absolute left-full rounded-md px-2 py-1 ml-6 bg-cyan-100 dark:bg-cyan-700 invisible opacity-20
+                    `absolute left-full rounded-md px-2 py-1 ml-6 text-gray-800 dark:text-gray-200 bg-gray-300 dark:bg-gray-700 invisible opacity-20
                 -translate-x-3 transition-all lg:group-hover:visible lg:group-hover:opacity-100 lg:group-hover:translate-x-0`
                 }>{text}</div>}
             </li>

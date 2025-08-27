@@ -1,19 +1,21 @@
 import React, { useEffect, useState, useContext } from 'react';
 import HomeNavProvider from '../hooks/HomeNavProvider';
 import PushContext from '../hooks/PushContext';
+import AuthContext from '../hooks/AuthContext';
 
 
 function Home() {
   const options = ['task', 'event', 'list', 'note'];
   const [activeNav, setActiveNav] = useState('task');
   const { subscribe } = useContext(PushContext);
+  const {user} = useContext(AuthContext);
 
   useEffect(() => {
     const notificationConfirmed = localStorage.getItem('notificationConfirmed');
     if (!notificationConfirmed) {
       const result = window.confirm('Do you want to allow notifications?');
       if (result) {
-        subscribe();
+        subscribe(user.emailId);
         localStorage.setItem('notificationConfirmed', 'true');
       } else {
         localStorage.setItem('notificationConfirmed', 'false');

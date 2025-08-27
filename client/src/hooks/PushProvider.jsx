@@ -11,6 +11,7 @@ function urlBase64ToUint8Array(base64String) {
     return Uint8Array.from([...rawData].map((c) => c.charCodeAt(0)));
 }
 
+
 function PushProvider({children}) {
 
     useEffect(() => {
@@ -19,7 +20,8 @@ function PushProvider({children}) {
         }
     }, []);
 
-    const subscribe = async () => {
+    // Pass emailId as argument
+    const subscribe = async (emailId) => {
         const permission = await Notification.requestPermission();
         if (permission !== "granted") {
             alert("Please allow notifications!");
@@ -30,7 +32,7 @@ function PushProvider({children}) {
             userVisibleOnly: true,
             applicationServerKey: urlBase64ToUint8Array(PUBLIC_VAPID_KEY),
         });
-        await axiosInstance.post("/subscribe", subscription);
+        await axiosInstance.post("/subscribe", { subscription, emailId });
         alert("Subscribed to push!");
     };
 
