@@ -212,27 +212,27 @@ function CreateEvent() {
             <div className='grid grid-cols-1 gap-0.5'>
               <div className='w-full max-w-xs'>
                 <label>Title</label>
-                <input type="text" placeholder="Event title" className="input input-accent" name='title' value={title} onChange={handleChange} />
+                <input type="text" placeholder="Event title" className="input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600" name='title' value={title} onChange={handleChange} />
               </div>
               <div className='w-full max-w-xs'>
                 <label >Description</label>
-                <textarea className="textarea textarea-accent" placeholder="Description" name='description' value={description} onChange={handleChange}></textarea>
+                <textarea className="textarea border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600" placeholder="Description" name='description' value={description} onChange={handleChange}></textarea>
               </div>
               <div className='w-full max-w-xs'>
                 <label>Location</label>
-                <input type="text" placeholder="Event location" className="input input-accent" name='location' value={location} onChange={handleChange} />
+                <input type="text" placeholder="Event location" className="input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600" name='location' value={location} onChange={handleChange} />
               </div>
               <div className='w-full max-w-xs'>
                 <label>Date & Time</label>
                 <div className='flex gap-2'>
-                <input type="date" className="input input-accent w-1/2" name='date' value={date} onChange={handleChange} />
-                <input type="time" className="input input-accent w-1/2" name='time' value={time} onChange={handleChange} />
+                <input type="date" className="input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600" name='date' value={date} onChange={handleChange} />
+                <input type="time" className="input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600" name='time' value={time} onChange={handleChange} />
                 </div>
               </div>
             </div>
             <div className="flex justify-center w-full mx-auto my-2 gap-5">
-              <a className="bg-accent text-base-200 rounded-box grid h-10 w-32 place-items-center cursor-pointer hover:bg-accent/50 hover:text-accent ease-in-out transition-colors duration-300" onClick={(e) => handleSubmit(e)}>Create Event</a>
-              <a className="bg-accent text-base-200 rounded-box grid h-10 w-32 place-items-center cursor-pointer hover:bg-accent/50 hover:text-accent ease-in-out transition-colors duration-300" onClick={() => {onReset; handleCreateEventWindow()}}>Cancel</a>
+              <a className="bg-yellow-300 dark:bg-cyan-500 dark:text-gray-200 text-gray-800 rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs grid h-10 w-32 place-items-center cursor-pointer dark:hover:bg-cyan-400 hover:bg-yellow-400 ease-in-out transition-colors duration-300" onClick={(e) => handleSubmit(e)}>Create Event</a>
+              <a className="bg-yellow-300 dark:bg-cyan-500 dark:text-gray-200 text-gray-800 rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs grid h-10 w-32 place-items-center cursor-pointer dark:hover:bg-cyan-400 hover:bg-yellow-400 ease-in-out transition-colors duration-300" onClick={() => {onReset; handleCreateEventWindow()}}>Cancel</a>
             </div>
           </div>
         </div>

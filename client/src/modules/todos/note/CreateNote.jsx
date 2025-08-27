@@ -57,21 +57,21 @@ function CreateNote() {
   }
   return (
     <Transitions pageVariants={pageVariants}>
-      <div className="container flex justify-center w-1/2 mx-auto my-0.5 h-max">
-        <div className="card w-96 h-96 bg-base-100 shadow-sm border-2 border-base-300 mx-auto my-5 flex flex-col justify-center items-center gap-4 py-1 px-5">
-          <h1 className='text-2xl'>Create Task</h1>
-          <div className='grid grid-cols-1 gap-0.5'>
-            <div className='md:w-96 w-64 max-w-xs'>
-              <input type="text" placeholder="Task title" className="input input-ghost" name='title' value={title} onChange={handleChange} />
+      <div className="container flex justify-center md:w-1/2 w-screen mx-auto my-0.5 h-max">
+        <div className="card md:w-96 w-full md:h-96 md:bg-yellow-50 md:dark:bg-cyan-800 md:shadow-sm md:border-2 md:border-yellow-300 md:dark:border-cyan-500 mx-auto md:my-10 h-[calc(100vh-10rem-10rem)] flex flex-col justify-center items-center gap-4 md:py-1 px-5">
+          <h1 className='text-3xl'>Create Note</h1>
+          <div className='grid grid-cols-1 gap-0.5 w-full'>
+            <div className='w-full'>
+              <input type="text" placeholder="Task title" className="focus:bg-transparent focus:outline-none input w-full input-ghost" name='title' value={title} onChange={handleChange} />
             </div>
             <div className='divider m-0 p-0'></div>
-            <div className='md:w-96 w-64 max-w-xs'>
-              <textarea className="textarea textarea-ghost md:h-44 h-48" placeholder="Description" name='description' value={description} onChange={handleChange}></textarea>
+            <div className='w-full'>
+              <textarea className="focus:bg-transparent focus:outline-none textarea textarea-ghost md:h-44 h-48 w-full" placeholder="Description" name='description' value={description} onChange={handleChange}></textarea>
             </div>
           </div>
           <div className="flex justify-center w-full mx-auto my-2 gap-5">
-            <a className="bg-accent text-base-200 rounded-box grid h-10 w-32 place-items-center cursor-pointer hover:bg-accent/50 hover:text-accent ease-in-out transition-colors duration-300" onClick={(e) => handleSubmit(e)}>Create Task</a>
-            <a className="bg-accent text-base-200 rounded-box grid h-10 w-32 place-items-center cursor-pointer hover:bg-accent/50 hover:text-accent ease-in-out transition-colors duration-300" onClick={() => onReset}>Cancel</a>
+            <a className="bg-yellow-300 dark:bg-cyan-500 dark:text-gray-200 text-gray-800 rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs grid h-10 w-32 place-items-center cursor-pointer dark:hover:bg-cyan-400 hover:bg-yellow-400 ease-in-out transition-colors duration-300" onClick={(e) => handleSubmit(e)}>Create Note</a>
+            <a className="bg-yellow-300 dark:bg-cyan-500 dark:text-gray-200 text-gray-800 rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs grid h-10 w-32 place-items-center cursor-pointer dark:hover:bg-cyan-400 hover:bg-yellow-400 ease-in-out transition-colors duration-300" onClick={() => onReset}>Cancel</a>
           </div>
         </div>
       </div>
