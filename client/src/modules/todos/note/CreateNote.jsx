@@ -12,7 +12,7 @@ function CreateNote() {
     animate: { opacity: 1, y: 0 },
     exit: { opacity: 0, y: -50 },
   };
-  const [taskData, setTaskData] = useState({
+  const [noteData, setNoteData] = useState({
     title: "",
     description: "",
   });
@@ -20,17 +20,17 @@ function CreateNote() {
   const {
     title,
     description,
-  } = taskData;
+  } = noteData;
 
   const handleChange = (e) => {
-    setTaskData({
-      ...taskData,
+    setNoteData({
+      ...noteData,
       [e.target.name]: e.target.value
     });
   };
 
   const onReset = () => {
-    setTaskData({
+    setNoteData({
       title: "",
       description: "",
     });
@@ -39,11 +39,11 @@ function CreateNote() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    //add user.email to taskData
-    taskData.user = user.emailId;
+    //add user.email to noteData
+    noteData.user = user.emailId;
     try {
-      await axiosInstance.post('/tasks', taskData);
-      showToast("Task created successfully", "success");
+      await axiosInstance.post('/notes', noteData);
+      showToast("Note created successfully", "success");
     } catch (error) {
       console.error("Registration failed:", error.response.data.message);
       showToast(error.response.data.message, "error");
@@ -62,7 +62,7 @@ function CreateNote() {
           <h1 className='text-3xl'>Create Note</h1>
           <div className='grid grid-cols-1 gap-0.5 w-full'>
             <div className='w-full'>
-              <input type="text" placeholder="Task title" className="placeholder:text-gray-800 dark:placeholder:text-gray-200 focus:bg-transparent focus:outline-none input w-full input-ghost" name='title' value={title} onChange={handleChange} />
+              <input type="text" placeholder="Note title" className="placeholder:text-gray-800 dark:placeholder:text-gray-200 focus:bg-transparent focus:outline-none input w-full input-ghost" name='title' value={title} onChange={handleChange} />
             </div>
             <div className='divider divider-warning dark:divider-neutral m-0 p-0 '></div>
             <div className='w-full'>

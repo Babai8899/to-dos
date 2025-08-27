@@ -11,6 +11,7 @@ import authRoutes from './routes/AuthRoute.js';
 import userRoutes from './routes/UserRoute.js';
 import eventRoutes from './routes/EventRoute.js';
 import taskRoutes from './routes/TaskRoute.js';
+import noteRoutes from './routes/NoteRoute.js';
 
 dotenv.config();
 
@@ -46,6 +47,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/events', eventRoutes);
 app.use('/api/tasks', taskRoutes);
+app.use('/api/notes', noteRoutes);
 
 webpush.setVapidDetails(
     "mailto:you@example.com",
