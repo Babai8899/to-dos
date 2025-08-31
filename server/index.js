@@ -12,6 +12,7 @@ import userRoutes from './routes/UserRoute.js';
 import eventRoutes from './routes/EventRoute.js';
 import taskRoutes from './routes/TaskRoute.js';
 import noteRoutes from './routes/NoteRoute.js';
+import listRoutes from './routes/ListRoute.js';
 
 dotenv.config();
 
@@ -23,8 +24,7 @@ const privateVapidKey = "213RaiceqIxPBZPCSFVkvTzmckc-ZrgxSP44C_SXgQo";
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/todos';
 
-app.use(cors({origin: 'https://to-dos-client.vercel.app', credentials: true}));
-// app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+app.use(cors({origin: ['https://to-dos-client.vercel.app', 'http://localhost:5173'], credentials: true}));
 app.use(cookieParser());
 app.use(express.json());
 
@@ -48,6 +48,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/events', eventRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/notes', noteRoutes);
+app.use('/api/lists', listRoutes);
 
 webpush.setVapidDetails(
     "mailto:you@example.com",

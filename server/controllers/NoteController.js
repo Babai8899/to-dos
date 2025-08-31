@@ -1,5 +1,5 @@
-import NoteModel from "../models/NoteModel.js";
 import NoteCounterModel from "../models/NoteCounter.js";
+import NoteModel from "../models/NoteModel.js";
 
 const createNote = async (req, res) => {
     const { title, description, createdOn, user } = req.body;
@@ -44,6 +44,75 @@ const createNote = async (req, res) => {
     }
 };
 
+const getNotes = async (req, res) => {
+    try {
+        const notes = await NoteModel.find();
+        res.status(200).json(notes);
+    } catch (error) {
+        console.error("Error fetching notes:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
+
+const getNoteById = async (req, res) => {
+    const { noteId } = req.params;
+    try {
+        const note = await NoteModel.findOne({ noteId });
+        if (!note) {
+            return res.status(404).json({ message: "Note not found" });
+        }
+        res.status(200).json(note);
+    } catch (error) {
+        console.error("Error fetching note:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
+
+const updateNoteById = async (req, res) => {
+    const { noteId } = req.params;
+    const { title, description, createdOn } = req.body;
+    try {
+        const note = await NoteModel.findOneAndUpdate({ noteId }, { title, description, createdOn }, { new: true });
+        if (!note) {
+            return res.status(404).json({ message: "Note not found" });
+        }
+        res.status(200).json(note);
+    } catch (error) {
+        console.error("Error updating note:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
+
+const deleteNoteById = async (req, res) => {
+    const { noteId } = req.params;
+    try {
+        const note = await NoteModel.findOneAndDelete({ noteId });
+        if (!note) {
+            return res.status(404).json({ message: "Note not found" });
+        }
+        res.status(200).json({ message: "Note deleted successfully" });
+    } catch (error) {
+        console.error("Error deleting note:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
+
+const getNotesByEmailId = async (req, res) => {
+    const { emailId } = req.params;
+    try {
+        const notes = await NoteModel.find({ user: emailId });
+        res.status(200).json(notes);
+    } catch (error) {
+        console.error("Error fetching notes:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
+
 export {
-    createNote
+    createNote,
+    getNotes,
+    getNoteById,
+    updateNoteById,
+    deleteNoteById,
+    getNotesByEmailId
 };

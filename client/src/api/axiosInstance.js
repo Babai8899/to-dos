@@ -1,10 +1,19 @@
 import axios from 'axios';
 
+// Use REACT_APP_ENV for environment detection (set in .env file)
+const ENV = import.meta.env.VITE_ENV;
+console.log('Current Environment:', ENV);
+
+let baseURL;
+if (ENV === 'development') {
+    baseURL = 'http://localhost:5001/api';
+} else {
+    baseURL = 'https://to-dos-server-five.vercel.app/api';
+}
+
 const axiosInstance = axios.create({
-    baseURL: 'https://to-dos-server-five.vercel.app/api',
-    // baseURL: 'http://localhost:5001/api',
-    withCredentials: true, // send cookies with each request
-    
+        baseURL,
+        withCredentials: true, // send cookies with each request
 });
 
 // Refresh token interceptor

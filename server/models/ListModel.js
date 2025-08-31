@@ -11,15 +11,10 @@ const listSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
-    description: {
-        type: String,
-        trim: true,
-    },
     items: [
         {
-            type: String,
-            required: true,
-            trim: true,
+            itemName: { type: String, required: true },
+            completed: { type: Boolean, default: false },
         },
     ],
     user: {
@@ -27,3 +22,6 @@ const listSchema = new mongoose.Schema({
         required: true,
     }
 });
+
+const ListModel = mongoose.model('List', listSchema);
+export default ListModel;

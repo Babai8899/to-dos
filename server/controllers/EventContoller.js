@@ -115,6 +115,7 @@ const deleteEventById = async (req, res) => {
 }
 
 const getEventsByEmailId = async (req, res) => {
+    console.log(req.params);
     const { emailId } = req.params;
 
     try {

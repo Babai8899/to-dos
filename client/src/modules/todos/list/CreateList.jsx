@@ -1,4 +1,3 @@
-  
   import React, { useContext, useEffect, useState } from 'react'
 import Transitions from '../../../components/Transitions'
 import axiosInstance from '../../../api/axiosInstance';
@@ -15,13 +14,13 @@ function CreateList() {
   };
   const [listData, setListData] = useState({
     title: "",
-    elements: [],
+    items: [],
   });
   const [elementInput, setElementInput] = useState("");
 
   const {
     title,
-    elements,
+    items,
   } = listData;
 
   const checklistRef = React.useRef(null);
@@ -30,7 +29,7 @@ function CreateList() {
     if (checklistRef.current) {
       checklistRef.current.scrollTop = checklistRef.current.scrollHeight;
     }
-  }, [elements.length]);
+  }, [items.length]);
 
   const handleChange = (e) => {
     setListData({
@@ -40,24 +39,24 @@ function CreateList() {
   };
 
   // Delete checklist item
-  const handleDeleteElement = (idx) => {
+  const handleDeleteItem = (idx) => {
     setListData((prev) => ({
       ...prev,
-      elements: prev.elements.filter((_, i) => i !== idx),
+      items: prev.items.filter((_, i) => i !== idx),
     }));
   };
 
   // Handle input for checklist element
-  const handleElementInputChange = (e) => {
+  const handleItemInputChange = (e) => {
     setElementInput(e.target.value);
   };
 
   // Add element to checklist on Enter
-  const handleElementInputKeyDown = (e) => {
+  const handleItemInputKeyDown = (e) => {
     if (e.key === "Enter" && elementInput.trim() !== "") {
       setListData((prev) => ({
         ...prev,
-        elements: [...prev.elements, { text: elementInput, checked: false }],
+        items: [...prev.items, { itemName: elementInput, completed: false }],
       }));
       setElementInput("");
     }
@@ -67,8 +66,8 @@ function CreateList() {
   const handleCheckToggle = (idx) => {
     setListData((prev) => ({
       ...prev,
-      elements: prev.elements.map((el, i) =>
-        i === idx ? { ...el, checked: !el.checked } : el
+      items: prev.items.map((el, i) =>
+        i === idx ? { ...el, completed: !el.completed } : el
       ),
     }));
   };
@@ -76,7 +75,7 @@ function CreateList() {
   const onReset = () => {
     setListData({
       title: "",
-      elements: [],
+      items: [],
     });
     setElementInput("");
   }
@@ -84,21 +83,29 @@ function CreateList() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    //add user.email to listData
-    listData.user = user.emailId;
+    // If there's a pending input, add it to items before submit
+    let newItems = [...items];
+    if (elementInput.trim() !== "") {
+      newItems.push({ itemName: elementInput.trim(), completed: false });
+    }
+
+    const payload = {
+      ...listData,
+      items: newItems,
+      user: user.emailId,
+    };
     try {
-      await axiosInstance.post('/lists', listData);
+      await axiosInstance.post('/lists', payload);
       showToast("List created successfully", "success");
     } catch (error) {
-      console.error("Registration failed:", error.response.data.message);
-      showToast(error.response.data.message, "error");
+      console.error("Registration failed:", error.response?.data?.message || error.message);
+      showToast(error.response?.data?.message || error.message, "error");
       throw error;
     }
     // Reset form after submission
     setTimeout(() => {
       onReset();
     }, 1000);
-
   }
   return (
     <Transitions pageVariants={pageVariants}>
@@ -112,21 +119,21 @@ function CreateList() {
             <div className='divider divider-warning dark:divider-neutral m-0 p-0 '></div>
             {/* Checklist items */}
             <div className='w-full px-2 md:max-h-44 md:h-44 h-96 max-h-96'>
-              {elements.length > 0 && (
+              {items.length > 0 && (
                   <ul ref={checklistRef} className="md:h-36 h-80 overflow-y-auto noscrollbar">
-                  {elements.map((el, idx) => (
-                    <li key={el.text + idx} className="flex items-center gap-2 py-1">
+                  {items.map((el, idx) => (
+                    <li key={el.itemName + idx} className="flex items-center gap-2 py-1">
                       <input
                         type="checkbox"
-                        checked={el.checked}
+                        checked={el.completed}
                         onChange={() => handleCheckToggle(idx)}
                         className="checkbox"
                       />
-                      <span className={el.checked ? "line-through" : ""}>{el.text}</span>
+                      <span className={el.completed ? "line-through" : ""}>{el.itemName}</span>
                       <button
                         type="button"
                         className="ml-2 text-red-500 hover:text-red-700 px-2 py-0.5 rounded"
-                        onClick={() => handleDeleteElement(idx)}
+                        onClick={() => handleDeleteItem(idx)}
                         aria-label="Delete item"
                       >
                         &#10005;
@@ -140,8 +147,8 @@ function CreateList() {
                 className="placeholder:text-gray-800 dark:placeholder:text-gray-200 focus:bg-transparent focus:outline-none input input-ghost w-full"
                 placeholder="Add item and press Enter"
                 value={elementInput}
-                onChange={handleElementInputChange}
-                onKeyDown={handleElementInputKeyDown}
+                onChange={handleItemInputChange}
+                onKeyDown={handleItemInputKeyDown}
               />
             </div>
           </div>
