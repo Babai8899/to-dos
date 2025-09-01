@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, { useContext, useState } from 'react'
 import dayjs from 'dayjs';
 import Transitions from '../../../components/Transitions'
 import axiosInstance from "../../../api/axiosInstance.js";
@@ -12,8 +12,21 @@ const months = [
 const years = Array.from({ length: 20 }, (_, i) => dayjs().year() + i);
 
 function CreateEvent() {
-  const {user} = useContext(AuthContext);
-  const {showToast} = useContext(ToastContext);
+
+  const redLetterDays = {
+    "01-26": "Republic Day",
+    "08-15": "Independence Day",
+    "10-02": "Gandhi Jayanti",
+    "09-05": "Teacher’s Day",
+    "11-14": "Children’s Day",
+    "01-23": "Netaji Jayanti",
+    "02-28": "National Science Day",
+    "10-31": "National Unity Day",
+    "12-07": "Armed Forces Flag Day"
+  };
+
+  const { user } = useContext(AuthContext);
+  const { showToast } = useContext(ToastContext);
   const today = dayjs().startOf('day');
   const [currentDate, setCurrentDate] = useState(dayjs());
   const [selectedDate, setSelectedDate] = useState(null);
@@ -46,7 +59,7 @@ function CreateEvent() {
     const days = [];
 
     for (let i = 0; i < 7; i++) {
-      const thisDay = tempDate.clone(); 
+      const thisDay = tempDate.clone();
       const isCurrentMonth = thisDay.month() === currentDate.month();
       const isTodayOrFuture = !thisDay.isBefore(today, 'day');
       const isSelected = selectedDate && thisDay.isSame(selectedDate, 'day');
@@ -55,16 +68,34 @@ function CreateEvent() {
         // Hide previous/next month days completely
         days.push(<div key={thisDay.format()}></div>);
       } else {
+        // Determine color for Sunday, Saturday, and red letter days
+        let dayColor = '';
+        let tooltip = '';
+        const mmdd = thisDay.format('MM-DD');
+        if (redLetterDays[mmdd]) {
+          dayColor = !isTodayOrFuture ? 'text-red-300' : 'text-red-500';
+          tooltip = redLetterDays[mmdd];
+        } else if (thisDay.day() === 0) {
+          dayColor = !isTodayOrFuture ? 'text-red-300' : 'text-red-500'; // Sunday
+        } else if (thisDay.day() === 6) {
+          dayColor = !isTodayOrFuture ? 'text-blue-300' : 'text-blue-500'; // Saturday
+        }
         days.push(
           <div
             key={thisDay.format('YYYY-MM-DD')}
-            className={`cursor-pointer p-2 text-center rounded-xl
-              ${isSelected ? 'bg-accent text-accent-content font-bold' : 'bg-base-100'}
-              ${!isTodayOrFuture ? 'text-base-content/30 cursor-not-allowed' : 'hover:bg-accent hover:text-accent-content'}`}
+            className={`relative group cursor-pointer p-2 text-center rounded-xl
+              ${isSelected ? 'bg-yellow-100 dark:bg-cyan-900' : 'bg-base-100'}
+              ${!isTodayOrFuture ? 'text-base-content/30 cursor-not-allowed' : 'hover:bg-yellow-100 dark:hover:bg-cyan-900'}
+              ${dayColor}`}
             disabled={!isTodayOrFuture}
             onClick={() => { handleCreateEventWindow(thisDay); isTodayOrFuture && setSelectedDate(thisDay); }}
           >
             {thisDay.date()}
+            {tooltip && (
+              <span className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-10 hidden group-hover:block bg-yellow-300 text-gray-900 text-xs rounded-lg px-3 py-1 shadow-lg border border-yellow-400 whitespace-nowrap">
+                {tooltip}
+              </span>
+            )}
           </div>
         );
       }
@@ -94,9 +125,9 @@ function CreateEvent() {
   const {
     title,
     description,
-      location,
+    location,
     date,
-      time
+    time
   } = eventData;
 
   const handleChange = (e) => {
@@ -197,8 +228,19 @@ function CreateEvent() {
 
             {/* Week Days */}
             <div className="grid grid-cols-7 gap-2 mb-2 text-center font-bold text-base-content/60">
-              {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-                <div key={day}>{day}</div>
+              {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day, idx) => (
+                <div
+                  key={day}
+                  className={
+                    idx === 0
+                      ? 'text-red-500 font-bold'
+                      : idx === 6
+                        ? 'text-blue-500 font-bold'
+                        : ''
+                  }
+                >
+                  {day}
+                </div>
               ))}
             </div>
 
@@ -225,14 +267,14 @@ function CreateEvent() {
               <div className='w-full max-w-xs'>
                 <label className='text-gray-900 dark:text-gray-200'>Date & Time</label>
                 <div className='flex gap-2'>
-                <input type="date" className="text-gray-800 dark:text-gray-200 input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600" name='date' value={date} onChange={handleChange} />
-                <input type="time" className="text-gray-800 dark:text-gray-200 input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600" name='time' value={time} onChange={handleChange} />
+                  <input type="date" className="text-gray-800 dark:text-gray-200 input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600" name='date' value={date} onChange={handleChange} />
+                  <input type="time" className="text-gray-800 dark:text-gray-200 input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600" name='time' value={time} onChange={handleChange} />
                 </div>
               </div>
             </div>
             <div className="flex justify-center w-full mx-auto my-2 gap-5">
               <a className="bg-yellow-300 dark:bg-cyan-500 dark:text-gray-200 text-gray-800 rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs grid h-10 w-32 place-items-center cursor-pointer dark:hover:bg-cyan-400 hover:bg-yellow-400 ease-in-out transition-colors duration-300" onClick={(e) => handleSubmit(e)}>Create Event</a>
-              <a className="bg-yellow-300 dark:bg-cyan-500 dark:text-gray-200 text-gray-800 rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs grid h-10 w-32 place-items-center cursor-pointer dark:hover:bg-cyan-400 hover:bg-yellow-400 ease-in-out transition-colors duration-300" onClick={() => {onReset; handleCreateEventWindow()}}>Cancel</a>
+              <a className="bg-yellow-300 dark:bg-cyan-500 dark:text-gray-200 text-gray-800 rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs grid h-10 w-32 place-items-center cursor-pointer dark:hover:bg-cyan-400 hover:bg-yellow-400 ease-in-out transition-colors duration-300" onClick={() => { onReset; handleCreateEventWindow() }}>Cancel</a>
             </div>
           </div>
         </div>

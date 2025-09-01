@@ -25,6 +25,18 @@ const userSchema = new mongoose.Schema({
     dob: {
         type: Date,
         required: true
+    },
+    anniversary: {
+        type: Date,
+        required: false
+    },
+    securityQuestion: {
+        type: String,
+        required: true
+    },
+    answer: {
+        type: String,
+        required: true
     }
 });
 

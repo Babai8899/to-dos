@@ -28,6 +28,12 @@ function Navbar() {
         logout();
         navigate('/');
     }
+    // State for inner dropdown visibility
+    const [showInnerDropdown, setShowInnerDropdown] = useState(false);
+    const handleMyTodosClick = (e) => {
+        e.preventDefault();
+        setShowInnerDropdown((prev) => !prev);
+    }
 
     return (
         <div>
@@ -78,7 +84,7 @@ function Navbar() {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-yellow-300 text-gray-800 dark:text-gray-200 dark:bg-cyan-600 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                            className="menu menu-sm dropdown-content bg-yellow-300 text-gray-800 dark:text-gray-200 dark:bg-cyan-600 rounded-box z-1 mt-3 w-52 p-2 shadow relative">
                             <li>
                                 <a className="justify-between">
                                     Profile
@@ -86,6 +92,20 @@ function Navbar() {
                                 </a>
                             </li>
                             <li><a>Settings</a></li>
+                            <li style={{ position: 'relative' }}>
+                                <a onClick={handleMyTodosClick} style={{ cursor: 'pointer' }}>My Todos</a>
+                                {showInnerDropdown && (
+                                    <ul
+                                        className="menu menu-sm bg-yellow-300 text-gray-800 dark:text-gray-200 dark:bg-cyan-600 rounded-box z-10 w-52 p-2 shadow"
+                                        style={{ position: 'absolute', left: '-220px', top: '0' }} // left of outer dropdown
+                                    >
+                                        <li><a href="/notes">Notes</a></li>
+                                        <li><a href="/lists">Lists</a></li>
+                                        <li><a href="/reminders">Reminders</a></li>
+                                        <li><a href="/habits">Habits</a></li>
+                                    </ul>
+                                )}
+                            </li>
                             <li><a onClick={handleClick}>Logout</a></li>
                         </ul>
                     </div>

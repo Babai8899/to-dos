@@ -6,6 +6,13 @@ import axiosInstance from '../../api/axiosInstance'
 
 function Register() {
 
+    const securityQuestions = [
+        "What was your childhood nickname?",
+        "In what city did you meet your spouse/significant other?",
+        "What is the name of your favorite childhood friend?",
+        "What is home town?",
+    ]
+
     const { showToast } = useContext(ToastContext);
     const pageVariants = {
         initial: { opacity: 0 },
@@ -27,7 +34,9 @@ function Register() {
         phone: "",
         password: "",
         confirmPassword: "",
-        anniversary: ""
+        anniversary: "",
+        securityQuestion: " ",
+        answer: ""
     });
 
     const {
@@ -38,7 +47,9 @@ function Register() {
         phone,
         password,
         confirmPassword,
-        anniversary
+        anniversary,
+        securityQuestion,
+        answer
     } = userData;
 
     const getPasswordStrength = (password) => {
@@ -80,7 +91,9 @@ function Register() {
             phone: "",
             password: "",
             confirmPassword: "",
-            anniversary: ""
+            anniversary: "",
+            securityQuestion: " ",
+            answer: ""
         });
         setStrength({});
         setMatching({});
@@ -105,7 +118,7 @@ function Register() {
                 <div
                     className="card w-full md:bg-yellow-50 md:dark:bg-cyan-800 md:shadow-sm md:border-2 md:h-auto h-[calc(100vh-10rem-10rem)] md:border-yellow-300 md:dark:border-cyan-500 mx-auto my-5 flex flex-col justify-center items-center gap-4 md:py-1 px-5">
                     <h1 className='text-4xl text-yellow-600 dark:text-cyan-500 font-bold'>Register</h1>
-                    <div className='grid w-full grid-cols-1 lg:grid-cols-2 gap-3 h-[calc(100vh-9rem-9rem)] overflow-y-auto noscrollbar px-1'>
+                    <div className='grid w-full grid-cols-1 lg:grid-cols-2 gap-3 h-[calc(100vh-9rem-9rem)] overflow-y-auto noscrollbar px-1 py-1'>
                         <div className='w-full max-w-xs mx-auto'>
                             <label className='text-gray-900 dark:text-gray-200'>Email ID</label>
                             <input type="text" placeholder="Enter your email id" className="text-gray-800 dark:text-gray-200 input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600"
@@ -150,6 +163,22 @@ function Register() {
                         <div className='w-full max-w-xs mx-auto'>
                             <label className='text-gray-900 dark:text-gray-200'>Anniversary (Optional)</label>
                             <input type="date" className="text-gray-800 dark:text-gray-200 input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600" name='anniversary' value={anniversary}
+                                onChange={handleChange} />
+                        </div>
+                        <div className='w-full max-w-xs mx-auto'>
+                            <div className='flex justify-between'>
+                                <label className='text-gray-900 dark:text-gray-200'>Security Question</label>
+                            </div>
+                            <select defaultValue="Pick a color" name='securityQuestion' value={securityQuestion} onChange={handleChange} className="select text-gray-800 dark:text-gray-200 border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600">
+                                <option disabled value=" ">Pick security question</option>
+                                {securityQuestions.map((question, index) => (
+                                    <option key={index} value={question}>{question}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className='w-full max-w-xs mx-auto'>
+                            <label className='text-gray-900 dark:text-gray-200'>Anniversary (Optional)</label>
+                            <input type="text" placeholder='Enter the answer of security question' className="text-gray-800 dark:text-gray-200 input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600" name='answer' value={answer}
                                 onChange={handleChange} />
                         </div>
                     </div>

@@ -6,45 +6,52 @@ import expressAsyncHandler from "express-async-handler";
 // dotenv.config();
 
 const register = async (req, res) => {
-    const { emailId, password, firstName, lastName, phone, dob } = req.body;
-    //validate emailId, password, firstName, lastName, phone, dob are not empty
-    if (!emailId || !password || !firstName || !lastName || !phone || !dob) {
-        return res.status(400).json({ message: "All fields are required" });
+    const { emailId, password, firstName, lastName, phone, dob, anniversary, securityQuestion, answer } = req.body;
+    // Validate required fields
+    if (!emailId || !password || !firstName || !lastName || !phone || !dob || !securityQuestion || !answer) {
+        return res.status(400).json({ message: "All required fields must be provided" });
     }
 
-    //validate email as a valid email format
+    // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(emailId)) {
         return res.status(400).json({ message: "Invalid email format" });
     }
 
-    //check if emailId already exists
-    const existingUser = await UserModel.find({ emailId });
-    if (existingUser.length > 0) {
+    // Check if emailId already exists
+    const existingUser = await UserModel.findOne({ emailId });
+    if (existingUser) {
         return res.status(400).json({ message: "Email ID already exists" });
     }
 
-    //validate password as lenght min 8 and max 20 characters and must contain at least one uppercase letter, one lowercase letter, one number, and one special character
+    // Validate password
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
     if (!passwordRegex.test(password)) {
         return res.status(400).json({ message: "Password must be 8-20 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character" });
     }
-    //validate firstName and lastName as only alphabets and length min 2 and max 30 characters
+    // Validate firstName and lastName
     const nameRegex = /^[A-Za-z]{2,30}$/;
     if (!nameRegex.test(firstName) || !nameRegex.test(lastName)) {
         return res.status(400).json({ message: "First name and last name must be 2-30 characters long and contain only alphabets" });
     }
-    //validate phone as 10 digit number
+    // Validate phone
     const phoneRegex = /^\d{10}$/;
     if (!phoneRegex.test(phone)) {
         return res.status(400).json({ message: "Phone number must be a 10-digit number" });
     }
-
-    //validate dob as a valid date and not in the future
+    // Validate dob
     const dobDate = new Date(dob);
-    if (isNaN(dobDate.getTime()) || dobDate > new Date())
+    if (isNaN(dobDate.getTime()) || dobDate > new Date()) {
         return res.status(400).json({ message: "Date of birth must be a valid date and not in the future" });
-
+    }
+    // Validate anniversary if provided
+    let anniversaryDate = null;
+    if (anniversary) {
+        anniversaryDate = new Date(anniversary);
+        if (isNaN(anniversaryDate.getTime())) {
+            return res.status(400).json({ message: "Anniversary must be a valid date" });
+        }
+    }
 
     try {
         // Hash the password before saving
@@ -56,9 +63,11 @@ const register = async (req, res) => {
             firstName,
             lastName,
             phone,
-            dob
+            dob: dobDate,
+            anniversary: anniversaryDate,
+            securityQuestion,
+            answer
         });
-
         await newUser.save();
         res.status(201).json({ message: "User registered successfully" });
     } catch (error) {
