@@ -114,9 +114,7 @@ function Register() {
     }
     return (
         <Transitions pageVariants={pageVariants}>
-            <div className="container flex justify-center md:w-1/2 w-screen mx-auto my-0.5">
-                <div
-                    className="card w-full md:bg-yellow-50 md:dark:bg-cyan-800 md:shadow-sm md:border-2 md:h-auto h-[calc(100vh-10rem-10rem)] md:border-yellow-300 md:dark:border-cyan-500 mx-auto my-5 flex flex-col justify-center items-center gap-4 md:py-1 px-5">
+            <div className=' my-1.5 md:w-1/2 w-screen md:h-[calc(100vh-8rem)] h-[calc(100vh-15rem)] rounded-lg flex flex-col gap-4 justify-center items-center mx-auto border-2 md:bg-yellow-50/50 md:dark:bg-cyan-900/50 md:shadow-sm md:border-2 md:border-yellow-300 md:dark:border-cyan-500 md:px-2'>
                     <h1 className='text-4xl text-yellow-600 dark:text-cyan-500 font-bold'>Register</h1>
                     <div className='grid w-full grid-cols-1 lg:grid-cols-2 gap-3 h-[calc(100vh-9rem-9rem)] overflow-y-auto noscrollbar px-1 py-1'>
                         <div className='w-full max-w-xs mx-auto'>
@@ -136,7 +134,7 @@ function Register() {
                         </div>
                         <div className='w-full max-w-xs mx-auto'>
                             <label className='text-gray-900 dark:text-gray-200'>Date of Birth</label>
-                            <input type="date" className="text-gray-800 dark:text-gray-200 input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600" name='dob' value={dob}
+                            <input type="date" placeholder='Date of birth' className="text-gray-800 dark:text-gray-200 input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600" name='dob' value={dob}
                                 onChange={handleChange} />
                         </div>
                         <div className='w-full max-w-xs mx-auto'>
@@ -189,7 +187,6 @@ function Register() {
                             onClick={(e) => onReset(e)}>Reset</a>
                     </div>
                 </div>
-            </div>
         </Transitions>
     )
 }

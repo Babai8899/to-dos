@@ -109,18 +109,17 @@ function CreateList() {
   }
   return (
     <Transitions pageVariants={pageVariants}>
-      <div className="container flex justify-center md:w-1/2 w-screen mx-auto my-0.5 h-max">
-        <div className="card md:w-96 w-full md:h-96 md:bg-yellow-50 md:dark:bg-cyan-800 md:shadow-sm md:border-2 md:border-yellow-300 md:dark:border-cyan-500 mx-auto md:my-10 h-[calc(100vh-10rem-10rem)] flex flex-col justify-center items-center gap-4 md:py-1 px-5">
+      <div className=' my-1.5 md:w-1/3 w-screen md:h-[calc(100vh-8rem)] h-[calc(100vh-15rem)] rounded-lg flex flex-col gap-4 justify-center items-center mx-auto border-2 md:bg-yellow-50/50 md:dark:bg-cyan-900/50 md:shadow-sm md:border-2 md:border-yellow-300 md:dark:border-cyan-500'>
           <h1 className='text-3xl'>Create List</h1>
-          <div className='grid grid-cols-1 gap-0.5 h-full w-full'>
+          <div className='grid w-full'>
             <div className='w-full'>
-              <input type="text" placeholder="List title" className="placeholder:text-gray-800 dark:placeholder:text-gray-200 focus:bg-transparent focus:outline-none input w-full input-ghost" name='title' value={title} onChange={handleChange} />
+              <input type="text" placeholder="List title" className="text-lg placeholder:text-gray-800 dark:placeholder:text-gray-200 focus:bg-transparent focus:outline-none input w-full input-ghost" name='title' value={title} onChange={handleChange} />
             </div>
             <div className='divider divider-warning dark:divider-neutral m-0 p-0 '></div>
             {/* Checklist items */}
-            <div className='w-full px-2 md:max-h-44 md:h-44 h-96 max-h-96'>
+            <div className='w-full px-5 md:max-h-64 md:h-64 h-96 max-h-96'>
               {items.length > 0 && (
-                  <ul ref={checklistRef} className="md:h-36 h-80 overflow-y-auto noscrollbar">
+                  <ul ref={checklistRef} className="md:h-56 h-80 overflow-y-auto noscrollbar">
                   {items.map((el, idx) => (
                     <li key={el.itemName + idx} className="flex items-center gap-2 py-1">
                       <input
@@ -157,7 +156,7 @@ function CreateList() {
             <a className="bg-yellow-300 dark:bg-cyan-500 dark:text-gray-200 text-gray-800 rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs grid h-10 w-32 place-items-center cursor-pointer dark:hover:bg-cyan-400 hover:bg-yellow-400 ease-in-out transition-colors duration-300" onClick={onReset}>Cancel</a>
           </div>
         </div>
-      </div>
+      
     </Transitions>
   )
 }

@@ -20,22 +20,23 @@ import Register from './modules/Users/Register'
 import UpdatePassword from './modules/Users/UpdatePassword'
 import ChatBot from './shared/ChatBot'
 import PushProvider from './hooks/PushProvider'
+import Dummy from './Dummy'
 function App() {
 
   return (
-    <div className="bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors duration-100">
+    <div className="bg-gray-50 dark:bg-gray-900 md:h-[calc(100vh-3rem)] h-[calc(100vh-9rem)] transition-colors duration-100">
       <AnimatePresence mode='wait'>
         <Router>
           <ToastProvider>
             <PushProvider>
 
-            
             <AuthProvider>
               <ChatBot/>
               <Navbar />
               <Sidebar />
               <Routes>
                 <Route exact path='/' element={<Welcome />} />
+                <Route exact path='/dummy' element={<Dummy />} />
                 <Route exact path='/unathorized' element={<Unauthorized />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />

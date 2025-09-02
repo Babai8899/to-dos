@@ -22,8 +22,8 @@ function ChatBot() {
                     {visible ?
                         <Transitions pageVariants={pageVariants}>
                             <div className='card gap-2 grid border md:w-auto w-screen border-gray-300 dark:border-gray-600 p-1 rounded-lg shadow-lg'>
-                                <div className="card bg-yellow-50 dark:bg-cyan-700 md:h-80 h-[calc(100vh-7rem-7rem)] rounded-lg shadow-lg text-sm">
-                                    <div className='bg-yellow-500 dark:bg-cyan-900 p-2 rounded-t-lg justify-between flex items-center text-gray-200'>
+                                <div className="card bg-yellow-50 dark:bg-cyan-700 md:h-80 h-[calc(100vh-7rem-7rem)] rounded-md shadow-lg text-sm">
+                                    <div className='bg-yellow-500 dark:bg-cyan-900 p-2 rounded-t-sm justify-between flex items-center text-gray-200'>
                                         <span>Chat Bot</span>
                                         <button class="text-gray-300 hover:text-gray-600 text-2xl font-bold" onClick={toggleChat}>
                                             ×

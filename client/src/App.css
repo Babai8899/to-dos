@@ -2,8 +2,6 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-
-
 @plugin "daisyui/theme" {
   name: "dark";
   default: false;
@@ -19,8 +17,6 @@
   prefersdark: true;
   color-scheme: "light";
 }
-
-
 
 
 body {
