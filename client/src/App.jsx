@@ -24,7 +24,7 @@ import Dummy from './Dummy'
 function App() {
 
   return (
-    <div className="bg-gray-50 dark:bg-gray-900 md:h-[calc(100vh-3rem)] h-[calc(100vh-9rem)] transition-colors duration-100">
+    <div className="bg-gray-50 dark:bg-gray-900 h-screen transition-colors duration-100">
       <AnimatePresence mode='wait'>
         <Router>
           <ToastProvider>
