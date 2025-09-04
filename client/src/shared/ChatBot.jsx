@@ -21,12 +21,14 @@ function ChatBot() {
                 <div className="md:w-1/4 w-full fixed md:top-24 md:right-5 md:px-2 z-2">
                     {visible ?
                         <Transitions pageVariants={pageVariants}>
-                            <div className='card gap-2 grid border md:w-auto w-screen border-gray-300 dark:border-gray-600 p-1 rounded-lg shadow-lg'>
+                            <div className='card gap-2 grid md:border md:w-auto w-screen md:border-gray-300 dark:border-gray-600 p-1 rounded-lg md:shadow-lg'>
                                 <div className="card bg-yellow-50 dark:bg-cyan-700 md:h-80 h-[calc(100vh-7rem-7rem)] rounded-md shadow-lg text-sm">
-                                    <div className='bg-yellow-500 dark:bg-cyan-900 p-2 rounded-t-sm justify-between flex items-center text-gray-200'>
-                                        <span>Chat Bot</span>
-                                        <button class="text-gray-300 hover:text-gray-600 text-2xl font-bold" onClick={toggleChat}>
-                                            ×
+                                    <div className='bg-yellow-500 dark:bg-cyan-900 p-2 rounded-t-sm justify-between flex items-center  text-gray-800 dark:text-gray-200'>
+                                        <span className='text-2xl'>Chat Bot</span>
+                                        <button class="text-gray-800 cursor-pointer dark:text-gray-200 text-2xl bg-white/20 ease-in-out transition-colors duration-300 hover:bg-white/50 dark:bg-black/20 dark:hover:bg-black/50 rounded-full font-bold p-1" onClick={toggleChat}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                            </svg>
                                         </button>
                                     </div>
                                     <div className='px-1'>
@@ -65,7 +67,7 @@ function ChatBot() {
                             </div>
                         </Transitions> :
                         <div onClick={toggleChat}>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="stroke-gray-800 dark:stroke-gray-200 size-12 fixed md:bottom-16 bottom-28 right-5 cursor-pointer rounded-full p-2 bg-amber-200 dark:bg-cyan-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="stroke-gray-800 dark:stroke-gray-200 size-12 fixed md:bottom-16 bottom-28 right-5 cursor-pointer rounded-full p-2 bg-amber-200 dark:bg-cyan-600 hover:bg-amber-300 dark:hover:bg-cyan-700 ease-in-out transition-colors duration-300">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
                             </svg>
                         </div>}
