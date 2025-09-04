@@ -24,7 +24,7 @@ body {
   font-family: 'Saira', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url('background.jpg');
+  background-image: url('/background.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
