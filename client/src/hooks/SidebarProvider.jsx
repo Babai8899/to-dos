@@ -17,7 +17,7 @@ function SidebarProvider({ children }) {
                         }`}>
                         CreateMenu
                     </div>
-                    <button className="p-1 rounded-lg bg-gray-300 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-900 cursor-pointer ease-in-out transition-colors duration-300" onClick={() => handleSidebar()}>
+                    <button className="p-1 rounded-lg bg-gray-300 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-900 cursor-pointer ease-in-out transition-all duration-300" onClick={() => handleSidebar()}>
                         {!open ?
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-9">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />

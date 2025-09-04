@@ -18,11 +18,11 @@ function ChatBot() {
     return (
         <div>
             <div className="container flex">
-                <div className="md:w-1/4 w-full fixed md:top-24 md:right-5 md:px-2 z-2">
+                <div className="md:w-2/7 w-full fixed md:top-20 md:right-1 md:px-2 z-2">
                     {visible ?
                         <Transitions pageVariants={pageVariants}>
                             <div className='card gap-2 grid md:border md:w-auto w-screen md:border-gray-300 dark:border-gray-600 p-1 rounded-lg md:shadow-lg'>
-                                <div className="card bg-yellow-50 dark:bg-cyan-700 md:h-80 h-[calc(100vh-7rem-7rem)] rounded-md shadow-lg text-sm">
+                                <div className="card bg-yellow-50 dark:bg-cyan-700 md:h-96 h-[calc(100vh-7rem-7rem)] rounded-md shadow-lg text-sm">
                                     <div className='bg-yellow-500 dark:bg-cyan-900 p-2 rounded-t-sm justify-between flex items-center  text-gray-800 dark:text-gray-200'>
                                         <span className='text-2xl'>Chat Bot</span>
                                         <button class="text-gray-800 cursor-pointer dark:text-gray-200 text-2xl bg-white/20 ease-in-out transition-colors duration-300 hover:bg-white/50 dark:bg-black/20 dark:hover:bg-black/50 rounded-full font-bold p-1" onClick={toggleChat}>
