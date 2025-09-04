@@ -80,11 +80,14 @@ function CreateEvent() {
         } else if (thisDay.day() === 6) {
           dayColor = !isTodayOrFuture ? 'text-blue-300' : 'text-blue-500'; // Saturday
         }
+        else {
+          dayColor = !isTodayOrFuture ? 'text-gray-800/30 dark:text-gray-200/30' : 'text-gray-800 dark:text-gray-200'; // Weekdays
+        }
         days.push(
           <div
             key={thisDay.format('YYYY-MM-DD')}
             className={`relative group cursor-pointer p-2 text-center rounded-xl
-              ${isSelected ? 'bg-yellow-100 dark:bg-cyan-900' : 'bg-base-100'}
+              ${isSelected ? 'bg-yellow-100 dark:bg-cyan-900' : 'bg-yellow-50/50 dark:bg-cyan-900/10'}
               ${!isTodayOrFuture ? 'text-base-content/30 cursor-not-allowed' : 'hover:bg-yellow-100 dark:hover:bg-cyan-900'}
               ${dayColor}`}
             disabled={!isTodayOrFuture}
@@ -180,20 +183,20 @@ function CreateEvent() {
   return (
     <Transitions pageVariants={pageVariants}>
       {!createEventWindow ?
-        <div className="p-6 flex flex-col items-center justify-start">
-          <div className="lg:w-1/2 w-96 max-w-5xl bg-base-100 rounded-xl shadow-xl p-6">
+        <div className='w-screen md:h-[calc(100vh-8rem)] h-[calc(100vh-15rem)] rounded-lg flex flex-col gap-4 justify-center items-center mx-auto'>
+          <div className="md:w-1/2 rounded-xl shadow-xl p-6 justify-center items-center mx-auto bg-yellow-50/50 dark:bg-cyan-900/50">
             {/* Header */}
             <div className="flex justify-between items-center mb-4">
-              <button className="btn btn-outline btn-sm" onClick={() => handleMonthChange(-1)}>❮ Prev</button>
+              <button className="btn btn-outline btn-sm text-gay-800 dark:text-gray-200" onClick={() => handleMonthChange(-1)}>❮ Prev</button>
               <div
-                className="text-xl font-bold cursor-pointer hover:text-primary"
+                className="text-xl font-bold cursor-pointer text-gay-800 dark:text-gray-200 hover:text-primary"
                 onClick={() => setShowSelector(!showSelector)}
               >
                 {currentDate.format('MMMM YYYY')}
               </div>
-              <button className="btn btn-outline btn-sm" onClick={() => handleMonthChange(1)}>Next ❯</button>
+              <button className="btn btn-outline btn-sm text-gay-800 dark:text-gray-200" onClick={() => handleMonthChange(1)}>Next ❯</button>
               {showSelector && (
-                <div className="absolute top-12 left-1/2 transform -translate-x-1/2 z-20 bg-base-100 border rounded-xl shadow-lg p-4 flex gap-4">
+                <div className="absolute top-12 left-1/2 transform -translate-x-1/2 z-20 bg-yellow-50/50 dark:bg-cyan-900/50 border rounded-xl shadow-lg p-4 flex gap-4">
                   <select
                     className="select noscrollbar"
                     value={currentDate.month()}
@@ -227,7 +230,7 @@ function CreateEvent() {
             </div>
 
             {/* Week Days */}
-            <div className="grid grid-cols-7 gap-2 mb-2 text-center font-bold text-base-content/60">
+            <div className="grid grid-cols-7 gap-2 mb-2 text-center font-bold text-gray-800 dark:text-gray-200">
               {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day, idx) => (
                 <div
                   key={day}
@@ -248,7 +251,7 @@ function CreateEvent() {
             <div className="space-y-2">{weeks}</div>
           </div>
         </div> :
-        <div className=' my-1.5 md:w-1/3 w-screen md:h-[calc(100vh-8rem)] h-[calc(100vh-15rem)] rounded-lg flex flex-col gap-4 justify-center items-center mx-auto md:border-2 md:bg-yellow-50/50 md:dark:bg-cyan-900/50 md:shadow-sm md:border-2 md:border-yellow-300 md:dark:border-cyan-500'>
+        <div className='my-1.5 md:w-1/3 w-screen md:h-[calc(100vh-8rem)] h-[calc(100vh-15rem)] rounded-lg flex flex-col gap-4 justify-center items-center mx-auto md:bg-yellow-50/50 md:dark:bg-cyan-900/50 md:shadow-sm md:border-2 md:border-yellow-300 md:dark:border-cyan-500'>
           <h1 className='text-2xl'>Create Event</h1>
           <div className='w-full max-w-xs'>
             <label className='text-gray-900 dark:text-gray-200'>Title</label>

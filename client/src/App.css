@@ -20,10 +20,18 @@
 
 
 body {
-    margin: 0;
-    font-family: 'Saira', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  font-family: 'Saira', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: url('background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background-color 0.3s ease;
+  /* width: 100%; removed to prevent overflow issues */
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .noscrollbar {
@@ -36,3 +44,4 @@ body {
 }
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+

@@ -24,74 +24,76 @@ import Dummy from './Dummy'
 function App() {
 
   return (
-    <div className="bg-gray-50 dark:bg-gray-900 h-screen transition-colors duration-100">
-      <AnimatePresence mode='wait'>
-        <Router>
-          <ToastProvider>
-            <PushProvider>
-
-            <AuthProvider>
-              <ChatBot/>
-              <Navbar />
-              <Sidebar />
-              <Routes>
-                <Route exact path='/' element={<Welcome />} />
-                <Route exact path='/dummy' element={<Dummy />} />
-                <Route exact path='/unathorized' element={<Unauthorized />} />
-                <Route path='/login' element={<Login />} />
-                <Route path='/register' element={<Register />} />
-                <Route
-                  path="/home"
-                  element={
-                    <PrivateRoute>
-                      <Home />
-                    </PrivateRoute>
-                  }
-                />
-                <Route path='/user/view' element={
-                  <PrivateRoute>
-                    <View />
-                  </PrivateRoute>
-                } />
-                <Route path='/user/update' element={
-                  <PrivateRoute>
-                    <UpdatePassword />
-                  </PrivateRoute>
-                } />
-                <Route
-                  path="/task"
-                  element={
-                    <PrivateRoute>
-                      <CreateTask />
-                    </PrivateRoute>
-                  }
-                />
-                <Route path='/event' element={
+  <div className="noscrollbar min-h-screen w-screen overflow-x-hidden flex flex-col backdrop-blur-sm bg-white/30 dark:bg-black/20 transition-colors duration-100">
+      <div className="flex-grow flex flex-col">
+        <AnimatePresence mode='wait'>
+          <Router>
+            <ToastProvider>
+              <PushProvider>
+                <AuthProvider>
+                  <Navbar />
+                  <ChatBot />
+                  <Sidebar />
+                  <Routes>
+                    <Route exact path='/' element={<Welcome />} />
+                    <Route exact path='/dummy' element={<Dummy />} />
+                    <Route exact path='/unathorized' element={<Unauthorized />} />
+                    <Route path='/login' element={<Login />} />
+                    <Route path='/register' element={<Register />} />
+                    <Route path='/event' element={<CreateEvent />} />
+                    <Route
+                      path="/home"
+                      element={
+                        <PrivateRoute>
+                          <Home />
+                        </PrivateRoute>
+                      }
+                    />
+                    <Route path='/user/view' element={
+                      <PrivateRoute>
+                        <View />
+                      </PrivateRoute>
+                    } />
+                    <Route path='/user/update' element={
+                      <PrivateRoute>
+                        <UpdatePassword />
+                      </PrivateRoute>
+                    } />
+                    <Route
+                      path="/task"
+                      element={
+                        <PrivateRoute>
+                          <CreateTask />
+                        </PrivateRoute>
+                      }
+                    />
+                    {/* <Route path='/event' element={
                   <PrivateRoute>
                     <CreateEvent />
                   </PrivateRoute>
-                } />
-                <Route
-                  path="/note"
-                  element={
-                    <PrivateRoute>
-                      <CreateNote />
-                    </PrivateRoute>
-                  }
-                />
-                <Route path='/list' element={
-                  <PrivateRoute>
-                    <CreateList />
-                  </PrivateRoute>
-                } />
-              </Routes>
-              <Footer />
-            </AuthProvider>
-          </PushProvider>
-          </ToastProvider>
-        </Router>
-      </AnimatePresence>
-    </div>
+                } /> */}
+                    <Route
+                      path="/note"
+                      element={
+                        <PrivateRoute>
+                          <CreateNote />
+                        </PrivateRoute>
+                      }
+                    />
+                    <Route path='/list' element={
+                      <PrivateRoute>
+                        <CreateList />
+                      </PrivateRoute>
+                    } />
+                  </Routes>
+                  <Footer />
+                </AuthProvider>
+              </PushProvider>
+            </ToastProvider>
+          </Router>
+        </AnimatePresence>
+      </div>
+    // </div>
   )
 }
 
