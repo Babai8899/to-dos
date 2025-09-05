@@ -42,7 +42,7 @@ function Navbar() {
                     <a className="rounded-box grid h-10 w-32 place-items-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900 font-bold ease-in-out transition-colors duration-300 text-shadow-xs text-yellow-500 dark:text-cyan-600 dark:text-shadow-gray-200 text-shadow-gray-800" href="/home">ToDos</a>
                     <input type="text" placeholder="Search" className="input bg-gray-400 dark:bg-gray-600 dark:placeholder:text-gray-200 placeholder:text-gray-800 w-24 md:w-auto lg:visible invisible" />
                 </div>
-                <div className="flex gap-2 mr-4 navbar-end">
+                <div className="flex gap-2 md:mr-4 navbar-end">
                     <label className="swap swap-rotate p-2 rounded-full cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900 ease-in-out transition-colors duration-300">
                         {/* this hidden checkbox controls the state */}
                         <input

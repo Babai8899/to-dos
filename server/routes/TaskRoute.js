@@ -8,6 +8,6 @@ router.get('/', getTasks);
 router.get('/:taskId', getTaskById);
 router.put('/:taskId', updateTaskById);
 router.delete('/:taskId', deleteTaskById);
-router.get('/:emailId', getTasksByEmailId);
+router.get('/user/:emailId', getTasksByEmailId);
 
 export default router

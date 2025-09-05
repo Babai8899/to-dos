@@ -8,6 +8,6 @@ router.get('/', getEvents);
 router.get('/:eventId', getEventById);
 router.put('/:eventId', updateEventById);
 router.delete('/:eventId', deleteEventById);
-router.get('/:emailId', getEventsByEmailId);
+router.get('/user/:emailId', getEventsByEmailId);
 
 export default router

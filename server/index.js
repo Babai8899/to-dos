@@ -13,6 +13,7 @@ import eventRoutes from './routes/EventRoute.js';
 import taskRoutes from './routes/TaskRoute.js';
 import noteRoutes from './routes/NoteRoute.js';
 import listRoutes from './routes/ListRoute.js';
+import chatRoutes from './routes/ChatRoutes.js';
 
 dotenv.config();
 
@@ -27,6 +28,8 @@ const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/todos';
 app.use(cors({origin: ['https://to-dos-client.vercel.app', 'http://localhost:5173'], credentials: true}));
 app.use(cookieParser());
 app.use(express.json());
+
+app.use('/resources', express.static('resources'));
 
 mongoose.connect(MONGO_URI).then(() => {
     console.log('Connected to MongoDB');
@@ -49,6 +52,7 @@ app.use('/api/events', eventRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/notes', noteRoutes);
 app.use('/api/lists', listRoutes);
+app.use('/api/chat', chatRoutes);
 
 webpush.setVapidDetails(
     "mailto:you@example.com",

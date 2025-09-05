@@ -8,6 +8,6 @@ router.get('/', getNotes);
 router.get('/:noteId', getNoteById);
 router.put('/:noteId', updateNoteById);
 router.delete('/:noteId', deleteNoteById);
-router.get('/:emailId', getNotesByEmailId);
+router.get('/user/:emailId', getNotesByEmailId);
 
 export default router;
