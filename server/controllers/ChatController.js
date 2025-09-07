@@ -19,10 +19,17 @@ const startChat = async (req, res) => {
             return res.status(400).json({ error: "Question is required in request body." });
         }
 
-        // Upload CSV from resources folder
-        const csv = await ai.files.upload({
-            file: "resources/todosDb.events.csv",
-        });
+        // Get emailId from frontend and use corresponding CSV files for all modules
+        const emailId = req.body.emailId;
+        if (!emailId) {
+            return res.status(400).json({ error: "emailId is required in request body." });
+        }
+        // File paths for all modules
+        const fileTypes = ['tasks', 'events', 'notes', 'lists'];
+        const csvFiles = await Promise.all(fileTypes.map(async type => {
+            const filePath = `resources/${type}_${emailId}.csv`;
+            return await ai.files.upload({ file: filePath });
+        }));
 
         const config = {
             thinkingConfig: {
@@ -30,14 +37,14 @@ const startChat = async (req, res) => {
             },
             systemInstruction: [
                 {
-                    text: `You are ChronoMate, an AI chat bot for an application called ToDos. This application manages Events, Tasks, Check lists, Notes. You will not answer any general knowledge questions. You will be answering base of data of the particular logged in user. At start you will greet the user based on timing and introduce yourself and ask user about his query. You will be provided csv. You will suggest query based on the data and answer them. Avoide stars in response and do not use any markdown formatting. You will not answer any question that is not related to the application. You will not answer any question that is not related to the data provided in the csv. Keep your response short and to the point`,
+                    text: `You are ChronoMate, an AI chat bot for an application called ToDos. This application manages Events, Tasks, Check lists, Notes. You will not answer any general knowledge questions. You will be answering base of data of the particular logged in user. At start you will greet the user based on timing and introduce yourself and ask user about his query. You will be provided csv files for events, tasks, notes, and lists. You will suggest query based on the data and answer them. Avoid stars in response and do not use any markdown formatting. You will not answer any question that is not related to the application. You will not answer any question that is not related to the data provided in the csv files. Keep your response short and to the point`,
                 }
             ],
         };
         const model = 'gemini-2.5-pro';
         const contents = [
             createUserContent([
-                createPartFromUri(csv.uri, 'text/csv'),
+                ...csvFiles.map(csv => createPartFromUri(csv.uri, 'text/csv')),
             ]),
             {
                 role: 'user',
@@ -125,14 +132,15 @@ const startChat = async (req, res) => {
             answer += chunk.text;
         }
 
-        res.json({ response: answer });
+        res.json({answer});
 
         console.log('User Question:', userQuestion);
         console.log('AI Response:', answer);
         // Save chat to MongoDB
         await ChatHistory.create({
             question: userQuestion,
-            response: answer
+            response: answer,
+            emailId,
         });
     } catch (error) {
         console.error(error);
@@ -140,13 +148,17 @@ const startChat = async (req, res) => {
     }
 }
 
-const getChatHistory = async (req, res) => {
+const getChatHistoryByEmailId = async (req, res) => {
     try {
-        const history = await ChatHistory.find().sort({ createdAt: -1 });
+        const emailId = req.params.emailId;
+        if (!emailId) {
+            return res.status(400).json({ error: "emailId is required in request params." });
+        }
+        const history = await ChatHistory.find({ emailId }).sort({ createdAt: -1 });
         res.json(history);
     } catch (error) {
         res.status(500).json({ error: "Failed to fetch chat history." });
     }
 }
 
-export { startChat, getChatHistory };
+export { startChat, getChatHistoryByEmailId };

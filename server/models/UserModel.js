@@ -32,11 +32,16 @@ const userSchema = new mongoose.Schema({
     },
     securityQuestion: {
         type: String,
-        required: true
+        // required: true
     },
     answer: {
         type: String,
-        required: true
+        // required: true
+    }
+    ,
+    profileImage: {
+        type: Buffer,
+        required: false
     }
 });
 

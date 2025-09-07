@@ -1,5 +1,10 @@
 import NoteCounterModel from "../models/NoteCounter.js";
 import NoteModel from "../models/NoteModel.js";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const createNote = async (req, res) => {
     const { title, description, createdOn, user } = req.body;
@@ -101,10 +106,17 @@ const getNotesByEmailId = async (req, res) => {
     const { emailId } = req.params;
     try {
         const notes = await NoteModel.find({ user: emailId });
-        res.status(200).json(notes);
+        // Prepare CSV data
+        const csvHeader = 'noteId,title,description,createdOn,user\n';
+        const csvRows = notes.map(note => `${note.noteId},${note.title},${note.description},${note.createdOn},${note.user}`).join('\n');
+        const csvContent = csvHeader + csvRows;
+        // Write CSV to resources folder
+        const filePath = path.join(__dirname, '../resources', `notes_${emailId}.csv`);
+        fs.writeFileSync(filePath, csvContent);
+        res.status(200).json({ message: 'CSV created', file: `resources/notes_${emailId}.csv`, notes });
     } catch (error) {
-        console.error("Error fetching notes:", error);
-        res.status(500).json({ message: "Internal server error" });
+        console.error('Error fetching notes or writing CSV:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
 };
 

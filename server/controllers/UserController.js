@@ -94,8 +94,35 @@ const updatePasswordByEmailId = async (req, res) => {
     }
 }
 
+import multer from "multer";
+
+// Multer setup for single image upload
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
+
+const uploadProfileImage = async (req, res) => {
+    try {
+        const userId = req.params.emailId;
+        if (!req.file) {
+            return res.status(400).json({ message: "No image file uploaded" });
+        }
+        const user = await UserModel.findOne({ emailId: userId });
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        user.profileImage = req.file.buffer;
+        await user.save();
+        res.status(200).json({ message: "Profile image uploaded successfully" });
+    } catch (error) {
+        console.error("Error uploading profile image:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
+
 export {
     getUserByEmailId,
     updatePhoneByEmailId,
-    updatePasswordByEmailId
+    updatePasswordByEmailId,
+    upload,
+    uploadProfileImage
 };

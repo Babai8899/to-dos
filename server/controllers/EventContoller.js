@@ -1,5 +1,10 @@
 import EventModel from "../models/EventModel.js";
 import EventCounterModel from "../models/EventCounter.js";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const createEvent = async (req, res) => {
     console.log(req.body);
@@ -120,10 +125,17 @@ const getEventsByEmailId = async (req, res) => {
 
     try {
         const events = await EventModel.find({ user: emailId });
-        res.status(200).json(events);
+        // Prepare CSV data
+        const csvHeader = 'eventId,title,description,date,time,location,user\n';
+        const csvRows = events.map(event => `${event.eventId},${event.title},${event.description},${event.date},${event.time},${event.location},${event.user}`).join('\n');
+        const csvContent = csvHeader + csvRows;
+        // Write CSV to resources folder
+        const filePath = path.join(__dirname, '../resources', `events_${emailId}.csv`);
+        fs.writeFileSync(filePath, csvContent);
+        res.status(200).json({ message: 'CSV created', file: `resources/events_${emailId}.csv`, events });
     } catch (error) {
-        console.error("Error fetching events:", error);
-        res.status(500).json({ message: "Internal server error" });
+        console.error('Error fetching events or writing CSV:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
 }
 

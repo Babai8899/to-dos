@@ -36,19 +36,18 @@ function App() {
                   <Sidebar />
                   <Routes>
                     <Route exact path='/' element={<Welcome />} />
-                    <Route exact path='/home' element={<Home />} />
                     <Route exact path='/dummy' element={<Dummy />} />
                     <Route exact path='/unathorized' element={<Unauthorized />} />
                     <Route path='/login' element={<Login />} />
                     <Route path='/register' element={<Register />} />
-                    {/* <Route
+                    <Route
                       path="/home"
                       element={
                         <PrivateRoute>
                           <Home />
                         </PrivateRoute>
                       }
-                    /> */}
+                    />
                     <Route path='/user/view' element={
                       <PrivateRoute>
                         <View />

@@ -1,5 +1,10 @@
 import TaskModel from "../models/TaskModel.js";
 import TaskCounterModel from "../models/TaskCounter.js";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const createTask = async (req, res) => {
     console.log(req.body);
@@ -119,10 +124,17 @@ const getTasksByEmailId = async (req, res) => {
 
     try {
         const tasks = await TaskModel.find({ user: emailId });
-        res.status(200).json(tasks);
+        // Prepare CSV data
+        const csvHeader = 'taskId,title,description,date,time,user\n';
+        const csvRows = tasks.map(task => `${task.taskId},${task.title},${task.description},${task.date},${task.time},${task.user}`).join('\n');
+        const csvContent = csvHeader + csvRows;
+        // Write CSV to resources folder
+        const filePath = path.join(__dirname, '../resources', `tasks_${emailId}.csv`);
+        fs.writeFileSync(filePath, csvContent);
+        res.status(200).json({ message: 'CSV created', file: `resources/tasks_${emailId}.csv`, tasks });
     } catch (error) {
-        console.error("Error fetching tasks:", error);
-        res.status(500).json({ message: "Internal server error" });
+        console.error('Error fetching tasks or writing CSV:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
 }
 

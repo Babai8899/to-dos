@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 function Navbar() {
 
-    const { logout } = useContext(AuthContext);
+    const { logout, user } = useContext(AuthContext);
+    console.log(user);
     const navigate = useNavigate();
 
     const [theme, setTheme] = useState(localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light')
@@ -39,7 +40,7 @@ function Navbar() {
         <div>
             <div className="navbar bg-gray-200 dark:bg-gray-800 shadow-sm">
                 <div className="flex my-auto text-4xl navbar-start gap-1">
-                    <a className="rounded-box grid h-10 w-32 place-items-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900 font-bold ease-in-out transition-colors duration-300 text-shadow-xs text-yellow-500 dark:text-cyan-600 dark:text-shadow-gray-200 text-shadow-gray-800" href="/home">ToDos</a>
+                    <a className="rounded-box grid h-10 w-32 place-items-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900 font-bold ease-in-out transition-colors duration-300 text-shadow-xs text-yellow-500 dark:text-cyan-600 dark:text-shadow-gray-200 text-shadow-gray-800" href="/">ToDos</a>
                     <input type="text" placeholder="Search" className="input bg-gray-400 dark:bg-gray-600 dark:placeholder:text-gray-200 placeholder:text-gray-800 w-24 md:w-auto lg:visible invisible" />
                 </div>
                 <div className="flex gap-2 md:mr-4 navbar-end">
@@ -78,8 +79,13 @@ function Navbar() {
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-8 stroke-gray-800 dark:stroke-gray-200">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                             </svg>
-
                         </div>
+                        {user === null ? 
+                        <ul
+                            tabIndex={0}
+                            className="menu menu-sm dropdown-content bg-yellow-300 text-gray-800 dark:text-gray-200 dark:bg-cyan-600 rounded-box z-1 mt-3 w-52 p-2 shadow relative">
+                            <li><a href='/login'>Login</a></li>
+                        </ul>:
                         <ul
                             tabIndex={0}
                             className="menu menu-sm dropdown-content bg-yellow-300 text-gray-800 dark:text-gray-200 dark:bg-cyan-600 rounded-box z-1 mt-3 w-52 p-2 shadow relative">
@@ -105,7 +111,7 @@ function Navbar() {
                                 )}
                             </li>
                             <li><a onClick={handleClick}>Logout</a></li>
-                        </ul>
+                        </ul>}
                     </div>
                 </div>
             </div>
