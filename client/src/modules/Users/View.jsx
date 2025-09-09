@@ -34,7 +34,7 @@ function View() {
             alt="Profile"
             className="object-cover w-full h-full"
           />
-        ) : (
+          ) : ( 
           <span className="text-6xl text-gray-400 dark:text-gray-500">👤</span>
         )}
       </div>
