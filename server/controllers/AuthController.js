@@ -95,30 +95,33 @@ const login = async (req, res) => {
             return res.status(401).json({ message: "Wrong password" });
         }
 
-        // generate JWT token
-        const accessToken = jwt.sign({ user: user }, process.env.JWT_ACCESS_SECRET, { expiresIn: '1m' });
+                // Remove profileImage from user object before storing in JWT
+                const { profileImage, password: userPassword, ...userPayload } = user.toObject ? user.toObject() : user;
 
-        //generate refresh token
-        const refreshToken = jwt.sign({ user: user }, process.env.JWT_REFRESH_SECRET, { expiresIn: '1h' });
+                // generate JWT token
+                const accessToken = jwt.sign({ user: userPayload }, process.env.JWT_ACCESS_SECRET, { expiresIn: '1m' });
 
-        // Set the refresh token in a cookie
-        res.
-        cookie('accessToken', accessToken, {
-            httpOnly: false,
-            secure: true, // Use secure cookies in production
-            sameSite: 'None', // Adjust as necessary for your application
-            maxAge: 1 * 60 * 1000 // 1 minutes
-        }).
-        cookie('refreshToken', refreshToken, {
-            httpOnly: false,
-            secure: true, // Use secure cookies in production
-            sameSite: 'None', // Adjust as necessary for your application
-            maxAge: 1 * 60 * 60 * 1000 // 1 hour
-        });
+                //generate refresh token
+                const refreshToken = jwt.sign({ user: userPayload }, process.env.JWT_REFRESH_SECRET, { expiresIn: '1h' });
 
-        res.status(200).json({
-            message: "Login successful",
-        });
+                // Set the refresh token in a cookie
+                res
+                    .cookie('accessToken', accessToken, {
+                        httpOnly: false,
+                        secure: true, // Use secure cookies in production
+                        sameSite: 'None', // Adjust as necessary for your application
+                        maxAge: 1 * 60 * 1000 // 1 minutes
+                    })
+                    .cookie('refreshToken', refreshToken, {
+                        httpOnly: false,
+                        secure: true, // Use secure cookies in production
+                        sameSite: 'None', // Adjust as necessary for your application
+                        maxAge: 1 * 60 * 60 * 1000 // 1 hour
+                    });
+
+                res.status(200).json({
+                    message: "Login successful",
+                });
 
     } catch (error) {
         console.error("Error logging in user:", error);
@@ -138,9 +141,9 @@ const refresh = async (req, res) => {
             if (err) {
                 return res.status(403).json({ message: "forbidden" });
             }
-            const user = decoded.user;
+            const { profileImage, password: userPassword, ...userPayload } = decoded.user;
             // Generate a new access token
-            const accessToken = jwt.sign({ user }, process.env.JWT_ACCESS_SECRET, { expiresIn: '1m' });
+            const accessToken = jwt.sign({ user: userPayload }, process.env.JWT_ACCESS_SECRET, { expiresIn: '1m' });
 
             // Set the new access token in a cookie
             res.cookie('accessToken', accessToken, {
@@ -172,11 +175,9 @@ const getUser = async (req, res) => {
     }
     try {
         const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
-        const user = decoded.user;
-        //exclude password from user details
-        user.password = undefined; // Remove password from user object
-        // Return user details
-        res.status(200).json(user);
+    const { profileImage, password: userPassword, ...userPayload } = decoded.user;
+    // Return user details (without profileImage and password)
+    res.status(200).json(userPayload);
     } catch (error) {
         console.error("Error fetching user:", error);
         res.status(403).json({ message: "Forbidden" });

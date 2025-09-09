@@ -39,6 +39,7 @@ function App() {
                     <Route exact path='/dummy' element={<Dummy />} />
                     <Route exact path='/unathorized' element={<Unauthorized />} />
                     <Route path='/login' element={<Login />} />
+
                     <Route path='/register' element={<Register />} />
                     <Route
                       path="/home"

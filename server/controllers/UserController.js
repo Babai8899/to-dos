@@ -26,21 +26,25 @@ const getUserByEmailId = async (req, res) => {
     }
 }
 
-const updatePhoneByEmailId = async (req, res) => {
-    
+const updateDetailsByEmailId = async (req, res) => {
     const { emailId } = req.params;
-    const { phone } = req.body;
+    const { phone, anniversaryDate } = req.body;
 
-    // Validate emailId and phone are not empty
-    if (!emailId || !phone) {
-        return res.status(400).json({ message: "Email ID and phone number are required" });
+    // Validate emailId is not empty and at least one field to update is provided
+    if (!emailId || (!phone && !anniversaryDate)) {
+        return res.status(400).json({ message: "Email ID and at least one field (phone or anniversaryDate) is required" });
     }
 
+    // Build update object dynamically
+    const updateFields = {};
+    if (phone) updateFields.phone = phone;
+    if (anniversaryDate) updateFields.anniversaryDate = anniversaryDate;
+
     try {
-        // Find user by emailId and update phone number
+        // Find user by emailId and update provided fields
         const updatedUser = await UserModel.findOneAndUpdate(
             { emailId },
-            { phone },
+            updateFields,
             { new: true }
         );
 
@@ -52,7 +56,7 @@ const updatePhoneByEmailId = async (req, res) => {
         const { password, ...userDetails } = updatedUser.toObject();
         res.status(200).json(userDetails);
     } catch (error) {
-        console.error("Error updating user phone:", error);
+        console.error("Error updating user details:", error);
         res.status(500).json({ message: "Internal server error" });
     }
 }
@@ -119,10 +123,26 @@ const uploadProfileImage = async (req, res) => {
     }
 };
 
+const getProfileImage = async (req, res) => {
+    try {
+        const userId = req.params.emailId;
+        const user = await UserModel.findOne({ emailId: userId });
+        if (!user || !user.profileImage) {
+            return res.status(404).json({ message: "Profile image not found" });
+        }
+        res.set("Content-Type", "image/jpeg");
+        res.send(user.profileImage);
+    } catch (error) {
+        console.error("Error fetching profile image:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
+
 export {
     getUserByEmailId,
-    updatePhoneByEmailId,
+    updateDetailsByEmailId,
     updatePasswordByEmailId,
     upload,
-    uploadProfileImage
+    uploadProfileImage,
+    getProfileImage
 };
