@@ -90,7 +90,7 @@ function Navbar() {
                             tabIndex={0}
                             className="menu menu-sm dropdown-content bg-yellow-300 text-gray-800 dark:text-gray-200 dark:bg-cyan-600 rounded-box z-1 mt-3 w-52 p-2 shadow relative">
                             <li>
-                                <a className="justify-between">
+                                <a className="justify-between" href='/user/view'>
                                     Profile
                                     <span className="badge">New</span>
                                 </a>
