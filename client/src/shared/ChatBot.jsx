@@ -117,7 +117,7 @@ function ChatBot() {
                                                 <button className='mx-auto bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-box grid h-10 w-28 place-items-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 ease-in-out transition-colors duration-300'><a href="/login" className='text-2xl'>Login</a></button>
                                             </div>
                                         </div> :
-                                        <div className='px-1 h-80 noscrollbar overflow-y-auto' ref={chatContainerRef}>
+                                        <div className='px-1 h-full noscrollbar overflow-y-auto' ref={chatContainerRef}>
                                             <div className='flex flex-col'>
                                                 {chatHistory.map((chat, index) => (
                                                     <div key={index}>

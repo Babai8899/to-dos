@@ -1,0 +1,19 @@
+{
+  "name": "chronomate-todos-root",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Root package for ChronoMate ToDos monorepo",
+  "scripts": {
+    "install-client": "cd client && npm install",
+    "install-server": "cd server && npm install",
+    "install-desktop": "cd desktop && npm install",
+    "client": "cd client && npm run dev",
+    "server": "cd server && npm run dev",
+    "desktop": "cd desktop && npm start",
+    "client:build": "cd client && npm run build",
+    "server:start": "cd server && npm start",
+    "desktop:build": "cd desktop && npm run build"
+  },
+  "author": "Indranil Dhara (indra.babai.9898@gmail.com)",
+  "license": "ISC"
+}
