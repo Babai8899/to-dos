@@ -73,10 +73,15 @@ LIST006,Certifications,"{
   _id: new ObjectId('68b3bf3bf095a24eff27ee54')
 };{
   itemName: 'Azure AI Fundamentals',
-  completed: false,
+  completed: true,
   _id: new ObjectId('68b3bf3bf095a24eff27ee55')
 };{
   itemName: 'MongoDB Associate',
-  completed: false,
+  completed: true,
   _id: new ObjectId('68b3bf3bf095a24eff27ee56')
+}",john.wick@todos.com
+LIST007,Movies,"{
+  itemName: 'Johnwick',
+  completed: false,
+  _id: new ObjectId('68c5a35e114ce70ef933c7a3')
 }",john.wick@todos.com

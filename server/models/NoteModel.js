@@ -18,6 +18,14 @@ const noteSchema = new mongoose.Schema({
     },
     createdOn: {
         type: String,
+        default: () => new Date().toLocaleString(),
+    },
+    lastEditedOn: {
+        type: String,
+        default: () => new Date().toLocaleString(),
+    },
+    createdOn: {
+        type: String,
         required: true,
     },
     user: {

@@ -17,6 +17,14 @@ const listSchema = new mongoose.Schema({
             completed: { type: Boolean, default: false },
         },
     ],
+    createdOn: {
+        type: String,
+        default: () => new Date().toLocaleString(),
+    },
+    lastEditedOn: {
+        type: String,
+        default: () => new Date().toLocaleString(),
+    },
     user: {
         type: String,
         required: true,

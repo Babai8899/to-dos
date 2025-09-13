@@ -29,11 +29,14 @@ const createList = async (req, res) => {
         return res.status(500).json({ message: "Internal server error" });
     }
     try {
+        const now = new Date().toLocaleString();
         const newList = new ListModel({
             listId,
             title,
             items,
-            user
+            user,
+            createdOn: now,
+            lastEditedOn: now
         });
         await newList.save();
         return res.status(201).json(newList);
@@ -75,7 +78,15 @@ const updateListById = async (req, res) => {
         return res.status(400).json({ message: "Each item must have itemName (string) and completed (boolean)" });
     }
     try {
-        const list = await ListModel.findOneAndUpdate({ listId }, { title, items }, { new: true });
+        const list = await ListModel.findOneAndUpdate(
+            { listId }, 
+            { 
+                title, 
+                items,
+                lastEditedOn: new Date().toLocaleString()
+            }, 
+            { new: true }
+        );
         if (!list) {
             return res.status(404).json({ message: "List not found" });
         }

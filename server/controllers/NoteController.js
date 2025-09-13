@@ -75,9 +75,17 @@ const getNoteById = async (req, res) => {
 
 const updateNoteById = async (req, res) => {
     const { noteId } = req.params;
-    const { title, description, createdOn } = req.body;
+    const { title, description } = req.body;
     try {
-        const note = await NoteModel.findOneAndUpdate({ noteId }, { title, description, createdOn }, { new: true });
+        const note = await NoteModel.findOneAndUpdate(
+            { noteId }, 
+            { 
+                title, 
+                description,
+                lastEditedOn: new Date().toLocaleString()
+            }, 
+            { new: true }
+        );
         if (!note) {
             return res.status(404).json({ message: "Note not found" });
         }
