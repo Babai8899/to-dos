@@ -114,16 +114,15 @@ const getNotesByEmailId = async (req, res) => {
     const { emailId } = req.params;
     try {
         const notes = await NoteModel.find({ user: emailId });
-        // Prepare CSV data
+        // Generate CSV content in memory
         const csvHeader = 'noteId,title,description,createdOn,user\n';
-        const csvRows = notes.map(note => `${note.noteId},${note.title},${note.description},${note.createdOn},${note.user}`).join('\n');
+        const csvRows = notes.map(note => 
+            `${note.noteId},${note.title},${note.description},${note.createdOn},${note.user}`
+        ).join('\n');
         const csvContent = csvHeader + csvRows;
-        // Write CSV to resources folder
-        const filePath = path.join(__dirname, '../resources', `notes_${emailId}.csv`);
-        fs.writeFileSync(filePath, csvContent);
-        res.status(200).json({ message: 'CSV created', file: `resources/notes_${emailId}.csv`, notes });
+        res.status(200).json({ notes, csvContent });
     } catch (error) {
-        console.error('Error fetching notes or writing CSV:', error);
+        console.error('Error fetching notes:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
 };

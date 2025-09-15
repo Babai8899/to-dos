@@ -1,6 +1,0 @@
-taskId,title,description,date,time,user
-TASK001,Azure Certification,Need to clear AZ900 - Microsoft Certified Azure Fundamentals certification,2025-09-30,00:00,john.wick@todos.com
-TASK002,AE App Testing,As soon as development completed, need to send for testing,2025-09-01,00:06,john.wick@todos.com
-TASK003,AE App Deployement,As soon as testing is completed successfully, need to send for deployment,2025-09-13,09:00,john.wick@todos.com
-TASK004,Konvo Tool Integration,Need to integrate the backend and frontend of Konvo Chat Tool,2025-09-06,09:00,john.wick@todos.com
-TASK005,Internal Certification,Need to clear minimum one internal certification,2025-09-30,23:59,john.wick@todos.com

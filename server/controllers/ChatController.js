@@ -24,12 +24,28 @@ const startChat = async (req, res) => {
         if (!emailId) {
             return res.status(400).json({ error: "emailId is required in request body." });
         }
-        // File paths for all modules
-        const fileTypes = ['tasks', 'events', 'notes', 'lists'];
-        const csvFiles = await Promise.all(fileTypes.map(async type => {
-            const filePath = `resources/${type}_${emailId}.csv`;
-            return await ai.files.upload({ file: filePath });
-        }));
+        // Get CSV content from API endpoints
+        const [tasksResponse, eventsResponse, notesResponse, listsResponse] = await Promise.all([
+            fetch(`${process.env.BASE_URL}/tasks/user/${emailId}`),
+            fetch(`${process.env.BASE_URL}/events/user/${emailId}`),
+            fetch(`${process.env.BASE_URL}/notes/user/${emailId}`),
+            fetch(`${process.env.BASE_URL}/lists/user/${emailId}`)
+        ]);
+
+        const [tasksData, eventsData, notesData, listsData] = await Promise.all([
+            tasksResponse.json(),
+            eventsResponse.json(),
+            notesResponse.json(),
+            listsResponse.json()
+        ]);
+
+        // Create temporary files in memory
+        const csvFiles = await Promise.all([
+            ai.files.create({ data: tasksData.csvContent, mimeType: "text/csv" }),
+            ai.files.create({ data: eventsData.csvContent, mimeType: "text/csv" }),
+            ai.files.create({ data: notesData.csvContent, mimeType: "text/csv" }),
+            ai.files.create({ data: listsData.csvContent, mimeType: "text/csv" })
+        ]);
 
         const config = {
             thinkingConfig: {

@@ -115,16 +115,15 @@ const getListsByEmailId = async (req, res) => {
     const { emailId } = req.params;
     try {
         const lists = await ListModel.find({ user: emailId });
-        // Prepare CSV data
+        // Generate CSV content in memory
         const csvHeader = 'listId,title,items,user\n';
-        const csvRows = lists.map(list => `${list.listId},${list.title},"${Array.isArray(list.items) ? list.items.join(';') : list.items}",${list.user}`).join('\n');
+        const csvRows = lists.map(list => 
+            `${list.listId},${list.title},"${Array.isArray(list.items) ? list.items.map(item => `${item.itemName}:${item.completed}`).join(';') : ''}",${list.user}`
+        ).join('\n');
         const csvContent = csvHeader + csvRows;
-        // Write CSV to resources folder
-        const filePath = path.join(__dirname, '../resources', `lists_${emailId}.csv`);
-        fs.writeFileSync(filePath, csvContent);
-        res.status(200).json({ message: 'CSV created', file: `resources/lists_${emailId}.csv`, lists });
+        res.status(200).json({ lists, csvContent });
     } catch (error) {
-        console.error('Error fetching lists or writing CSV:', error);
+        console.error('Error fetching lists:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
 };

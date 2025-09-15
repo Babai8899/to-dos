@@ -124,16 +124,15 @@ const getTasksByEmailId = async (req, res) => {
 
     try {
         const tasks = await TaskModel.find({ user: emailId });
-        // Prepare CSV data
+        // Generate CSV content in memory
         const csvHeader = 'taskId,title,description,date,time,user\n';
-        const csvRows = tasks.map(task => `${task.taskId},${task.title},${task.description},${task.date},${task.time},${task.user}`).join('\n');
+        const csvRows = tasks.map(task => 
+            `${task.taskId},${task.title},${task.description},${task.date},${task.time},${task.user}`
+        ).join('\n');
         const csvContent = csvHeader + csvRows;
-        // Write CSV to resources folder
-        const filePath = path.join(__dirname, '../resources', `tasks_${emailId}.csv`);
-        fs.writeFileSync(filePath, csvContent);
-        res.status(200).json({ message: 'CSV created', file: `resources/tasks_${emailId}.csv`, tasks });
+        res.status(200).json({ tasks, csvContent });
     } catch (error) {
-        console.error('Error fetching tasks or writing CSV:', error);
+        console.error('Error fetching tasks:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
 }

@@ -125,16 +125,15 @@ const getEventsByEmailId = async (req, res) => {
 
     try {
         const events = await EventModel.find({ user: emailId });
-        // Prepare CSV data
+        // Generate CSV content in memory
         const csvHeader = 'eventId,title,description,date,time,location,user\n';
-        const csvRows = events.map(event => `${event.eventId},${event.title},${event.description},${event.date},${event.time},${event.location},${event.user}`).join('\n');
+        const csvRows = events.map(event => 
+            `${event.eventId},${event.title},${event.description},${event.date},${event.time},${event.location},${event.user}`
+        ).join('\n');
         const csvContent = csvHeader + csvRows;
-        // Write CSV to resources folder
-        const filePath = path.join(__dirname, '../resources', `events_${emailId}.csv`);
-        fs.writeFileSync(filePath, csvContent);
-        res.status(200).json({ message: 'CSV created', file: `resources/events_${emailId}.csv`, events });
+        res.status(200).json({ events, csvContent });
     } catch (error) {
-        console.error('Error fetching events or writing CSV:', error);
+        console.error('Error fetching events:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
 }
