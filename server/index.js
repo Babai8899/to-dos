@@ -29,7 +29,7 @@ app.use(cors({origin: ['https://to-dos-client.vercel.app', 'http://localhost:517
 app.use(cookieParser());
 app.use(express.json());
 
-app.use('/resources', express.static('resources'));
+app.use('./resources', express.static('resources'));
 
 mongoose.connect(MONGO_URI).then(() => {
     console.log('Connected to MongoDB');
