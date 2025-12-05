@@ -8,9 +8,9 @@ const __dirname = path.dirname(__filename);
 
 const createTask = async (req, res) => {
     console.log(req.body);
-    const { title, description, date, time, user } = req.body;
+    const { title, description, date, time, user, priority = 'medium' } = req.body;
 
-    console.log("Creating task with data:", { title, description, date, time, user });
+    console.log("Creating task with data:", { title, description, date, time, user, priority });
     // Validate required fields
     if (!title || !description || !date || !time || !user) {
         return res.status(400).json({ message: "All fields are required" });
@@ -51,7 +51,9 @@ const createTask = async (req, res) => {
             description,
             date,
             time,
-            user: user // Assuming req.user is set by an authentication middleware
+            user: user, // Assuming req.user is set by an authentication middleware
+            status: 'pending',
+            priority: priority
         });
 
         // Save the task to the database
@@ -90,10 +92,18 @@ const getTaskById = async (req, res) => {
 
 const updateTaskById = async (req, res) => {
     const { taskId } = req.params;
-    const { title, description, date } = req.body;
+    const { title, description, date, time, status, priority } = req.body;
 
     try {
-        const task = await TaskModel.findOneAndUpdate({ taskId }, { title, description, date }, { new: true });
+        const updateData = {};
+        if (title !== undefined) updateData.title = title;
+        if (description !== undefined) updateData.description = description;
+        if (date !== undefined) updateData.date = date;
+        if (time !== undefined) updateData.time = time;
+        if (status !== undefined) updateData.status = status;
+        if (priority !== undefined) updateData.priority = priority;
+
+        const task = await TaskModel.findOneAndUpdate({ taskId }, updateData, { new: true });
         if (!task) {
             return res.status(404).json({ message: "Task not found" });
         }
@@ -125,9 +135,9 @@ const getTasksByEmailId = async (req, res) => {
     try {
         const tasks = await TaskModel.find({ user: emailId });
         // Generate CSV content in memory
-        const csvHeader = 'taskId,title,description,date,time,user\n';
+        const csvHeader = 'taskId,title,description,date,time,status,priority,user\n';
         const csvRows = tasks.map(task => 
-            `${task.taskId},${task.title},${task.description},${task.date},${task.time},${task.user}`
+            `${task.taskId},${task.title},${task.description},${task.date},${task.time},${task.status || 'pending'},${task.priority || 'medium'},${task.user}`
         ).join('\n');
         const csvContent = csvHeader + csvRows;
         res.status(200).json({ tasks, csvContent });

@@ -35,6 +35,9 @@ function Navbar() {
         e.preventDefault();
         setShowInnerDropdown((prev) => !prev);
     }
+    const closeInnerDropdown = () => {
+        setShowInnerDropdown(false);
+    }
 
     return (
         <div>
@@ -75,7 +78,7 @@ function Navbar() {
                         </div>
                     </div>
                     <div className="dropdown dropdown-end">
-                        <div tabIndex={0} role="button" className="py-2 px-2 rounded-full cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900 ease-in-out transition-colors duration-300">
+                        <div tabIndex={0} role="button" className="py-2 px-2 rounded-full cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900 ease-in-out transition-colors duration-300" onClick={closeInnerDropdown}>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-8 stroke-gray-800 dark:stroke-gray-200">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                             </svg>
@@ -83,34 +86,33 @@ function Navbar() {
                         {user === null ?
                             <ul
                                 tabIndex={0}
-                                className="menu menu-sm dropdown-content bg-yellow-300 text-gray-800 dark:text-gray-200 dark:bg-cyan-600 rounded-box z-1 mt-3 w-52 p-2 shadow relative">
+                                className="menu menu-sm dropdown-content bg-yellow-300 text-gray-800 dark:text-gray-200 dark:bg-cyan-600 rounded-box z-[100] mt-3 w-52 p-2 shadow">
                                 <li><a href='/login'>Login</a></li>
                             </ul> :
                             <ul
                                 tabIndex={0}
-                                className="menu menu-sm dropdown-content bg-yellow-300 text-gray-800 dark:text-gray-200 dark:bg-cyan-600 rounded-box z-1 mt-3 w-52 p-2 shadow relative">
+                                className="menu menu-sm dropdown-content bg-yellow-300 text-gray-800 dark:text-gray-200 dark:bg-cyan-600 rounded-box z-[100] mt-3 w-52 p-2 shadow">
                                 <li>
-                                    <a className="justify-between" href='/user/view'>
+                                    <a className="justify-between" href='/user/view' onClick={closeInnerDropdown}>
                                         Profile
                                         <span className="badge">New</span>
                                     </a>
                                 </li>
-                                <li><a>Settings</a></li>
-                                <li style={{ position: 'relative' }}>
-                                    <a onClick={handleMyTodosClick} style={{ cursor: 'pointer' }}>My Todos</a>
+                                <li><a onClick={closeInnerDropdown}>Settings</a></li>
+                                <li className="relative">
+                                    <a onClick={handleMyTodosClick} className="cursor-pointer">My Todos</a>
                                     {showInnerDropdown && (
                                         <ul
-                                            className="menu menu-sm bg-yellow-300 text-gray-800 dark:text-gray-200 dark:bg-cyan-600 rounded-box z-10 w-52 p-2 shadow"
-                                            style={{ position: 'absolute', left: '-220px', top: '0' }} // left of outer dropdown
+                                            className="menu menu-sm bg-yellow-300 text-gray-800 dark:text-gray-200 dark:bg-cyan-600 rounded-box w-52 p-2 shadow absolute left-[-13rem] top-0 z-[101]"
                                         >
+                                            <li><a href="/tasks">Tasks</a></li>
                                             <li><a href="/notes">Notes</a></li>
                                             <li><a href="/lists">Lists</a></li>
-                                            <li><a href="/reminders">Reminders</a></li>
-                                            <li><a href="/habits">Habits</a></li>
+                                            <li><a href="/events">Events</a></li>
                                         </ul>
                                     )}
                                 </li>
-                                <li><a onClick={handleClick}>Logout</a></li>
+                                <li><a onClick={() => { closeInnerDropdown(); handleClick(); }}>Logout</a></li>
                             </ul>}
                     </div>
                 </div>

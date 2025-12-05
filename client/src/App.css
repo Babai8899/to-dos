@@ -9,15 +9,12 @@
   color-scheme: "dark";
 }
 
-
-
 @plugin "daisyui/theme" {
   name: "light";
   default: true;
   prefersdark: true;
   color-scheme: "light";
 }
-
 
 body {
   margin: 0;
@@ -29,7 +26,6 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   transition: background-color 0.3s ease;
-  /* width: 100%; removed to prevent overflow issues */
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -43,5 +39,70 @@ body {
   display: none; /* Chrome, Safari, Opera */
 }
 
+/* Custom scrollbar styling for content areas */
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scrollbar-thumb-amber-300::-webkit-scrollbar-thumb {
+  background-color: rgb(252 211 77);
+  border-radius: 3px;
+}
+
+.scrollbar-thumb-amber-700::-webkit-scrollbar-thumb {
+  background-color: rgb(180 83 9);
+  border-radius: 3px;
+}
+
+.scrollbar-thumb-rose-300::-webkit-scrollbar-thumb {
+  background-color: rgb(253 164 175);
+  border-radius: 3px;
+}
+
+.scrollbar-thumb-rose-700::-webkit-scrollbar-thumb {
+  background-color: rgb(190 18 60);
+  border-radius: 3px;
+}
+
+.scrollbar-thumb-sky-300::-webkit-scrollbar-thumb {
+  background-color: rgb(125 211 252);
+  border-radius: 3px;
+}
+
+.scrollbar-thumb-sky-700::-webkit-scrollbar-thumb {
+  background-color: rgb(3 105 161);
+  border-radius: 3px;
+}
+
+.scrollbar-thumb-emerald-300::-webkit-scrollbar-thumb {
+  background-color: rgb(110 231 183);
+  border-radius: 3px;
+}
+
+.scrollbar-thumb-emerald-700::-webkit-scrollbar-thumb {
+  background-color: rgb(4 120 87);
+  border-radius: 3px;
+}
+
+.scrollbar-thumb-pink-300::-webkit-scrollbar-thumb {
+  background-color: rgb(249 168 212);
+  border-radius: 3px;
+}
+
+.scrollbar-thumb-pink-700::-webkit-scrollbar-thumb {
+  background-color: rgb(190 24 93);
+  border-radius: 3px;
+}
+
+.scrollbar-track-transparent::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 

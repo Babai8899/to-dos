@@ -28,17 +28,17 @@ const getUserByEmailId = async (req, res) => {
 
 const updateDetailsByEmailId = async (req, res) => {
     const { emailId } = req.params;
-    const { phone, anniversaryDate } = req.body;
+    const { phone, anniversary } = req.body;
 
     // Validate emailId is not empty and at least one field to update is provided
-    if (!emailId || (!phone && !anniversaryDate)) {
-        return res.status(400).json({ message: "Email ID and at least one field (phone or anniversaryDate) is required" });
+    if (!emailId || (!phone && !anniversary)) {
+        return res.status(400).json({ message: "Email ID and at least one field (phone or anniversary) is required" });
     }
 
     // Build update object dynamically
     const updateFields = {};
     if (phone) updateFields.phone = phone;
-    if (anniversaryDate) updateFields.anniversaryDate = anniversaryDate;
+    if (anniversary) updateFields.anniversary = anniversary;
 
     try {
         // Find user by emailId and update provided fields

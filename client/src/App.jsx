@@ -16,6 +16,10 @@ import CreateTask from './modules/todos/task/CreateTask'
 import CreateEvent from './modules/todos/event/CreateEvent'
 import CreateNote from './modules/todos/note/CreateNote'
 import CreateList from './modules/todos/list/CreateList'
+import ViewTasks from './modules/todos/task/ViewTasks'
+import ViewEvents from './modules/todos/event/ViewEvents'
+import ViewNotes from './modules/todos/note/ViewNotes'
+import ViewLists from './modules/todos/list/ViewLists'
 import Register from './modules/Users/Register'
 import UpdatePassword from './modules/Users/UpdatePassword'
 import ChatBot from './shared/ChatBot'
@@ -67,9 +71,22 @@ function App() {
                         </PrivateRoute>
                       }
                     />
+                    <Route
+                      path="/tasks"
+                      element={
+                        <PrivateRoute>
+                          <ViewTasks />
+                        </PrivateRoute>
+                      }
+                    />
                     <Route path='/event' element={
                   <PrivateRoute>
                     <CreateEvent />
+                  </PrivateRoute>
+                } />
+                    <Route path='/events' element={
+                  <PrivateRoute>
+                    <ViewEvents />
                   </PrivateRoute>
                 } />
                     <Route
@@ -80,9 +97,22 @@ function App() {
                         </PrivateRoute>
                       }
                     />
+                    <Route
+                      path="/notes"
+                      element={
+                        <PrivateRoute>
+                          <ViewNotes />
+                        </PrivateRoute>
+                      }
+                    />
                     <Route path='/list' element={
                       <PrivateRoute>
                         <CreateList />
+                      </PrivateRoute>
+                    } />
+                    <Route path='/lists' element={
+                      <PrivateRoute>
+                        <ViewLists />
                       </PrivateRoute>
                     } />
                   </Routes>

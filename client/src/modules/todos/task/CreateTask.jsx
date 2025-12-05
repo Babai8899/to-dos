@@ -18,14 +18,16 @@ function CreateTask() {
     title: "",
     description: "",
     date: "",
-    time: ""
+    time: "",
+    priority: "medium"
   });
 
   const {
     title,
     description,
     date,
-    time
+    time,
+    priority
   } = taskData;
 
   const handleChange = (e) => {
@@ -40,7 +42,8 @@ function CreateTask() {
       title: "",
       description: "",
       date: "",
-      time: ""
+      time: "",
+      priority: "medium"
     });
   }
 
@@ -69,7 +72,7 @@ function CreateTask() {
   }
   return (
     <Transitions pageVariants={pageVariants}>
-      <div className='my-1.5 md:w-1/3 w-screen md:h-[calc(100vh-8rem)] h-[calc(100vh-15rem)] rounded-lg flex flex-col gap-4 justify-center items-center mx-auto md:border-2 md:bg-yellow-50/50 md:dark:bg-cyan-900/50 md:shadow-sm md:border-yellow-300 md:dark:border-cyan-500'>
+      <div className='my-1.5 md:w-1/3 w-screen md:h-[calc(100vh-8rem)] h-[calc(100vh-15rem)] rounded-lg flex flex-col gap-2 justify-center items-center mx-auto md:border-2 md:bg-yellow-50/50 md:dark:bg-cyan-900/50 md:shadow-sm md:border-yellow-300 md:dark:border-cyan-500'>
         <h1 className='text-4xl'>Create Task</h1>
         <div className='w-full max-w-xs'>
           <label className='text-gray-900 dark:text-gray-200'>Title</label>
@@ -85,6 +88,14 @@ function CreateTask() {
             <input type="date" className="text-gray-800 dark:text-gray-200 input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600 w-1/2" name='date' value={date} onChange={handleChange} />
             <input type="time" className="text-gray-800 dark:text-gray-200 input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600 w-1/2" name='time' value={time} onChange={handleChange} />
           </div>
+        </div>
+        <div className='w-full max-w-xs'>
+          <label className='text-gray-900 dark:text-gray-200'>Priority</label>
+          <select className="text-gray-800 dark:text-gray-200 select border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500" name='priority' value={priority} onChange={handleChange}>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
         </div>
 
         <div className="flex justify-center w-full mx-auto my-2 gap-5">
