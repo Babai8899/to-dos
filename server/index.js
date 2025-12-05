@@ -25,7 +25,8 @@ const privateVapidKey = "213RaiceqIxPBZPCSFVkvTzmckc-ZrgxSP44C_SXgQo";
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/todos';
 
-app.use(cors({origin: ['https://to-dos-client.vercel.app', 'http://localhost:5173'], credentials: true}));
+// app.use(cors({origin: ['https://to-dos-client.vercel.app', 'http://localhost:5173'], credentials: true}));
+app.use(cors({origin: '*', credentials: true}));
 app.use(cookieParser());
 app.use(express.json());
 
