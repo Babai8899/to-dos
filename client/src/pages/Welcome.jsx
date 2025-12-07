@@ -18,11 +18,11 @@ function Welcome() {
 
     return (
         <Transitions pageVariants={pageVariants}>
-            <div className="fixed right-0 top-16 lg:w-[calc(100vw-5rem)] w-screen md:h-[calc(100vh-8rem)] px-6 py-4 noscrollbar overflow-y-scroll h-[calc(100vh-15rem)]">
+            <div className="fixed right-0 top-16 lg:w-[calc(100vw-5rem)] w-screen md:h-[calc(100vh-8rem)] px-6 py-4 noscrollbar overflow-y-scroll h-[calc(100vh-9rem)] pb-6">
                 <div className="max-w-6xl w-full mx-auto">
                     {/* Hero Section */}
                     <div className="text-center mb-8">
-                        <h1 className="text-4xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 dark:from-cyan-400 dark:via-cyan-500 dark:to-cyan-600 bg-clip-text text-transparent">
+                        <h1 className="text-4xl md:text-5xl font-bold mb-3 bg-linear-to-r from-yellow-500 via-amber-500 to-yellow-600 dark:from-cyan-400 dark:via-cyan-500 dark:to-cyan-600 bg-clip-text text-transparent">
                             ChronoMate
                         </h1>
                         <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 font-medium mb-2">
@@ -37,7 +37,7 @@ function Welcome() {
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
                         {/* Tasks Card */}
                         <div className="group relative overflow-hidden rounded-2xl bg-yellow-50/50 dark:bg-cyan-900/50 p-4 border-2 border-yellow-300 dark:border-cyan-600 hover:shadow-xl transition-all duration-300 backdrop-blur-sm">
-                            <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-amber-400/20 to-yellow-500/20 rounded-full blur-2xl"></div>
+                            <div className="absolute top-0 right-0 w-16 h-16 bg-linear-to-br from-amber-400/20 to-yellow-500/20 rounded-full blur-2xl"></div>
                             <div className="relative z-10">
                                 <div className="p-2 bg-amber-500/20 dark:bg-amber-400/20 rounded-xl w-fit mb-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 text-amber-600 dark:text-amber-400">
@@ -51,7 +51,7 @@ function Welcome() {
 
                         {/* Events Card */}
                         <div className="group relative overflow-hidden rounded-2xl bg-yellow-50/50 dark:bg-cyan-900/50 p-4 border-2 border-yellow-300 dark:border-cyan-600 hover:shadow-xl transition-all duration-300 backdrop-blur-sm">
-                            <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-sky-400/20 to-blue-500/20 rounded-full blur-2xl"></div>
+                            <div className="absolute top-0 right-0 w-16 h-16 bg-linear-to-br from-sky-400/20 to-blue-500/20 rounded-full blur-2xl"></div>
                             <div className="relative z-10">
                                 <div className="p-2 bg-sky-500/20 dark:bg-sky-400/20 rounded-xl w-fit mb-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 text-sky-600 dark:text-sky-400">
@@ -65,7 +65,7 @@ function Welcome() {
 
                         {/* Lists Card */}
                         <div className="group relative overflow-hidden rounded-2xl bg-yellow-50/50 dark:bg-cyan-900/50 p-4 border-2 border-yellow-300 dark:border-cyan-600 hover:shadow-xl transition-all duration-300 backdrop-blur-sm">
-                            <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-pink-400/20 to-fuchsia-500/20 rounded-full blur-2xl"></div>
+                            <div className="absolute top-0 right-0 w-16 h-16 bg-linear-to-br from-pink-400/20 to-fuchsia-500/20 rounded-full blur-2xl"></div>
                             <div className="relative z-10">
                                 <div className="p-2 bg-pink-500/20 dark:bg-pink-400/20 rounded-xl w-fit mb-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 text-pink-600 dark:text-pink-400">
@@ -79,7 +79,7 @@ function Welcome() {
 
                         {/* Notes Card */}
                         <div className="group relative overflow-hidden rounded-2xl bg-yellow-50/50 dark:bg-cyan-900/50 p-4 border-2 border-yellow-300 dark:border-cyan-600 hover:shadow-xl transition-all duration-300 backdrop-blur-sm">
-                            <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-emerald-400/20 to-teal-500/20 rounded-full blur-2xl"></div>
+                            <div className="absolute top-0 right-0 w-16 h-16 bg-linear-to-br from-emerald-400/20 to-teal-500/20 rounded-full blur-2xl"></div>
                             <div className="relative z-10">
                                 <div className="p-2 bg-emerald-500/20 dark:bg-emerald-400/20 rounded-xl w-fit mb-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 text-emerald-600 dark:text-emerald-400">

@@ -30,7 +30,7 @@ function App() {
 
   return (
   <div className="noscrollbar min-h-screen w-screen overflow-x-hidden flex flex-col backdrop-blur-sm bg-white/50 dark:bg-black/50 transition-colors duration-100">
-      <div className="flex-grow flex flex-col">
+      <div className="grow flex flex-col">
         <AnimatePresence mode='wait'>
           <Router>
             <ToastProvider>

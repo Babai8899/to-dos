@@ -240,17 +240,17 @@ function Home() {
                 id: 'deadline',
                 hasContent: deadlineKnockingTasks.length > 0,
                 render: (
-                    <div key="deadline" className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-amber-50/50 via-orange-50/50 to-red-50/50 dark:from-amber-900/50 dark:via-orange-900/50 dark:to-red-900/50 p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-amber-200/50 dark:border-amber-700/50 h-96 flex flex-col backdrop-blur-sm">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-amber-400/20 to-orange-500/20 rounded-full blur-3xl"></div>
+                    <div key="deadline" className="group relative overflow-hidden rounded-2xl bg-linear-to-br from-amber-50/50 via-orange-50/50 to-red-50/50 dark:from-amber-900/50 dark:via-orange-900/50 dark:to-red-900/50 p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-amber-200/50 dark:border-amber-700/50 h-96 flex flex-col backdrop-blur-sm">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-linear-to-br from-amber-400/20 to-orange-500/20 rounded-full blur-3xl"></div>
                         <div className="relative z-10 flex items-center gap-3 mb-4">
                             <div className="p-2.5 bg-amber-500/20 dark:bg-amber-400/20 rounded-xl">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 text-amber-600 dark:text-amber-400">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                             </div>
-                            <h2 className="text-2xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 dark:from-amber-400 dark:to-orange-400 bg-clip-text text-transparent">Deadline Knocking</h2>
+                            <h2 className="text-2xl font-bold bg-linear-to-r from-amber-600 to-orange-600 dark:from-amber-400 dark:to-orange-400 bg-clip-text text-transparent">Deadline Knocking</h2>
                         </div>
-                        <div className="relative z-10 flex-grow overflow-y-auto space-y-3 pr-2 scrollbar-thin scrollbar-thumb-amber-300 dark:scrollbar-thumb-amber-700 scrollbar-track-transparent">
+                        <div className="relative z-10 grow overflow-y-auto space-y-3 pr-2 scrollbar-thin scrollbar-thumb-amber-300 dark:scrollbar-thumb-amber-700 scrollbar-track-transparent">
                             {deadlineKnockingTasks.length === 0 ? (
                                 <div className="flex flex-col items-center justify-center h-full text-gray-400 dark:text-gray-500">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-16 h-16 mb-2 opacity-50">
@@ -283,17 +283,17 @@ function Home() {
                 id: 'overdue',
                 hasContent: overdueTasks.length > 0,
                 render: (
-                    <div key="overdue" className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-rose-50/50 via-pink-50/50 to-red-50/50 dark:from-rose-900/50 dark:via-pink-900/50 dark:to-red-900/50 p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-rose-200/50 dark:border-rose-700/50 h-96 flex flex-col backdrop-blur-sm">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-rose-400/20 to-red-500/20 rounded-full blur-3xl"></div>
+                    <div key="overdue" className="group relative overflow-hidden rounded-2xl bg-linear-to-br from-rose-50/50 via-pink-50/50 to-red-50/50 dark:from-rose-900/50 dark:via-pink-900/50 dark:to-red-900/50 p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-rose-200/50 dark:border-rose-700/50 h-96 flex flex-col backdrop-blur-sm">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-linear-to-br from-rose-400/20 to-red-500/20 rounded-full blur-3xl"></div>
                         <div className="relative z-10 flex items-center gap-3 mb-4">
                             <div className="p-2.5 bg-rose-500/20 dark:bg-rose-400/20 rounded-xl">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 text-rose-600 dark:text-rose-400">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
                                 </svg>
                             </div>
-                            <h2 className="text-2xl font-bold bg-gradient-to-r from-rose-600 to-red-600 dark:from-rose-400 dark:to-red-400 bg-clip-text text-transparent">Overdue Tasks</h2>
+                            <h2 className="text-2xl font-bold bg-linear-to-r from-rose-600 to-red-600 dark:from-rose-400 dark:to-red-400 bg-clip-text text-transparent">Overdue Tasks</h2>
                         </div>
-                        <div className="relative z-10 flex-grow overflow-y-auto space-y-3 pr-2 scrollbar-thin scrollbar-thumb-rose-300 dark:scrollbar-thumb-rose-700 scrollbar-track-transparent">
+                        <div className="relative z-10 grow overflow-y-auto space-y-3 pr-2 scrollbar-thin scrollbar-thumb-rose-300 dark:scrollbar-thumb-rose-700 scrollbar-track-transparent">
                             {overdueTasks.length === 0 ? (
                                 <div className="flex flex-col items-center justify-center h-full text-gray-400 dark:text-gray-500">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-16 h-16 mb-2 opacity-50">
@@ -342,15 +342,15 @@ function Home() {
                 id: 'upcoming',
                 hasContent: upcomingEvents.length > 0,
                 render: (
-                    <div key="upcoming" className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-sky-50/50 via-blue-50/50 to-indigo-50/50 dark:from-sky-900/50 dark:via-blue-900/50 dark:to-indigo-900/50 p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-sky-200/50 dark:border-sky-700/50 h-96 flex flex-col backdrop-blur-sm">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-sky-400/20 to-blue-500/20 rounded-full blur-3xl"></div>
+                    <div key="upcoming" className="group relative overflow-hidden rounded-2xl bg-linear-to-br from-sky-50/50 via-blue-50/50 to-indigo-50/50 dark:from-sky-900/50 dark:via-blue-900/50 dark:to-indigo-900/50 p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-sky-200/50 dark:border-sky-700/50 h-96 flex flex-col backdrop-blur-sm">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-linear-to-br from-sky-400/20 to-blue-500/20 rounded-full blur-3xl"></div>
                         <div className="relative z-10 flex items-center gap-3 mb-4">
                             <div className="p-2.5 bg-sky-500/20 dark:bg-sky-400/20 rounded-xl">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 text-sky-600 dark:text-sky-400">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
                                 </svg>
                             </div>
-                            <h2 className="text-2xl font-bold bg-gradient-to-r from-sky-600 to-blue-600 dark:from-sky-400 dark:to-blue-400 bg-clip-text text-transparent">Upcoming Events</h2>
+                            <h2 className="text-2xl font-bold bg-linear-to-r from-sky-600 to-blue-600 dark:from-sky-400 dark:to-blue-400 bg-clip-text text-transparent">Upcoming Events</h2>
                         </div>
                         <div className="relative z-10 grow overflow-hidden">
                             {upcomingEvents.length === 0 ? (
@@ -391,15 +391,15 @@ function Home() {
                 id: 'recentEvent',
                 hasContent: recentEvent !== null,
                 render: (
-                    <div key="recentEvent" className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-violet-50/50 via-purple-50/50 to-fuchsia-50/50 dark:from-violet-900/50 dark:via-purple-900/50 dark:to-fuchsia-900/50 p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-violet-200/50 dark:border-violet-700/50 h-96 flex flex-col backdrop-blur-sm">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-violet-400/20 to-purple-500/20 rounded-full blur-3xl"></div>
+                    <div key="recentEvent" className="group relative overflow-hidden rounded-2xl bg-linear-to-br from-violet-50/50 via-purple-50/50 to-fuchsia-50/50 dark:from-violet-900/50 dark:via-purple-900/50 dark:to-fuchsia-900/50 p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-violet-200/50 dark:border-violet-700/50 h-96 flex flex-col backdrop-blur-sm">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-linear-to-br from-violet-400/20 to-purple-500/20 rounded-full blur-3xl"></div>
                         <div className="relative z-10 flex items-center gap-3 mb-4">
                             <div className="p-2.5 bg-violet-500/20 dark:bg-violet-400/20 rounded-xl">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 text-violet-600 dark:text-violet-400">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
                                 </svg>
                             </div>
-                            <h2 className="text-2xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 dark:from-violet-400 dark:to-purple-400 bg-clip-text text-transparent">Recent Event</h2>
+                            <h2 className="text-2xl font-bold bg-linear-to-r from-violet-600 to-purple-600 dark:from-violet-400 dark:to-purple-400 bg-clip-text text-transparent">Recent Event</h2>
                         </div>
                         {recentEvent ? (
                             <div className="relative z-10 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-xl p-5 border border-violet-200/30 dark:border-violet-700/30 flex flex-col">
@@ -434,15 +434,15 @@ function Home() {
                 id: 'lastNote',
                 hasContent: lastNote !== null,
                 render: (
-                    <div key="lastNote" className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-50/50 via-teal-50/50 to-cyan-50/50 dark:from-emerald-900/50 dark:via-teal-900/50 dark:to-cyan-900/50 p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-emerald-200/50 dark:border-emerald-700/50 h-96 flex flex-col backdrop-blur-sm">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-emerald-400/20 to-teal-500/20 rounded-full blur-3xl"></div>
+                    <div key="lastNote" className="group relative overflow-hidden rounded-2xl bg-linear-to-br from-emerald-50/50 via-teal-50/50 to-cyan-50/50 dark:from-emerald-900/50 dark:via-teal-900/50 dark:to-cyan-900/50 p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-emerald-200/50 dark:border-emerald-700/50 h-96 flex flex-col backdrop-blur-sm">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-linear-to-br from-emerald-400/20 to-teal-500/20 rounded-full blur-3xl"></div>
                         <div className="relative z-10 flex items-center gap-3 mb-4">
                             <div className="p-2.5 bg-emerald-500/20 dark:bg-emerald-400/20 rounded-xl">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 text-emerald-600 dark:text-emerald-400">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
                                 </svg>
                             </div>
-                            <h2 className="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 dark:from-emerald-400 dark:to-teal-400 bg-clip-text text-transparent">Last Created Note</h2>
+                            <h2 className="text-2xl font-bold bg-linear-to-r from-emerald-600 to-teal-600 dark:from-emerald-400 dark:to-teal-400 bg-clip-text text-transparent">Last Created Note</h2>
                         </div>
                         {lastNote ? (
                             <div className="relative z-10 grow flex flex-col">
@@ -470,7 +470,7 @@ function Home() {
                                                 </button>
                                                 <button
                                                     onClick={handleUpdateNote}
-                                                    className="px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg hover:from-emerald-600 hover:to-teal-600 shadow-md transition-all"
+                                                    className="px-4 py-2 text-sm font-medium text-white bg-linear-to-r from-emerald-500 to-teal-500 rounded-lg hover:from-emerald-600 hover:to-teal-600 shadow-md transition-all"
                                                 >
                                                     Save
                                                 </button>
@@ -510,15 +510,15 @@ function Home() {
                 id: 'lastList',
                 hasContent: lastList !== null,
                 render: (
-                    <div key="lastList" className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-pink-50/50 via-rose-50/50 to-fuchsia-50/50 dark:from-pink-900/50 dark:via-rose-900/50 dark:to-fuchsia-900/50 p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-pink-200/50 dark:border-pink-700/50 h-96 flex flex-col backdrop-blur-sm">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-pink-400/20 to-fuchsia-500/20 rounded-full blur-3xl"></div>
+                    <div key="lastList" className="group relative overflow-hidden rounded-2xl bg-linear-to-br from-pink-50/50 via-rose-50/50 to-fuchsia-50/50 dark:from-pink-900/50 dark:via-rose-900/50 dark:to-fuchsia-900/50 p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-pink-200/50 dark:border-pink-700/50 h-96 flex flex-col backdrop-blur-sm">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-linear-to-br from-pink-400/20 to-fuchsia-500/20 rounded-full blur-3xl"></div>
                         <div className="relative z-10 flex items-center gap-3 mb-4">
                             <div className="p-2.5 bg-pink-500/20 dark:bg-pink-400/20 rounded-xl">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 text-pink-600 dark:text-pink-400">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
                                 </svg>
                             </div>
-                            <h2 className="text-2xl font-bold bg-gradient-to-r from-pink-600 to-fuchsia-600 dark:from-pink-400 dark:to-fuchsia-400 bg-clip-text text-transparent">Last Created List</h2>
+                            <h2 className="text-2xl font-bold bg-linear-to-r from-pink-600 to-fuchsia-600 dark:from-pink-400 dark:to-fuchsia-400 bg-clip-text text-transparent">Last Created List</h2>
                         </div>
                         {lastList ? (
                             <div className="relative z-10 grow flex flex-col">
@@ -539,7 +539,7 @@ function Home() {
                                                             type="checkbox"
                                                             checked={item.completed}
                                                             onChange={() => handleToggleItem(idx)}
-                                                            className="checkbox checkbox-sm border-pink-400 [--chkbg:theme(colors.pink.500)] [--chkfg:white] checked:border-pink-500"
+                                                            className="checkbox checkbox-sm border-pink-400 [--chkbg:var(--color-pink-500)] [--chkfg:white] checked:border-pink-500"
                                                         />
                                                         <span className={`text-sm grow ${item.completed ? 'line-through text-gray-400 dark:text-gray-500' : 'text-gray-800 dark:text-gray-200'}`}>
                                                             {item.itemName}
@@ -572,7 +572,7 @@ function Home() {
                                                 </button>
                                                 <button
                                                     onClick={handleUpdateList}
-                                                    className="px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-pink-500 to-fuchsia-500 rounded-lg hover:from-pink-600 hover:to-fuchsia-600 shadow-md transition-all"
+                                                    className="px-4 py-2 text-sm font-medium text-white bg-linear-to-r from-pink-500 to-fuchsia-500 rounded-lg hover:from-pink-600 hover:to-fuchsia-600 shadow-md transition-all"
                                                 >
                                                     Save
                                                 </button>
@@ -598,7 +598,7 @@ function Home() {
                                                         type="checkbox"
                                                         checked={item.completed}
                                                         readOnly
-                                                        className="checkbox checkbox-sm border-pink-400 [--chkbg:theme(colors.pink.500)] [--chkfg:white] checked:border-pink-500"
+                                                        className="checkbox checkbox-sm border-pink-400 [--chkbg:var(--color-pink-500)] [--chkfg:white] checked:border-pink-500"
                                                     />
                                                     <span className={`text-sm ${item.completed ? 'line-through text-gray-400 dark:text-gray-500' : 'text-gray-800 dark:text-gray-200'}`}>
                                                         {item.itemName}
@@ -624,7 +624,7 @@ function Home() {
     };
 
     return (
-        <div className="fixed right-0 top-16 lg:w-[calc(100vw-5rem)] w-screen md:h-[calc(100vh-8rem)] px-6 py-4 grid md:grid-cols-2 gap-5 noscrollbar overflow-y-scroll h-[calc(100vh-15rem)]">
+        <div className="fixed right-0 top-16 lg:w-[calc(100vw-5rem)] w-screen md:h-[calc(100vh-8rem)] px-6 py-4 grid md:grid-cols-2 gap-5 noscrollbar overflow-y-scroll h-[calc(100vh-9rem)] pb-6">
             {generateSortedCards().map(card => card.render)}
         </div>
     );

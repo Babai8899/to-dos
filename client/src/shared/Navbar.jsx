@@ -136,12 +136,12 @@ function Navbar() {
                         {user === null ?
                             <ul
                                 tabIndex={0}
-                                className="menu menu-sm dropdown-content bg-yellow-300 text-gray-800 dark:text-gray-200 dark:bg-cyan-600 rounded-box z-[100] mt-3 w-52 p-2 shadow">
+                                className="menu menu-sm dropdown-content bg-yellow-300 text-gray-800 dark:text-gray-200 dark:bg-cyan-600 rounded-box z-100 mt-3 w-52 p-2 shadow">
                                 <li><a href='/login'>Login</a></li>
                             </ul> :
                             <ul
                                 tabIndex={0}
-                                className="menu menu-sm dropdown-content bg-yellow-300 text-gray-800 dark:text-gray-200 dark:bg-cyan-600 rounded-box z-[100] mt-3 w-52 p-2 shadow">
+                                className="menu menu-sm dropdown-content bg-yellow-300 text-gray-800 dark:text-gray-200 dark:bg-cyan-600 rounded-box z-100 mt-3 w-52 p-2 shadow">
                                 <li>
                                     <a className="justify-between" href='/user/view' onClick={closeInnerDropdown}>
                                         Profile
@@ -153,7 +153,7 @@ function Navbar() {
                                     <a onClick={handleMyTodosClick} className="cursor-pointer">My Todos</a>
                                     {showInnerDropdown && (
                                         <ul
-                                            className="menu menu-sm bg-yellow-300 text-gray-800 dark:text-gray-200 dark:bg-cyan-600 rounded-box w-52 p-2 shadow absolute left-[-13rem] top-0 z-[101]"
+                                            className="menu menu-sm bg-yellow-300 text-gray-800 dark:text-gray-200 dark:bg-cyan-600 rounded-box w-52 p-2 shadow absolute -left-52 top-0 z-101"
                                         >
                                             <li><a href="/tasks">Tasks</a></li>
                                             <li><a href="/notes">Notes</a></li>
@@ -171,7 +171,7 @@ function Navbar() {
 
             {/* Floating Notification Panel */}
             {showNotifications && (
-                <div className="notification-panel fixed top-20 right-4 bg-yellow-50 dark:bg-cyan-900 border-2 border-yellow-300 dark:border-cyan-600 rounded-2xl z-[9999] w-96 max-h-[32rem] overflow-y-auto shadow-2xl animate-slide-down">
+                <div className="notification-panel fixed top-20 right-4 bg-yellow-50 dark:bg-cyan-900 border-2 border-yellow-300 dark:border-cyan-600 rounded-2xl z-9999 w-96 max-h-128 overflow-y-auto shadow-2xl animate-slide-down">
                     <div className="p-4">
                         <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 text-amber-600 dark:text-cyan-400">

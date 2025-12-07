@@ -106,7 +106,7 @@ function DatePicker({ selectedDate, onDateSelect, onClose }) {
   }
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm">
+    <div className="fixed inset-0 z-9999 flex items-center justify-center bg-black/50 backdrop-blur-sm">
       <div className="w-96 max-w-full rounded-xl shadow-2xl p-6 bg-yellow-50 dark:bg-cyan-900 border-2 border-yellow-300 dark:border-cyan-600 animate-slide-down">
         {/* Header */}
         <div className="flex justify-between items-center mb-4 relative">
