@@ -7,6 +7,7 @@ function ViewEvents() {
     const { user } = useContext(AuthContext);
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [actionLoading, setActionLoading] = useState({});
     const [filter, setFilter] = useState('all'); // all, upcoming, past
 
     const loadEvents = async () => {
@@ -32,10 +33,13 @@ function ViewEvents() {
     const handleDelete = async (eventId) => {
         if (window.confirm('Are you sure you want to delete this event?')) {
             try {
+                setActionLoading(prev => ({ ...prev, [`delete_${eventId}`]: true }));
                 await axiosInstance.delete(`/events/${eventId}`);
                 await loadEvents();
             } catch (error) {
                 console.error("Failed to delete event:", error);
+            } finally {
+                setActionLoading(prev => ({ ...prev, [`delete_${eventId}`]: false }));
             }
         }
     };
@@ -151,9 +155,11 @@ function ViewEvents() {
 
                                 <div className="flex gap-2 mt-auto">
                                     <button
+                                        disabled={actionLoading[`delete_${event.eventId}`]}
                                         onClick={() => handleDelete(event.eventId)}
-                                        className="flex-1 px-4 py-2 bg-yellow-300 dark:bg-cyan-500 hover:bg-yellow-400 dark:hover:bg-cyan-400 text-gray-800 dark:text-gray-200 rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs transition-colors duration-300"
+                                        className="flex-1 px-4 py-2 bg-gray-400 dark:bg-gray-600 hover:bg-gray-500 dark:hover:bg-gray-700 text-white rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                                     >
+                                        {actionLoading[`delete_${event.eventId}`] && <span className="loading loading-spinner loading-sm"></span>}
                                         Delete
                                     </button>
                                 </div>

@@ -6,12 +6,13 @@ import { useNavigate } from 'react-router-dom';
 function Navbar() {
 
     const { logout, user } = useContext(AuthContext);
-    const { hasNotifications, notifications } = useContext(NotificationContext);
+    const { hasNotifications, notifications, checkNotifications } = useContext(NotificationContext);
     console.log(user);
     const navigate = useNavigate();
 
     const [theme, setTheme] = useState(localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light')
     const [showNotifications, setShowNotifications] = useState(false);
+    const [taskLoading, setTaskLoading] = useState({});
 
     const toggleTheme = (e) => {
         console.log(e.target.checked);
@@ -54,6 +55,7 @@ function Navbar() {
     const markTaskAsCompleted = async (e, task) => {
         e.stopPropagation();
         try {
+            setTaskLoading(prev => ({ ...prev, [task.taskId]: true }));
             await axiosInstance.put(`/tasks/${task.taskId}`, {
                 ...task,
                 status: 'completed',
@@ -63,6 +65,8 @@ function Navbar() {
             await checkNotifications();
         } catch (error) {
             console.error('Error marking task as completed:', error);
+        } finally {
+            setTaskLoading(prev => ({ ...prev, [task.taskId]: false }));
         }
     }
 
@@ -144,7 +148,7 @@ function Navbar() {
                                         <span className="badge">New</span>
                                     </a>
                                 </li>
-                                <li><a onClick={closeInnerDropdown}>Settings</a></li>
+                                <li><a onClick={closeInnerDropdown} className="cursor-pointer">Settings</a></li>
                                 <li className="relative">
                                     <a onClick={handleMyTodosClick} className="cursor-pointer">My Todos</a>
                                     {showInnerDropdown && (
@@ -158,7 +162,7 @@ function Navbar() {
                                         </ul>
                                     )}
                                 </li>
-                                <li><a onClick={() => { closeInnerDropdown(); handleClick(); }}>Logout</a></li>
+                                <li><a onClick={() => { closeInnerDropdown(); handleClick(); }} className="cursor-pointer">Logout</a></li>
                             </ul>}
                     </div>
                 </div>
@@ -199,13 +203,18 @@ function Navbar() {
                                                     </p>
                                                 </div>
                                                 <button
+                                                    disabled={taskLoading[task.taskId]}
                                                     onClick={(e) => markTaskAsCompleted(e, task)}
-                                                    className="btn btn-xs bg-yellow-300 hover:bg-yellow-400 dark:bg-cyan-600 dark:hover:bg-cyan-700 border-none text-gray-800 dark:text-gray-200 rounded-tl-lg rounded-br-lg rounded-tr-xs rounded-bl-xs"
+                                                    className="btn btn-xs bg-yellow-300 hover:bg-yellow-400 dark:bg-cyan-600 dark:hover:bg-cyan-700 border-none text-gray-800 dark:text-gray-200 rounded-tl-lg rounded-br-lg rounded-tr-xs rounded-bl-xs disabled:opacity-50 disabled:cursor-not-allowed min-h-0 h-6"
                                                     title="Mark as completed"
                                                 >
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                                                    </svg>
+                                                    {taskLoading[task.taskId] ? (
+                                                        <span className="loading loading-spinner loading-xs"></span>
+                                                    ) : (
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                                        </svg>
+                                                    )}
                                                 </button>
                                             </div>
                                         </div>

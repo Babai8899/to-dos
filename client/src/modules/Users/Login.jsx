@@ -21,6 +21,7 @@ function Login() {
 
     const { login } = useContext(AuthContext);
 
+    const [loading, setLoading] = useState(false);
     const [userData, setUserData] = useState({
         emailId: "",
         password: ""
@@ -60,10 +61,13 @@ function Login() {
                 showToast("Please fill in all fields", "warning");
                 return;
             }
+            setLoading(true);
             await login(userData);
             navigate('/home'); // Redirect to home or another page after successful login
         } catch (error) {
             console.error("Login failed:", error.response.data.message);
+        } finally {
+            setLoading(false);
         }
 
         console.log("Login data submitted:", userData);
@@ -99,8 +103,15 @@ function Login() {
                     <label className='text-gray-800 dark:text-gray-200'>Remember me</label>
                 </div>
                 <div className="flex justify-center w-full mx-auto my-2 gap-5">
-                    <a className="bg-yellow-300 dark:bg-cyan-500 dark:text-gray-200 text-gray-800 rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs grid h-10 w-32 place-items-center cursor-pointer dark:hover:bg-cyan-400 hover:bg-yellow-400 ease-in-out transition-colors duration-300" onClick={(e) => handleSubmit(e)}>Login</a>
-                    <a className="bg-yellow-300 dark:bg-cyan-500 dark:text-gray-200 text-gray-800 rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs grid h-10 w-32 place-items-center cursor-pointer dark:hover:bg-cyan-400 hover:bg-yellow-400 ease-in-out transition-colors duration-300">Reset</a>
+                    <button
+                        disabled={loading}
+                        className="bg-yellow-300 dark:bg-cyan-500 dark:text-gray-200 text-gray-800 rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs h-10 w-32 cursor-pointer dark:hover:bg-cyan-400 hover:bg-yellow-400 ease-in-out transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                        onClick={(e) => handleSubmit(e)}
+                    >
+                        {loading && <span className="loading loading-spinner loading-sm"></span>}
+                        Login
+                    </button>
+                    <a className="bg-gray-400 dark:bg-gray-600 hover:bg-gray-500 dark:hover:bg-gray-700 text-white rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs grid h-10 w-32 place-items-center cursor-pointer ease-in-out transition-colors duration-300">Reset</a>
                 </div>
 
             </div>

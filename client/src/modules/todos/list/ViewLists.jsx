@@ -169,7 +169,7 @@ function ViewLists() {
                                                     </span>
                                                     <button
                                                         onClick={() => handleDeleteItem(idx)}
-                                                        className="text-rose-500 hover:text-rose-700"
+                                                        className="text-rose-500 hover:text-rose-700 cursor-pointer"
                                                     >
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
                                                             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
@@ -195,7 +195,7 @@ function ViewLists() {
                                             </button>
                                             <button
                                                 onClick={handleCancelEdit}
-                                                className="flex-1 px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg transition-colors"
+                                                className="flex-1 px-4 py-2 bg-gray-400 dark:bg-gray-600 hover:bg-gray-500 dark:hover:bg-gray-700 text-white rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs transition-colors duration-300"
                                             >
                                                 Cancel
                                             </button>
@@ -240,7 +240,7 @@ function ViewLists() {
                                             </button>
                                             <button
                                                 onClick={() => handleDelete(list.listId)}
-                                                className="flex-1 px-4 py-2 bg-yellow-300 dark:bg-cyan-500 hover:bg-yellow-400 dark:hover:bg-cyan-400 text-gray-800 dark:text-gray-200 rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs transition-colors duration-300"
+                                                className="flex-1 px-4 py-2 bg-gray-400 dark:bg-gray-600 hover:bg-gray-500 dark:hover:bg-gray-700 text-white rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs transition-colors duration-300"
                                             >
                                                 Delete
                                             </button>

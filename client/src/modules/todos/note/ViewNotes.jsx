@@ -7,6 +7,7 @@ function ViewNotes() {
     const { user } = useContext(AuthContext);
     const [notes, setNotes] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [actionLoading, setActionLoading] = useState({});
     const [editingNote, setEditingNote] = useState(null);
     const [editedNote, setEditedNote] = useState({ title: '', description: '' });
 
@@ -33,10 +34,13 @@ function ViewNotes() {
     const handleDelete = async (noteId) => {
         if (window.confirm('Are you sure you want to delete this note?')) {
             try {
+                setActionLoading(prev => ({ ...prev, [`delete_${noteId}`]: true }));
                 await axiosInstance.delete(`/notes/${noteId}`);
                 await loadNotes();
             } catch (error) {
                 console.error("Failed to delete note:", error);
+            } finally {
+                setActionLoading(prev => ({ ...prev, [`delete_${noteId}`]: false }));
             }
         }
     };
@@ -51,6 +55,7 @@ function ViewNotes() {
 
     const handleUpdate = async (noteId) => {
         try {
+            setActionLoading(prev => ({ ...prev, [`update_${noteId}`]: true }));
             await axiosInstance.put(`/notes/${noteId}`, {
                 ...editedNote,
                 user: user.emailId
@@ -59,6 +64,8 @@ function ViewNotes() {
             setEditingNote(null);
         } catch (error) {
             console.error("Failed to update note:", error);
+        } finally {
+            setActionLoading(prev => ({ ...prev, [`update_${noteId}`]: false }));
         }
     };
 
@@ -112,14 +119,16 @@ function ViewNotes() {
                                         />
                                         <div className="flex gap-2 mt-auto">
                                             <button
-                                                onClick={() => handleDelete(note.noteId)}
-                                                className="flex-1 px-4 py-2 bg-yellow-300 dark:bg-cyan-500 hover:bg-yellow-400 dark:hover:bg-cyan-400 text-gray-800 dark:text-gray-200 rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs transition-colors duration-300"
+                                                disabled={actionLoading[`update_${note.noteId}`]}
+                                                onClick={() => handleUpdate(note.noteId)}
+                                                className="flex-1 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                                             >
-                                                Delete
+                                                {actionLoading[`update_${note.noteId}`] && <span className="loading loading-spinner loading-sm"></span>}
+                                                Save
                                             </button>
                                             <button
                                                 onClick={handleCancelEdit}
-                                                className="flex-1 px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs transition-colors duration-300"
+                                                className="flex-1 px-4 py-2 bg-gray-400 dark:bg-gray-600 hover:bg-gray-500 dark:hover:bg-gray-700 text-white rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs transition-colors duration-300"
                                             >
                                                 Cancel
                                             </button>
@@ -147,9 +156,11 @@ function ViewNotes() {
                                                 Edit
                                             </button>
                                             <button
+                                                disabled={actionLoading[`delete_${note.noteId}`]}
                                                 onClick={() => handleDelete(note.noteId)}
-                                                className="flex-1 px-4 py-2 bg-yellow-300 dark:bg-cyan-500 hover:bg-yellow-400 dark:hover:bg-cyan-400 text-gray-800 dark:text-gray-200 rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs transition-colors duration-300"
+                                                className="flex-1 px-4 py-2 bg-gray-400 dark:bg-gray-600 hover:bg-gray-500 dark:hover:bg-gray-700 text-white rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                                             >
+                                                {actionLoading[`delete_${note.noteId}`] && <span className="loading loading-spinner loading-sm"></span>}
                                                 Delete
                                             </button>
                                         </div>

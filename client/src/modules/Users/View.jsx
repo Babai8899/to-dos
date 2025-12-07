@@ -86,12 +86,12 @@ function View() {
                 className="px-2 py-1.5 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 flex-1 min-w-0 h-10"
                 placeholder="Enter phone number"
               />
-              <button onClick={handleUpdatePhone} className="text-green-600 dark:text-green-400 shrink-0 mt-1">
+              <button onClick={handleUpdatePhone} className="text-green-600 dark:text-green-400 shrink-0 mt-1 cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                   <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                 </svg>
               </button>
-              <button onClick={() => { setIsEditingPhone(false); setPhone(user.phone || ''); }} className="text-red-600 dark:text-red-400 shrink-0 mt-1">
+              <button onClick={() => { setIsEditingPhone(false); setPhone(user.phone || ''); }} className="text-red-600 dark:text-red-400 shrink-0 mt-1 cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                 </svg>
@@ -122,12 +122,12 @@ function View() {
                 onChange={(e) => setAnniversary(e.target.value)}
                 className="px-2 py-1.5 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 flex-1 min-w-0 h-10"
               />
-              <button onClick={handleUpdateAnniversary} className="text-green-600 dark:text-green-400 shrink-0 mt-1">
+              <button onClick={handleUpdateAnniversary} className="text-green-600 dark:text-green-400 shrink-0 mt-1 cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                   <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                 </svg>
               </button>
-              <button onClick={() => { setIsEditingAnniversary(false); setAnniversary(user.anniversary ? new Date(user.anniversary).toISOString().split('T')[0] : ''); }} className="text-red-600 dark:text-red-400 shrink-0 mt-1">
+              <button onClick={() => { setIsEditingAnniversary(false); setAnniversary(user.anniversary ? new Date(user.anniversary).toISOString().split('T')[0] : ''); }} className="text-red-600 dark:text-red-400 shrink-0 mt-1 cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                 </svg>

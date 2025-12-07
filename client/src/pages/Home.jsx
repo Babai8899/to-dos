@@ -13,6 +13,7 @@ function Home() {
     const [events, setEvents] = useState([]);
     const [tasks, setTasks] = useState([]);
     const [notes, setNotes] = useState([]);
+    const [taskLoading, setTaskLoading] = useState({});
     const [editingNote, setEditingNote] = useState(false);
     const [editedNote, setEditedNote] = useState({ title: '', description: '' });
     const [editingList, setEditingList] = useState(false);
@@ -202,6 +203,7 @@ function Home() {
 
     const handleMarkTaskDone = async (task) => {
         try {
+            setTaskLoading(prev => ({ ...prev, [task.taskId]: true }));
             await axiosInstance.put(`/tasks/${task.taskId}`, {
                 ...task,
                 status: 'completed',
@@ -211,6 +213,8 @@ function Home() {
             checkNotifications(); // Sync notifications
         } catch (error) {
             console.error('Failed to mark task as done:', error);
+        } finally {
+            setTaskLoading(prev => ({ ...prev, [task.taskId]: false }));
         }
     };
 
@@ -313,12 +317,17 @@ function Home() {
                                                 <span>Was due: {task.date} at {task.time}</span>
                                             </div>
                                             <button
+                                                disabled={taskLoading[task.taskId]}
                                                 onClick={() => handleMarkTaskDone(task)}
-                                                className="px-2 py-1 bg-rose-100 hover:bg-rose-200 dark:bg-rose-900/50 dark:hover:bg-rose-800/60 text-rose-700 dark:text-rose-300 text-xs rounded-tl-lg rounded-br-lg rounded-tr-xs rounded-bl-xs transition-colors duration-300 flex items-center gap-1 font-medium"
+                                                className="px-2 py-1 bg-rose-100 hover:bg-rose-200 dark:bg-rose-900/50 dark:hover:bg-rose-800/60 text-rose-700 dark:text-rose-300 text-xs rounded-tl-lg rounded-br-lg rounded-tr-xs rounded-bl-xs transition-colors duration-300 flex items-center gap-1 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                                             >
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3 h-3">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                                                </svg>
+                                                {taskLoading[task.taskId] ? (
+                                                    <span className="loading loading-spinner loading-xs"></span>
+                                                ) : (
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3 h-3">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                                    </svg>
+                                                )}
                                                 Mark Done
                                             </button>
                                         </div>
@@ -455,7 +464,7 @@ function Home() {
                                             <div className="flex justify-end gap-2 mt-3">
                                                 <button
                                                     onClick={handleCancelEdit}
-                                                    className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm border border-emerald-300 dark:border-emerald-600 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/40 transition-colors"
+                                                    className="px-4 py-2 text-sm font-medium text-white bg-gray-400 dark:bg-gray-600 hover:bg-gray-500 dark:hover:bg-gray-700 rounded-lg transition-colors"
                                                 >
                                                     Cancel
                                                 </button>
@@ -537,7 +546,7 @@ function Home() {
                                                         </span>
                                                         <button
                                                             onClick={() => handleDeleteItem(idx)}
-                                                            className="text-rose-500 opacity-0 group-hover/item:opacity-100 transition-opacity hover:text-rose-700"
+                                                            className="text-rose-500 opacity-0 group-hover/item:opacity-100 transition-opacity hover:text-rose-700 cursor-pointer"
                                                         >
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
                                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -557,7 +566,7 @@ function Home() {
                                             <div className="flex justify-end gap-2 mt-3">
                                                 <button
                                                     onClick={handleCancelListEdit}
-                                                    className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm border border-pink-300 dark:border-pink-600 rounded-lg hover:bg-pink-50 dark:hover:bg-pink-900/40 transition-colors"
+                                                    className="px-4 py-2 text-sm font-medium text-white bg-gray-400 dark:bg-gray-600 hover:bg-gray-500 dark:hover:bg-gray-700 rounded-lg transition-colors"
                                                 >
                                                     Cancel
                                                 </button>

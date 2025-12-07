@@ -9,6 +9,7 @@ function ViewTasks() {
     const { checkNotifications } = useContext(NotificationContext);
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [actionLoading, setActionLoading] = useState({}); // Track loading state per task
     const [filter, setFilter] = useState('all'); // all, pending, completed, overdue
 
     const loadTasks = async () => {
@@ -34,16 +35,20 @@ function ViewTasks() {
     const handleDelete = async (taskId) => {
         if (window.confirm('Are you sure you want to delete this task?')) {
             try {
+                setActionLoading(prev => ({ ...prev, [`delete_${taskId}`]: true }));
                 await axiosInstance.delete(`/tasks/${taskId}`);
                 await loadTasks();
             } catch (error) {
                 console.error("Failed to delete task:", error);
+            } finally {
+                setActionLoading(prev => ({ ...prev, [`delete_${taskId}`]: false }));
             }
         }
     };
 
     const handleToggleComplete = async (task) => {
         try {
+            setActionLoading(prev => ({ ...prev, [`complete_${task.taskId}`]: true }));
             await axiosInstance.put(`/tasks/${task.taskId}`, {
                 ...task,
                 status: task.status === 'completed' ? 'pending' : 'completed',
@@ -53,6 +58,8 @@ function ViewTasks() {
             checkNotifications(); // Sync notifications
         } catch (error) {
             console.error("Failed to update task:", error);
+        } finally {
+            setActionLoading(prev => ({ ...prev, [`complete_${task.taskId}`]: false }));
         }
     };
 
@@ -193,19 +200,26 @@ function ViewTasks() {
                                 <div className="flex gap-2 mt-auto">
                                     {task.status === 'pending' && (
                                         <button
+                                            disabled={actionLoading[`complete_${task.taskId}`]}
                                             onClick={() => handleToggleComplete(task)}
-                                            className="flex-1 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs transition-colors duration-300 flex items-center justify-center gap-2"
+                                            className="flex-1 px-4 py-2 bg-yellow-300 dark:bg-cyan-500 hover:bg-yellow-400 dark:hover:bg-cyan-400 text-gray-800 dark:text-gray-200 rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs transition-colors duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                                         >
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                                            </svg>
+                                            {actionLoading[`complete_${task.taskId}`] ? (
+                                                <span className="loading loading-spinner loading-sm"></span>
+                                            ) : (
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                                </svg>
+                                            )}
                                             Mark Done
                                         </button>
                                     )}
                                     <button
+                                        disabled={actionLoading[`delete_${task.taskId}`]}
                                         onClick={() => handleDelete(task.taskId)}
-                                        className="flex-1 px-4 py-2 bg-yellow-300 dark:bg-cyan-500 hover:bg-yellow-400 dark:hover:bg-cyan-400 text-gray-800 dark:text-gray-200 rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs transition-colors duration-300"
+                                        className="flex-1 px-4 py-2 bg-gray-400 dark:bg-gray-600 hover:bg-gray-500 dark:hover:bg-gray-700 text-white rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                                     >
+                                        {actionLoading[`delete_${task.taskId}`] && <span className="loading loading-spinner loading-sm"></span>}
                                         Delete
                                     </button>
                                 </div>

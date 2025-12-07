@@ -7,6 +7,7 @@ import ToastContext from '../../../hooks/ToastContext';
 function CreateList() {
   const {user} = useContext(AuthContext);
   const {showToast} = useContext(ToastContext);
+  const [loading, setLoading] = useState(false);
   const pageVariants = {
     initial: { opacity: 0, y: 50 },
     animate: { opacity: 1, y: 0 },
@@ -82,6 +83,7 @@ function CreateList() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     // If there's a pending input, add it to items before submit
     let newItems = [...items];
@@ -101,6 +103,8 @@ function CreateList() {
       console.error("Registration failed:", error.response?.data?.message || error.message);
       showToast(error.response?.data?.message || error.message, "error");
       throw error;
+    } finally {
+      setLoading(false);
     }
     // Reset form after submission
     setTimeout(() => {
@@ -131,7 +135,7 @@ function CreateList() {
                       <span className={el.completed ? "line-through" : ""}>{el.itemName}</span>
                       <button
                         type="button"
-                        className="ml-2 text-red-500 hover:text-red-700 px-2 py-0.5 rounded"
+                        className="ml-2 text-red-500 hover:text-red-700 px-2 py-0.5 rounded cursor-pointer"
                         onClick={() => handleDeleteItem(idx)}
                         aria-label="Delete item"
                       >
@@ -152,8 +156,15 @@ function CreateList() {
             </div>
           </div>
           <div className="flex justify-center w-full mx-auto my-2 gap-5">
-            <a className="bg-yellow-300 dark:bg-cyan-500 dark:text-gray-200 text-gray-800 rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs grid h-10 w-32 place-items-center cursor-pointer dark:hover:bg-cyan-400 hover:bg-yellow-400 ease-in-out transition-colors duration-300" onClick={(e) => handleSubmit(e)}>Create List</a>
-            <a className="bg-yellow-300 dark:bg-cyan-500 dark:text-gray-200 text-gray-800 rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs grid h-10 w-32 place-items-center cursor-pointer dark:hover:bg-cyan-400 hover:bg-yellow-400 ease-in-out transition-colors duration-300" onClick={onReset}>Cancel</a>
+            <button 
+              disabled={loading} 
+              className="bg-yellow-300 dark:bg-cyan-500 dark:text-gray-200 text-gray-800 rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs h-10 w-32 cursor-pointer dark:hover:bg-cyan-400 hover:bg-yellow-400 ease-in-out transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2" 
+              onClick={(e) => handleSubmit(e)}
+            >
+              {loading && <span className="loading loading-spinner loading-sm"></span>}
+              Create List
+            </button>
+            <a href="/home" className="bg-gray-400 dark:bg-gray-600 hover:bg-gray-500 dark:hover:bg-gray-700 text-white rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs grid h-10 w-32 place-items-center cursor-pointer ease-in-out transition-colors duration-300">Cancel</a>
           </div>
         </div>
       
