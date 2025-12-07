@@ -1,5 +1,7 @@
 import React, { useContext, useState } from 'react'
 import Transitions from '../../../components/Transitions'
+import DateInput from '../../../components/DateInput'
+import TimeInput from '../../../components/TimeInput'
 import axiosInstance from '../../../api/axiosInstance';
 import AuthContext from '../../../hooks/AuthContext';
 import ToastContext from '../../../hooks/ToastContext';
@@ -85,8 +87,20 @@ function CreateTask() {
         <div className='w-full max-w-xs'>
           <label className='text-gray-900 dark:text-gray-200'>Deadline</label>
           <div className='flex gap-2'>
-            <input type="date" className="text-gray-800 dark:text-gray-200 input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600 w-1/2" name='date' value={date} onChange={handleChange} />
-            <input type="time" className="text-gray-800 dark:text-gray-200 input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600 w-1/2" name='time' value={time} onChange={handleChange} />
+            <DateInput
+              name='date'
+              value={date}
+              onChange={handleChange}
+              placeholder="Select deadline"
+              className="text-gray-800 dark:text-gray-200 input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600 w-full"
+            />
+            <TimeInput
+              name='time'
+              value={time}
+              onChange={handleChange}
+              placeholder="--:--"
+              className="text-gray-800 dark:text-gray-200 input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600 w-1/2"
+            />
           </div>
         </div>
         <div className='w-full max-w-xs'>

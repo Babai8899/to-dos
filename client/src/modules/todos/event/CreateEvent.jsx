@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react'
 import dayjs from 'dayjs';
 import Transitions from '../../../components/Transitions'
+import DateInput from '../../../components/DateInput'
+import TimeInput from '../../../components/TimeInput'
 import axiosInstance from "../../../api/axiosInstance.js";
 import AuthContext from "../../../hooks/AuthContext.jsx";
 import ToastContext from "../../../hooks/ToastContext.jsx";
@@ -268,8 +270,20 @@ function CreateEvent() {
           <div className='w-full max-w-xs'>
             <label className='text-gray-900 dark:text-gray-200'>Date & Time</label>
             <div className='flex gap-2'>
-              <input type="date" className="text-gray-800 dark:text-gray-200 input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600" name='date' value={date} onChange={handleChange} />
-              <input type="time" className="text-gray-800 dark:text-gray-200 input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600" name='time' value={time} onChange={handleChange} />
+              <DateInput
+                name='date'
+                value={date}
+                onChange={handleChange}
+                placeholder="Select event date"
+                className="text-gray-800 dark:text-gray-200 input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600 w-1/2"
+              />
+              <TimeInput
+                name='time'
+                value={time}
+                onChange={handleChange}
+                placeholder="--:--"
+                className="text-gray-800 dark:text-gray-200 input border-yellow-300 dark:border-cyan-500 focus:outline-yellow-300 dark:focus:outline-cyan-500 bg-gray-50 dark:bg-gray-500 dark:placeholder:text-gray-200 placeholder:text-gray-600 w-1/2"
+              />
             </div>
           </div>
           <div className="flex justify-center w-full mx-auto my-2 gap-5">

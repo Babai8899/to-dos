@@ -24,6 +24,7 @@ import Register from './modules/Users/Register'
 import UpdatePassword from './modules/Users/UpdatePassword'
 import ChatBot from './shared/ChatBot'
 import PushProvider from './hooks/PushProvider'
+import NotificationProvider from './hooks/NotificationProvider'
 import Dummy from './Dummy'
 function App() {
 
@@ -35,7 +36,8 @@ function App() {
             <ToastProvider>
               <PushProvider>
                 <AuthProvider>
-                  <Navbar />
+                  <NotificationProvider>
+                    <Navbar />
                   <ChatBot />
                   <Sidebar />
                   <Routes>
@@ -116,7 +118,9 @@ function App() {
                       </PrivateRoute>
                     } />
                   </Routes>
-                  <Footer />
+                  {/* </Routes> */}
+                  </NotificationProvider>
+                  <Footer/>
                 </AuthProvider>
               </PushProvider>
             </ToastProvider>

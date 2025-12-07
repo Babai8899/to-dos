@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import AuthContext from '../../../hooks/AuthContext';
+import NotificationContext from '../../../hooks/NotificationContext';
 import axiosInstance from '../../../api/axiosInstance';
 import Transitions from '../../../components/Transitions';
 
 function ViewTasks() {
     const { user } = useContext(AuthContext);
+    const { checkNotifications } = useContext(NotificationContext);
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(true);
     const [filter, setFilter] = useState('all'); // all, pending, completed, overdue
@@ -48,6 +50,7 @@ function ViewTasks() {
                 user: user.emailId
             });
             await loadTasks();
+            checkNotifications(); // Sync notifications
         } catch (error) {
             console.error("Failed to update task:", error);
         }
@@ -155,12 +158,13 @@ function ViewTasks() {
                                     <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 flex-1">
                                         {task.title}
                                     </h3>
-                                    <input
-                                        type="checkbox"
-                                        checked={task.status === 'completed'}
-                                        onChange={() => handleToggleComplete(task)}
-                                        className="checkbox checkbox-success ml-2"
-                                    />
+                                    {task.status === 'completed' && (
+                                        <div className="ml-2 bg-green-500 rounded-full p-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="white" className="w-5 h-5">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                            </svg>
+                                        </div>
+                                    )}
                                 </div>
                                 
                                 <p className="text-gray-700 dark:text-gray-300 mb-4 line-clamp-3">
@@ -187,6 +191,17 @@ function ViewTasks() {
                                 </div>
 
                                 <div className="flex gap-2 mt-auto">
+                                    {task.status === 'pending' && (
+                                        <button
+                                            onClick={() => handleToggleComplete(task)}
+                                            className="flex-1 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs transition-colors duration-300 flex items-center justify-center gap-2"
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                            </svg>
+                                            Mark Done
+                                        </button>
+                                    )}
                                     <button
                                         onClick={() => handleDelete(task.taskId)}
                                         className="flex-1 px-4 py-2 bg-yellow-300 dark:bg-cyan-500 hover:bg-yellow-400 dark:hover:bg-cyan-400 text-gray-800 dark:text-gray-200 rounded-tl-xl rounded-br-xl rounded-tr-xs rounded-bl-xs transition-colors duration-300"

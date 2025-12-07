@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useContext } from 'react';
 import PushContext from '../hooks/PushContext';
 import AuthContext from '../hooks/AuthContext';
+import NotificationContext from '../hooks/NotificationContext';
 import axiosInstance from '../api/axiosInstance';
 
 function Home() {
     const { subscribe } = useContext(PushContext);
     const { user } = useContext(AuthContext);
+    const { checkNotifications } = useContext(NotificationContext);
     const emailId = user.emailId;
     const [lists, setLists] = useState([]);
     const [events, setEvents] = useState([]);
@@ -194,8 +196,22 @@ function Home() {
     const getOverdueTasks = () => {
         return tasks.filter(task => {
             const taskDate = new Date(task.date);
-            return taskDate < today;
+            return taskDate < today && task.status === 'pending';
         });
+    };
+
+    const handleMarkTaskDone = async (task) => {
+        try {
+            await axiosInstance.put(`/tasks/${task.taskId}`, {
+                ...task,
+                status: 'completed',
+                user: emailId
+            });
+            await loadTasks();
+            checkNotifications(); // Sync notifications
+        } catch (error) {
+            console.error('Failed to mark task as done:', error);
+        }
     };
 
     const getUpcomingEvents = () => {
@@ -289,11 +305,22 @@ function Home() {
                                             <span className="px-2 py-1 bg-rose-100 dark:bg-rose-900/50 text-rose-700 dark:text-rose-300 text-xs rounded-full font-medium">Overdue</span>
                                         </div>
                                         <p className="text-sm text-gray-600 dark:text-gray-300 mb-3 line-clamp-2">{task.description}</p>
-                                        <div className="flex items-center gap-2 text-xs text-rose-600 dark:text-rose-400 font-medium">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
-                                            </svg>
-                                            <span>Was due: {task.date} at {task.time}</span>
+                                        <div className="flex items-center justify-between gap-2">
+                                            <div className="flex items-center gap-2 text-xs text-rose-600 dark:text-rose-400 font-medium">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                                                </svg>
+                                                <span>Was due: {task.date} at {task.time}</span>
+                                            </div>
+                                            <button
+                                                onClick={() => handleMarkTaskDone(task)}
+                                                className="px-2 py-1 bg-rose-100 hover:bg-rose-200 dark:bg-rose-900/50 dark:hover:bg-rose-800/60 text-rose-700 dark:text-rose-300 text-xs rounded-tl-lg rounded-br-lg rounded-tr-xs rounded-bl-xs transition-colors duration-300 flex items-center gap-1 font-medium"
+                                            >
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3 h-3">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                                </svg>
+                                                Mark Done
+                                            </button>
                                         </div>
                                     </div>
                                 ))

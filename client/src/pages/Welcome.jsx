@@ -18,8 +18,8 @@ function Welcome() {
 
     return (
         <Transitions pageVariants={pageVariants}>
-            <div className="fixed right-0 top-16 lg:w-[calc(100vw-5rem)] w-screen md:h-[calc(100vh-8rem)] px-6 py-4 noscrollbar overflow-y-scroll h-[calc(100vh-15rem)] flex items-center justify-center">
-                <div className="max-w-6xl w-full">
+            <div className="fixed right-0 top-16 lg:w-[calc(100vw-5rem)] w-screen md:h-[calc(100vh-8rem)] px-6 py-4 noscrollbar overflow-y-scroll h-[calc(100vh-15rem)]">
+                <div className="max-w-6xl w-full mx-auto">
                     {/* Hero Section */}
                     <div className="text-center mb-8">
                         <h1 className="text-4xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 dark:from-cyan-400 dark:via-cyan-500 dark:to-cyan-600 bg-clip-text text-transparent">
