@@ -22,7 +22,7 @@ import ViewNotes from './modules/todos/note/ViewNotes'
 import ViewLists from './modules/todos/list/ViewLists'
 import Register from './modules/Users/Register'
 import UpdatePassword from './modules/Users/UpdatePassword'
-import ChatBot from './shared/ChatBot'
+// import ChatBot from './shared/ChatBot'
 import PushProvider from './hooks/PushProvider'
 import NotificationProvider from './hooks/NotificationProvider'
 import Dummy from './Dummy'
@@ -38,7 +38,7 @@ function App() {
                 <AuthProvider>
                   <NotificationProvider>
                     <Navbar />
-                  <ChatBot />
+                  {/* <ChatBot /> */}
                   <Sidebar />
                   <Routes>
                     <Route exact path='/' element={<Welcome />} />

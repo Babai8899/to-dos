@@ -80,10 +80,13 @@ function ChatBot() {
             console.log({ question: currentQuestion, emailId: user?.emailId });
             const response = await axiosInstance.post('/chat', { question: currentQuestion, emailId: user?.emailId });
             console.log(response.data.answer);
+            
+            // Reload chat history to show the new question and response
             await loadHistory();
-            setLoading(false);
         } catch (error) {
-            console.log(error);
+            console.error('Chat error:', error);
+            alert('Failed to send message. Please try again.');
+        } finally {
             setLoading(false);
         }
     }
