@@ -10,7 +10,7 @@ function SidebarProvider({ children }) {
     }
 
     return (
-        <aside className='lg:h-[calc(100vh-5rem)] lg:w-auto fixed sm:w-screen lg:bottom-auto bottom-0 z-10'>
+        <aside className='lg:h-[calc(100vh-5rem)] lg:w-auto lg:z-10 fixed sm:w-screen lg:bottom-auto bottom-0 z-50'>
             <nav className="lg:h-full sm:h-auto flex lg:flex-col sm:flex-row dark:bg-gray-800 bg-gray-200">
                 <div className="hidden lg:flex p-4 pb-2 justify-between items-center my-3" >
                     <div className={`text-2xl overflow-hidden transition-all ${open ? 'w-40' : 'w-0'
