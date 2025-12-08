@@ -61,7 +61,7 @@ function CreateNote() {
   }
   return (
     <Transitions pageVariants={pageVariants}>
-      <div className=' my-1.5 md:w-1/3 w-screen md:h-[calc(100vh-8rem)] h-[calc(100vh-9rem)] rounded-lg flex flex-col gap-4 justify-center items-center mx-auto md:bg-yellow-50/50 md:dark:bg-cyan-900/50 md:shadow-sm md:border-2 md:border-yellow-300 md:dark:border-cyan-500'>
+      <div className='md:w-1/3 w-screen md:h-[calc(100vh-8rem)] h-[calc(100vh-9rem)] rounded-lg flex flex-col gap-4 justify-center items-center mx-auto md:bg-yellow-50/50 md:dark:bg-cyan-900/50 md:shadow-sm md:border-2 md:border-yellow-300 md:dark:border-cyan-500'>
           <h1 className='text-3xl'>Create Note</h1>
           <div className='grid grid-cols-1 gap-0.5 w-full'>
             <div className='w-full'>
