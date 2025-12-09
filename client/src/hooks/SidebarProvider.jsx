@@ -10,8 +10,8 @@ function SidebarProvider({ children }) {
     }
 
     return (
-        <aside className='lg:h-[calc(100vh-5rem)] lg:w-auto lg:z-10 fixed sm:w-screen lg:bottom-auto bottom-0 z-50'>
-            <nav className="lg:h-full sm:h-auto flex lg:flex-col sm:flex-row dark:bg-gray-800 bg-gray-200">
+        <aside className='lg:h-[calc(100vh-5rem)] lg:w-auto lg:z-10 lg:left-0 lg:right-auto fixed w-full left-0 right-0 lg:bottom-auto bottom-0 z-50'>
+            <nav className="lg:h-full h-auto flex lg:flex-col flex-row dark:bg-gray-800 bg-gray-200 lg:w-auto w-full">
                 <div className="hidden lg:flex p-4 pb-2 justify-between items-center my-3" >
                     <div className={`text-2xl overflow-hidden transition-all ${open ? 'w-40' : 'w-0'
                         }`}>
@@ -29,7 +29,7 @@ function SidebarProvider({ children }) {
                     </button>
                 </div>
                 <SidebarContext.Provider value={{ open }}>
-                    <ul className="flex lg:flex-col sm:flex-row px-3 lg:w-auto w-screen justify-between">
+                    <ul className="flex lg:flex-col flex-row px-3 lg:w-auto w-full justify-between">
                         {children}
                     </ul>
                 </SidebarContext.Provider>
