@@ -18,7 +18,7 @@ function Welcome() {
 
     return (
         <Transitions pageVariants={pageVariants}>
-            <div className="fixed right-0 top-16 left-0 lg:left-20 lg:w-[calc(100vw-5rem)] w-screen md:h-[calc(100vh-8rem)] px-6 py-4 noscrollbar overflow-y-scroll h-[calc(100vh-9rem)] pb-6">
+            <div className="fixed right-0 top-16 lg:w-[calc(100vw-5rem)] w-screen md:h-[calc(100vh-8rem)] px-6 py-4 noscrollbar overflow-y-scroll h-[calc(100vh-9rem)] pb-6">
                 <div className="max-w-6xl w-full mx-auto">
                     {/* Hero Section */}
                     <div className="text-center mb-8">

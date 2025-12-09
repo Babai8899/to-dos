@@ -257,7 +257,7 @@ function CreateEvent() {
             <div className="space-y-2">{weeks}</div>
           </div>
         </div> :
-        <div className='md:w-1/3 w-screen md:h-[calc(100vh-8rem)] h-[calc(100vh-9rem)] rounded-lg flex flex-col gap-2 justify-center items-center mx-auto md:bg-yellow-50/50 md:dark:bg-cyan-900/50 md:shadow-sm md:border-2 md:border-yellow-300 md:dark:border-cyan-500'>
+        <div className='md:my-1.5 md:w-1/3 w-screen md:h-[calc(100vh-8rem)] h-[calc(100vh-9rem)] rounded-lg flex flex-col gap-2 justify-center items-center mx-auto md:bg-yellow-50/50 md:dark:bg-cyan-900/50 md:shadow-sm md:border-2 md:border-yellow-300 md:dark:border-cyan-500'>
           <h1 className='text-2xl'>Create Event</h1>
           <div className='w-full max-w-xs'>
             <label className='text-gray-900 dark:text-gray-200'>Title</label>
