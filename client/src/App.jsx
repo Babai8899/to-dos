@@ -29,8 +29,9 @@ import Dummy from './Dummy'
 function App() {
 
   return (
-  <div className="noscrollbar min-h-screen w-screen overflow-x-hidden flex flex-col backdrop-blur-sm bg-white/50 dark:bg-black/50 transition-colors duration-100">
-      <div className="grow flex flex-col">
+    <div className="noscrollbar min-h-screen w-screen overflow-x-hidden flex flex-col backdrop-blur-sm bg-white/50 dark:bg-black/50 transition-colors duration-100">
+      {/* Add pb-20 for mobile, remove on desktop */}
+      <div className="grow flex flex-col pb-20 lg:pb-0">
         <AnimatePresence mode='wait'>
           <Router>
             <ToastProvider>
